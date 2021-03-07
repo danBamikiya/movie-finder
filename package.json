@@ -1,0 +1,36 @@
+{
+  "name": "face-detection",
+  "version": "1.0.0",
+  "description": "You don't have to try to recognize an actor in a film you're watching again.Face detector is an  app that gets movie data and poster based on user input then scrapes the web for images of actors and trains a neural network to recognize the scraped images on the movie poster!",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danBamikiya/face-detector/tree/branch"
+  },
+  "keywords": [
+    "face-detector",
+    "ai",
+    "web-scraper",
+    "neural-networks"
+  ],
+  "author": "Dan Bamikiya",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@babel/runtime": "^7.12.5",
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.5",
+    "core-js": "^3.8.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1"
+  }
+}
