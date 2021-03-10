@@ -5,24 +5,27 @@ import cheerio from 'cheerio';
 // make a GET HTTP request to an imdb search of the actor
 
 async function scrapeWebForActorsImages(actor) {
-	axios
+	await axios
 		.get(
 			`https://api.allorigins.win/get?url=${encodeURIComponent(
 				`https://www.imdb.com/find?q=${actor}&ref_=nv_sr_sm/`
 			)}`
 		)
-		.then(response => {
+		.then(async response => {
 			//handling the success
 			const html = response.data.contents;
 			//loading response data into a Cheerio instance
 			const $ = cheerio.load(html);
-			//selecting the elements with the actors image
-			const scrapedata = $('td.primary_photo').children().first().attr('href');
+			//selecting the element with the actors image
+			const scrapedImgSource = $('td.primary_photo')
+				.children()
+				.first()
+				.attr('href');
 
 			//outputting the scraped data
-			console.log(scrapedata);
+			console.log(scrapedImgSource);
 			// call another function to scrape the href location for a clearer image
-			return getClearerImage(scrapedata);
+			return await getClearerImage(scrapedImgSource);
 		})
 		//handling error
 		.catch(error => {
@@ -30,9 +33,9 @@ async function scrapeWebForActorsImages(actor) {
 		});
 }
 
-function getClearerImage(scrapedHref) {
+async function getClearerImage(scrapedHref) {
 	// make a GET HTTP request to an imdb page with the actors image
-	axios
+	await axios
 		.get(
 			`https://api.allorigins.win/get?url=${encodeURIComponent(
 				`https://www.imdb.com${scrapedHref}/`
@@ -43,7 +46,7 @@ function getClearerImage(scrapedHref) {
 			const html = response.data.contents;
 			//loading response data into a Cheerio instance
 			const $ = cheerio.load(html);
-			//selecting the elements with the actors image
+			//selecting the element with the actors image
 			const scrapedata = $('#name-poster').attr('src');
 
 			//outputting the scraped data
