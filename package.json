@@ -24,13 +24,14 @@
     "@babel/runtime": "^7.12.5",
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.5",
-    "core-js": "^3.8.2",
-    "dotenv": "^8.2.0"
+    "core-js": "^3.8.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-async-to-generator": "^7.13.0",
     "@babel/preset-env": "^7.12.11",
     "babel-loader": "^8.2.2",
+    "dotenv-webpack": "^7.0.1",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.1"
   }
