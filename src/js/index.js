@@ -1,3 +1,4 @@
+import getMovie from './getMovie.js';
 import scrapeWebForActorsImages from './webScrapper.js';
 
 const submitBtn = document.getElementById('submitBtn');
@@ -21,17 +22,6 @@ const div = document.createElement('div');
 div.className = 'movie-poster-details';
 
 const Movie = {}; // refactor here
-
-function validateResponse(res) {
-	if (!res.ok) {
-		throw Error(res.statusText);
-	}
-	return res;
-}
-
-function readResponseAsJSON(res) {
-	return res.json();
-}
 
 function outputResponse(movie) {
 	Movie.title = movie['title'];
@@ -124,33 +114,6 @@ function appendMovieDetailsToDOM() {
 
 	moviePosterDetailsContainer.appendChild(posterDetails);
 }
-
-function logError(err) {
-	console.log("Looks like there's a problem: \n", err);
-}
-
-const getMovie = async searchText => {
-	let movie; // refactor here
-
-	if (searchText.length === 0) {
-		return;
-	}
-	movie = await fetch(
-		`https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/${searchText}`,
-		{
-			method: 'GET',
-			headers: {
-				'x-rapidapi-key': process.env.RAPID_API_KEY,
-				'x-rapidapi-host':
-					'imdb-internet-movie-database-unofficial.p.rapidapi.com'
-			}
-		}
-	)
-		.then(validateResponse)
-		.then(readResponseAsJSON)
-		.catch(logError);
-	outputResponse(movie);
-};
 
 function submitValue(e) {
 	e.preventDefault();
@@ -268,3 +231,5 @@ function actorNameParser(actor) {
 	const casedName = name.toLowerCase();
 	return casedName;
 }
+
+export { outputResponse };
