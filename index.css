@@ -1,0 +1,282 @@
+body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-image: radial-gradient(
+			circle at center center,
+			rgba(33, 33, 33, 0),
+			rgb(33, 33, 33)
+		),
+		repeating-linear-gradient(
+			135deg,
+			rgb(33, 33, 33) 0px,
+			rgb(33, 33, 33) 1px,
+			transparent 1px,
+			transparent 4px
+		),
+		repeating-linear-gradient(
+			45deg,
+			rgb(56, 56, 56) 0px,
+			rgb(56, 56, 56) 5px,
+			transparent 5px,
+			transparent 6px
+		),
+		linear-gradient(90deg, rgb(33, 33, 33), rgb(33, 33, 33));
+}
+
+header {
+	width: auto;
+	padding: 1rem;
+	color: white;
+	text-align: center;
+	height: 5vh;
+	letter-spacing: 1px;
+	font-family: Orbitron, sans-serif;
+	font-weight: 600;
+	font-size: x-large;
+	background-image: repeating-linear-gradient(
+			0deg,
+			rgba(0, 0, 0, 0.11) 0px,
+			rgba(0, 0, 0, 0.11) 12px,
+			rgba(1, 1, 1, 0.16) 12px,
+			rgba(1, 1, 1, 0.16) 24px,
+			rgba(0, 0, 0, 0.14) 24px,
+			rgba(0, 0, 0, 0.14) 36px,
+			rgba(0, 0, 0, 0.23) 36px,
+			rgba(0, 0, 0, 0.23) 48px,
+			rgba(0, 0, 0, 0.12) 48px,
+			rgba(0, 0, 0, 0.12) 60px,
+			rgba(1, 1, 1, 0.07) 60px,
+			rgba(1, 1, 1, 0.07) 72px,
+			rgba(0, 0, 0, 0.21) 72px,
+			rgba(0, 0, 0, 0.21) 84px,
+			rgba(0, 0, 0, 0.24) 84px,
+			rgba(0, 0, 0, 0.24) 96px,
+			rgba(1, 1, 1, 0.23) 96px,
+			rgba(1, 1, 1, 0.23) 108px,
+			rgba(1, 1, 1, 0.07) 108px,
+			rgba(1, 1, 1, 0.07) 120px,
+			rgba(0, 0, 0, 0.01) 120px,
+			rgba(0, 0, 0, 0.01) 132px,
+			rgba(1, 1, 1, 0.22) 132px,
+			rgba(1, 1, 1, 0.22) 144px,
+			rgba(1, 1, 1, 0.24) 144px,
+			rgba(1, 1, 1, 0.24) 156px,
+			rgba(0, 0, 0, 0) 156px,
+			rgba(0, 0, 0, 0) 168px,
+			rgba(0, 0, 0, 0.12) 168px,
+			rgba(0, 0, 0, 0.12) 180px
+		),
+		repeating-linear-gradient(
+			90deg,
+			rgba(1, 1, 1, 0.01) 0px,
+			rgba(1, 1, 1, 0.01) 12px,
+			rgba(1, 1, 1, 0.15) 12px,
+			rgba(1, 1, 1, 0.15) 24px,
+			rgba(0, 0, 0, 0.09) 24px,
+			rgba(0, 0, 0, 0.09) 36px,
+			rgba(0, 0, 0, 0.02) 36px,
+			rgba(0, 0, 0, 0.02) 48px,
+			rgba(0, 0, 0, 0.1) 48px,
+			rgba(0, 0, 0, 0.1) 60px,
+			rgba(1, 1, 1, 0.07) 60px,
+			rgba(1, 1, 1, 0.07) 72px,
+			rgba(1, 1, 1, 0.15) 72px,
+			rgba(1, 1, 1, 0.15) 84px,
+			rgba(0, 0, 0, 0.18) 84px,
+			rgba(0, 0, 0, 0.18) 96px,
+			rgba(1, 1, 1, 0.15) 96px,
+			rgba(1, 1, 1, 0.15) 108px,
+			rgba(1, 1, 1, 0.09) 108px,
+			rgba(1, 1, 1, 0.09) 120px,
+			rgba(1, 1, 1, 0.07) 120px,
+			rgba(1, 1, 1, 0.07) 132px,
+			rgba(1, 1, 1, 0.05) 132px,
+			rgba(1, 1, 1, 0.05) 144px,
+			rgba(0, 0, 0, 0.1) 144px,
+			rgba(0, 0, 0, 0.1) 156px,
+			rgba(1, 1, 1, 0.18) 156px,
+			rgba(1, 1, 1, 0.18) 168px
+		),
+		repeating-linear-gradient(
+			45deg,
+			rgba(0, 0, 0, 0.24) 0px,
+			rgba(0, 0, 0, 0.24) 16px,
+			rgba(1, 1, 1, 0.06) 16px,
+			rgba(1, 1, 1, 0.06) 32px,
+			rgba(0, 0, 0, 0.16) 32px,
+			rgba(0, 0, 0, 0.16) 48px,
+			rgba(1, 1, 1, 0) 48px,
+			rgba(1, 1, 1, 0) 64px,
+			rgba(1, 1, 1, 0.12) 64px,
+			rgba(1, 1, 1, 0.12) 80px,
+			rgba(1, 1, 1, 0.22) 80px,
+			rgba(1, 1, 1, 0.22) 96px,
+			rgba(0, 0, 0, 0.24) 96px,
+			rgba(0, 0, 0, 0.24) 112px,
+			rgba(0, 0, 0, 0.25) 112px,
+			rgba(0, 0, 0, 0.25) 128px,
+			rgba(1, 1, 1, 0.12) 128px,
+			rgba(1, 1, 1, 0.12) 144px,
+			rgba(0, 0, 0, 0.18) 144px,
+			rgba(0, 0, 0, 0.18) 160px,
+			rgba(1, 1, 1, 0.03) 160px,
+			rgba(1, 1, 1, 0.03) 176px,
+			rgba(1, 1, 1, 0.1) 176px,
+			rgba(1, 1, 1, 0.1) 192px
+		),
+		repeating-linear-gradient(
+			135deg,
+			rgba(1, 1, 1, 0.18) 0px,
+			rgba(1, 1, 1, 0.18) 3px,
+			rgba(0, 0, 0, 0.09) 3px,
+			rgba(0, 0, 0, 0.09) 6px,
+			rgba(0, 0, 0, 0.08) 6px,
+			rgba(0, 0, 0, 0.08) 9px,
+			rgba(1, 1, 1, 0.05) 9px,
+			rgba(1, 1, 1, 0.05) 12px,
+			rgba(0, 0, 0, 0.01) 12px,
+			rgba(0, 0, 0, 0.01) 15px,
+			rgba(1, 1, 1, 0.12) 15px,
+			rgba(1, 1, 1, 0.12) 18px,
+			rgba(0, 0, 0, 0.05) 18px,
+			rgba(0, 0, 0, 0.05) 21px,
+			rgba(1, 1, 1, 0.16) 21px,
+			rgba(1, 1, 1, 0.16) 24px,
+			rgba(1, 1, 1, 0.07) 24px,
+			rgba(1, 1, 1, 0.07) 27px,
+			rgba(1, 1, 1, 0.23) 27px,
+			rgba(1, 1, 1, 0.23) 30px,
+			rgba(0, 0, 0, 0.2) 30px,
+			rgba(0, 0, 0, 0.2) 33px,
+			rgba(0, 0, 0, 0.18) 33px,
+			rgba(0, 0, 0, 0.18) 36px,
+			rgba(1, 1, 1, 0.12) 36px,
+			rgba(1, 1, 1, 0.12) 39px,
+			rgba(1, 1, 1, 0.13) 39px,
+			rgba(1, 1, 1, 0.13) 42px,
+			rgba(1, 1, 1, 0.2) 42px,
+			rgba(1, 1, 1, 0.2) 45px,
+			rgba(1, 1, 1, 0.18) 45px,
+			rgba(1, 1, 1, 0.18) 48px,
+			rgba(0, 0, 0, 0.2) 48px,
+			rgba(0, 0, 0, 0.2) 51px,
+			rgba(1, 1, 1, 0) 51px,
+			rgba(1, 1, 1, 0) 54px,
+			rgba(0, 0, 0, 0.03) 54px,
+			rgba(0, 0, 0, 0.03) 57px,
+			rgba(1, 1, 1, 0.06) 57px,
+			rgba(1, 1, 1, 0.06) 60px,
+			rgba(1, 1, 1, 0) 60px,
+			rgba(1, 1, 1, 0) 63px,
+			rgba(0, 0, 0, 0.1) 63px,
+			rgba(0, 0, 0, 0.1) 66px,
+			rgba(1, 1, 1, 0.19) 66px,
+			rgba(1, 1, 1, 0.19) 69px
+		),
+		linear-gradient(90deg, rgb(239, 53, 115), rgb(79, 2, 93));
+}
+
+canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.container {
+	display: flex;
+	width: 95%;
+	max-width: 1300px;
+	margin: 0.5rem auto 0 auto;
+	flex-direction: row;
+}
+
+.movie-poster-container {
+	width: 32%;
+	position: relative;
+}
+
+.movie-poster-details-container {
+	flex-grow: 1;
+	margin: 0 20px;
+	width: 39%;
+}
+
+.search-form {
+	background-color: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(5px);
+	border: 1px solid;
+	border-image: linear-gradient(to top, #ffe838, #fd57bf);
+	border-image-slice: 1;
+	padding: 20px;
+	width: 23%;
+	color: black;
+	font-family: Poppins, sans-serif;
+	text-align: center;
+	height: 13rem;
+	/* border-image: linear-gradient(to left, #33ccff 0%, #ff99cc 100%); */
+	/* border: 1px solid rgba(255, 255, 255, 0.2); */
+}
+
+input[type="text"],
+input[type="submit"] {
+	background: rgba(210, 180, 140, 0.2);
+	color: white;
+}
+
+input[type="submit"] {
+	font-family: Poppins, sans-serif;
+	border-radius: 5px;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+	cursor: pointer;
+}
+
+input[type="text"] {
+	font-family: Inconsolata, sans-serif;
+	height: 20px;
+	width: 220px;
+}
+
+.movie-poster {
+	max-width: 100%;
+	height: auto;
+}
+
+.detailsDiv {
+	width: 47%;
+	border: 1px solid white;
+}
+
+.castDiv {
+	border: 1px solid white;
+}
+
+.details-header {
+	border-bottom: 1px solid white;
+	padding: 5px;
+	margin: 0;
+}
+
+.cast-header {
+	border-bottom: 1px solid white;
+	padding: 5px;
+	margin: 0;
+}
+
+.poster-details {
+	color: cornflowerblue;
+	display: flex;
+	flex-direction: row;
+}
+
+.poster-details p {
+	margin: 0;
+	padding: 5px;
+}
