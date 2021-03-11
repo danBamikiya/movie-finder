@@ -1,5 +1,6 @@
-import getMovie from './getMovie.js';
-import scrapeWebForActorsImages from './webScrapper.js';
+import getMovie from './getMovie';
+import actorNameParser from './actorNameParser';
+import scrapeWebForActorsImages from './webScrapper';
 
 const submitBtn = document.getElementById('submitBtn');
 const inputTxt = document.getElementById('inputTxt');
@@ -217,19 +218,6 @@ async function loadLabeledImages() {
 	// 		return new faceapi.LabeledFaceDescriptors(actorName, descriptions);
 	// 	})
 	// );
-}
-
-function actorNameParser(actor) {
-	/** Regex to parse actors name */
-	const regexParser = /([^\W])([\w]+)/gi;
-	const result = actor.match(regexParser);
-	let parsedName = '';
-	result.forEach(name => {
-		parsedName += `${name}+`;
-	});
-	const name = parsedName.slice(0, -1);
-	const casedName = name.toLowerCase();
-	return casedName;
 }
 
 export { outputResponse };
