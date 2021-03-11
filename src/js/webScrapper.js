@@ -2,6 +2,8 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
 
+let clearerImgSource;
+
 // make a GET HTTP request to an imdb search of the actor
 
 async function scrapeWebForActorsImages(actor) {
@@ -25,12 +27,13 @@ async function scrapeWebForActorsImages(actor) {
 			//outputting the scraped data
 			console.log(scrapedImgSource);
 			// call another function to scrape the href location for a clearer image
-			return await getClearerImage(scrapedImgSource);
+			await getClearerImage(scrapedImgSource);
 		})
 		//handling error
 		.catch(error => {
 			console.log(error);
 		});
+	return clearerImgSource;
 }
 
 async function getClearerImage(scrapedHref) {
@@ -49,11 +52,10 @@ async function getClearerImage(scrapedHref) {
 			//selecting the element with the actors image
 			const scrapedata = $('#name-poster').attr('src');
 
-			//outputting the scraped data
 			console.log(scrapedata);
 
-			// return scraped data
-			return scrapedata;
+			//payoff scraped data
+			clearerImgSource = scrapedata;
 		})
 		//handling error
 		.catch(error => {
