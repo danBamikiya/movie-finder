@@ -1,4 +1,6 @@
 import getMovie from './getMovie';
+import appendMovieToDOM from './appendMovieToDOM';
+import appendMovieDetailsToDOM from './appendMovieDetailsToDOM';
 import backgroundActorNamesParse from './getActorsImgsUrl';
 
 const submitBtn = document.getElementById('submitBtn');
@@ -9,12 +11,6 @@ const moviePosterContainer = document.getElementsByClassName(
 const moviePosterDetailsContainer = moviePosterContainer.nextElementSibling;
 const canvasElement = document.getElementsByTagName('canvas')[0];
 
-const title_paragraph = document.createElement('p');
-const year_paragraph = document.createElement('p');
-const length_paragraph = document.createElement('p');
-const rating_paragraph = document.createElement('p');
-const plot_paragraph = document.createElement('p');
-
 const posterImg = document.createElement('img');
 const posterDetails = document.createElement('div');
 posterDetails.className = 'poster-details';
@@ -22,6 +18,19 @@ const div = document.createElement('div');
 div.className = 'movie-poster-details';
 
 const Movie = {};
+
+const AppendToDOMDependencies = {
+	Movie,
+	posterDetails,
+	moviePosterDetailsContainer,
+	moviePosterContainer,
+	posterImg,
+	title_paragraph: document.createElement('p'),
+	year_paragraph: document.createElement('p'),
+	length_paragraph: document.createElement('p'),
+	rating_paragraph: document.createElement('p'),
+	plot_paragraph: document.createElement('p')
+};
 
 function outputResponse(movie) {
 	Movie.title = movie['title'];
@@ -33,86 +42,9 @@ function outputResponse(movie) {
 	Movie.cast = movie['cast'];
 
 	backgroundActorNamesParse(Movie);
-	appendMovieToDOM();
+	appendMovieToDOM(AppendToDOMDependencies);
+	appendMovieDetailsToDOM(AppendToDOMDependencies);
 	startRecognition();
-}
-
-function appendMovieToDOM() {
-	moviePosterContainer.innerHTML = null; // clear previous poster
-	posterImg.src = Movie.poster;
-	posterImg.alt = 'a movie poster';
-	posterImg.className = 'movie-poster';
-	moviePosterContainer.appendChild(posterImg);
-
-	appendMovieDetailsToDOM();
-}
-
-function appendMovieDetailsToDOM() {
-	posterDetails.innerHTML = null; // clear previous poster details
-
-	const details = document.createElement('p');
-	details.className = 'details-header';
-	details.innerHTML = 'Details';
-
-	const cast = document.createElement('p');
-	cast.className = 'cast-header';
-	cast.innerHTML = 'Cast';
-
-	const detailsDiv = document.createElement('div');
-	detailsDiv.className = 'detailsDiv';
-	detailsDiv.appendChild(details);
-
-	const castDiv = document.createElement('div');
-	castDiv.className = 'castDiv';
-	castDiv.appendChild(cast);
-
-	for (const key in Movie) {
-		switch (key) {
-			case 'title':
-				title_paragraph.innerHTML = `${key}: ${Movie[key]}`;
-				title_paragraph.id = 'title-paragraph';
-				detailsDiv.appendChild(title_paragraph);
-				break;
-			case 'year':
-				year_paragraph.innerHTML = `${key}: ${Movie[key]}`;
-				year_paragraph.id = 'year-paragraph';
-				detailsDiv.appendChild(year_paragraph);
-				break;
-			case 'length':
-				length_paragraph.innerHTML = `${key}: ${Movie[key]}`;
-				length_paragraph.id = 'length-paragraph';
-				detailsDiv.appendChild(length_paragraph);
-				break;
-			case 'rating':
-				rating_paragraph.innerHTML = `${key}: ${Movie[key]}`;
-				rating_paragraph.id = 'rating-paragraph';
-				detailsDiv.appendChild(rating_paragraph);
-				break;
-			case 'plot':
-				plot_paragraph.innerHTML = `${key}: <p>${Movie[key]}</p>`;
-				plot_paragraph.id = 'plot-paragraph';
-				detailsDiv.appendChild(plot_paragraph);
-				break;
-			default:
-				break;
-		}
-	}
-
-	posterDetails.appendChild(detailsDiv);
-
-	Movie.cast.forEach(actor => {
-		const paragraph = document.createElement('p');
-		paragraph.appendChild(
-			document.createTextNode(
-				`${actor['actor']} as ${actor['character']}`
-			)
-		);
-		castDiv.appendChild(paragraph);
-	});
-
-	posterDetails.appendChild(castDiv);
-
-	moviePosterDetailsContainer.appendChild(posterDetails);
 }
 
 function submitValue(e) {
