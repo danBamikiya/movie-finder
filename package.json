@@ -1,38 +1,62 @@
 {
-  "name": "face-detection",
-  "version": "1.0.0",
-  "description": "You don't have to try to recognize an actor in a film you're watching again.Face detector is an  app that gets movie data and poster based on user input then scrapes the web for images of actors and trains a neural network to recognize the scraped images on the movie poster!",
-  "scripts": {
-    "dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "watch": "webpack --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/danBamikiya/face-detector/tree/branch"
-  },
-  "keywords": [
-    "face-detector",
-    "ai",
-    "web-scraper",
-    "neural-networks"
-  ],
-  "author": "Dan Bamikiya",
-  "license": "MIT",
-  "dependencies": {
-    "@babel/polyfill": "^7.12.1",
-    "@babel/runtime": "^7.12.5",
-    "axios": "^0.21.1",
-    "cheerio": "^1.0.0-rc.5",
-    "core-js": "^3.8.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-transform-async-to-generator": "^7.13.0",
-    "@babel/preset-env": "^7.12.11",
-    "babel-loader": "^8.2.2",
-    "dotenv-webpack": "^7.0.1",
-    "webpack": "^5.11.1",
-    "webpack-cli": "^4.3.1"
-  }
+	"name": "rekogniz-ai",
+	"version": "1.0.0",
+	"description": "You don't have to try to recognize an actor in a film you're watching again.Face detector is an  app that gets movie data and poster based on user input then scrapes the web for images of actors and trains a neural network to recognize the scraped images on the movie poster!",
+	"scripts": {
+		"dev": "webpack --mode development",
+		"build": "webpack --mode production",
+		"watch": "webpack --watch"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-customizable"
+		},
+		"cz-customizable": {
+			"config": "./.cz-config.js"
+		}
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged",
+			"commit-msg": "cz-customizable-ghooks"
+		}
+	},
+	"lint-staged": {
+		"src/**/\\*.js": "prettier --use-tabs false --tab-width 2 --write"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/danBamikiya/rekogniz-ai.git"
+	},
+	"keywords": [
+		"face-detector",
+		"ai",
+		"web-scraper",
+		"neural-networks"
+	],
+	"author": "Dan Bamikiya",
+	"license": "MIT",
+	"dependencies": {
+		"@babel/polyfill": "^7.12.1",
+		"@babel/runtime": "^7.12.5",
+		"axios": "^0.21.1",
+		"cheerio": "^1.0.0-rc.5",
+		"core-js": "^3.8.2",
+		"uninstall": "0.0.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.12.10",
+		"@babel/plugin-transform-async-to-generator": "^7.13.0",
+		"@babel/preset-env": "^7.12.11",
+		"babel-loader": "^8.2.2",
+		"commitizen": "^4.2.3",
+		"cz-customizable": "^6.3.0",
+		"cz-customizable-ghooks": "^2.0.0",
+		"dotenv-webpack": "^7.0.1",
+		"gh-pages": "^3.1.0",
+		"husky": "^5.1.3",
+		"prettier": "^2.2.1",
+		"webpack": "^5.11.1",
+		"webpack-cli": "^4.3.1"
+	}
 }
