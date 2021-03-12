@@ -21,7 +21,7 @@ posterDetails.className = 'poster-details';
 const div = document.createElement('div');
 div.className = 'movie-poster-details';
 
-const Movie = {}; // refactor here
+const Movie = {};
 
 function outputResponse(movie) {
 	Movie.title = movie['title'];
@@ -38,7 +38,7 @@ function outputResponse(movie) {
 }
 
 function appendMovieToDOM() {
-	moviePosterContainer.innerHTML = ''; // refactor
+	moviePosterContainer.innerHTML = null; // clear previous poster
 	posterImg.src = Movie.poster;
 	posterImg.alt = 'a movie poster';
 	posterImg.className = 'movie-poster';
@@ -48,7 +48,7 @@ function appendMovieToDOM() {
 }
 
 function appendMovieDetailsToDOM() {
-	posterDetails.innerHTML = ''; //refactor
+	posterDetails.innerHTML = null; // clear previous poster details
 
 	const details = document.createElement('p');
 	details.className = 'details-header';
