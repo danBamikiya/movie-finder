@@ -24,8 +24,6 @@ async function scrapeWebForActorsImages(actor) {
 				.first()
 				.attr('href');
 
-			//outputting the scraped data
-			console.log(scrapedImgSource);
 			// call another function to scrape the href location for a clearer image
 			await getClearerImage(scrapedImgSource);
 		})
@@ -51,8 +49,6 @@ async function getClearerImage(scrapedHref) {
 			const $ = cheerio.load(html);
 			//selecting the element with the actors image
 			const scrapedata = $('#name-poster').attr('src');
-
-			console.log(scrapedata);
 
 			//payoff scraped data
 			clearerImgSource = scrapedata;
