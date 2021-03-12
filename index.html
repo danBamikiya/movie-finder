@@ -20,27 +20,34 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="./index.css" />
-		<title>Facial Expressions Detector</title>
+		<title>Rekogniz AI</title>
 		<script src="./face-api.min.js" defer></script>
 		<script src="./dist/js/main.js" defer></script>
 	</head>
 	<body>
-		<header>Face Detector</header>
+		<header>Rekogniz AI</header>
 
-		<div class="container">
+		<section class="container">
 			<div class="movie-poster-container"></div>
 			<div class="movie-poster-details-container"></div>
-			<form class="search-form">
-				<input type="text" id="inputTxt" autofocus />
-				<input type="submit" id="submitBtn" />
-				<div>
-					<p>
-						Type your 'favourite' movie here and I'll try to use my badass algorithm give
-						its poster and tell the name of the actors by face!
-					</p>
-					<p>Try: Bumblebee, Ironman e.t.c</p>
+			<section class="activity-section">
+				<form class="search-form">
+					<input type="text" id="inputTxt" autofocus />
+					<input type="submit" id="submitBtn" />
+					<div>
+						<p>
+							Type your 'favourite' movie here and I'll try to use
+							my badass algorithm give its poster and tell the
+							name of the actors by face!
+						</p>
+						<p>Try: Bumblebee, Ironman e.t.c</p>
+					</div>
+				</form>
+				<div class="recommendation-engine">
+					<h3>Recommendation Engine</h3>
+					<div></div>
 				</div>
-			</form>
+			</section>
 		</div>
 	</body>
 </html>

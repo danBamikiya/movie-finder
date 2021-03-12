@@ -188,60 +188,24 @@ canvas {
 }
 
 .container {
-	display: flex;
+	display: grid;
+	grid-template-areas: 'movie-poster-container movie-poster-details-container activity-section';
+	grid-template-columns: 32% 1fr 29%;
+	height: 100%;
 	width: 95%;
 	max-width: 1300px;
 	margin: 0.5rem auto 0 auto;
-	flex-direction: row;
 }
 
 .movie-poster-container {
-	width: 32%;
-	position: relative;
+	grid-area: movie-poster-container;
 }
 
 .movie-poster-details-container {
-	flex-grow: 1;
+	grid-area: movie-poster-details-container;
 	margin: 0 20px;
-	width: 39%;
-}
-
-.search-form {
-	background-color: rgba(255, 255, 255, 0.15);
-	backdrop-filter: blur(5px);
-	border: 1px solid;
-	border-image: linear-gradient(to top, #ffe838, #fd57bf);
-	border-image-slice: 1;
-	padding: 20px;
-	width: 23%;
-	color: black;
-	font-family: Poppins, sans-serif;
-	text-align: center;
-	height: 13rem;
-	/* border-image: linear-gradient(to left, #33ccff 0%, #ff99cc 100%); */
-	/* border: 1px solid rgba(255, 255, 255, 0.2); */
-}
-
-input[type="text"],
-input[type="submit"] {
-	background: rgba(210, 180, 140, 0.2);
-	color: white;
-}
-
-input[type="submit"] {
-	font-family: Poppins, sans-serif;
-	border-radius: 5px;
-}
-
-input[type="submit"]:hover,
-input[type="submit"]:focus {
-	cursor: pointer;
-}
-
-input[type="text"] {
-	font-family: Inconsolata, sans-serif;
-	height: 20px;
-	width: 220px;
+	font-family: poppins;
+	font-size: 14px;
 }
 
 .movie-poster {
@@ -279,4 +243,61 @@ input[type="text"] {
 .poster-details p {
 	margin: 0;
 	padding: 5px;
+}
+
+section.activity-section {
+	grid-area: activity-section;
+	display: flex;
+	flex-direction: column;
+}
+
+.search-form {
+	background-color: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(5px);
+	border: 1px solid;
+	border-image: linear-gradient(to top, #ffe838, #fd57bf);
+	border-image-slice: 1;
+	padding: 20px;
+	color: #ccc;
+	font-family: Poppins, sans-serif;
+	text-align: center;
+	height: 40%;
+	font-size: 1.2vw;
+}
+
+input[type='text'],
+input[type='submit'] {
+	background: #444;
+	color: white;
+}
+
+input[type='submit'] {
+	font-family: Poppins, sans-serif;
+	border-radius: 5px;
+}
+
+input[type='submit']:hover,
+input[type='submit']:focus {
+	cursor: pointer;
+}
+
+input[type='text'] {
+	font-family: Inconsolata, sans-serif;
+	height: 20px;
+	width: 220px;
+}
+
+.recommendation-engine {
+	border-image: linear-gradient(to left, #33ccff 0%, #ff99cc 100%);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 3px;
+	margin-top: 10px;
+}
+
+.recommendation-engine > h3 {
+	color: white;
+	font-family: Orbitron;
+	letter-spacing: 2.5px;
+	text-align: center;
+	font-size: 1.3vw;
 }
