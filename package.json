@@ -7,23 +7,6 @@
 		"build": "webpack --mode production",
 		"watch": "webpack --watch"
 	},
-	"config": {
-		"commitizen": {
-			"path": "./node_modules/cz-customizable"
-		},
-		"cz-customizable": {
-			"config": "./.cz-config.js"
-		}
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged",
-			"commit-msg": "cz-customizable-ghooks"
-		}
-	},
-	"lint-staged": {
-		"src/**/\\*.js": "prettier --use-tabs false --tab-width 2 --write"
-	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/danBamikiya/rekogniz-ai.git"
@@ -43,23 +26,16 @@
 		"@vladmandic/face-api": "^1.2.1",
 		"axios": "^0.21.1",
 		"cheerio": "^1.0.0-rc.5",
-		"core-js": "^3.8.2",
-		"uninstall": "0.0.0"
+		"core-js": "^3.8.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.10",
 		"@babel/plugin-transform-async-to-generator": "^7.13.0",
 		"@babel/preset-env": "^7.12.11",
 		"babel-loader": "^8.2.2",
-		"commitizen": "^4.2.3",
-		"cz-customizable": "^6.3.0",
-		"cz-customizable-ghooks": "^2.0.0",
 		"dotenv-webpack": "^7.0.1",
-		"gh-pages": "^3.1.0",
 		"html-webpack-plugin": "^5.3.1",
-		"husky": "^5.1.3",
 		"path": "^0.12.7",
-		"prettier": "^2.2.1",
 		"webpack": "^5.11.1",
 		"webpack-cli": "^4.3.1",
 		"webpack-dev-server": "^3.11.2"
