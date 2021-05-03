@@ -6,7 +6,7 @@ export default function actorNameParser(actor) {
 	result.forEach(name => {
 		parsedName += `${name}+`;
 	});
-	const name = parsedName.slice(0, -1);
+	const name = parsedName.slice(0, -1); // remove ending '+' sign
 	const casedName = name.toLowerCase();
 	return casedName;
 }
