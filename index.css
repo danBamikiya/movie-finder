@@ -199,6 +199,7 @@ canvas {
 
 .movie-poster-container {
 	grid-area: movie-poster-container;
+	position: relative;
 }
 
 .movie-poster-details-container {
@@ -213,12 +214,12 @@ canvas {
 	height: auto;
 }
 
-.detailsDiv {
+.details-div {
 	width: 47%;
 	border: 1px solid white;
 }
 
-.castDiv {
+.cast-div {
 	border: 1px solid white;
 }
 
