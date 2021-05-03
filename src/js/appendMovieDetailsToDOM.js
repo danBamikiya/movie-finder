@@ -19,11 +19,11 @@ export default function appendMovieDetailsToDOM({
 	cast.innerHTML = 'Cast';
 
 	const detailsDiv = document.createElement('div');
-	detailsDiv.className = 'detailsDiv';
+	detailsDiv.className = 'details-div';
 	detailsDiv.appendChild(details);
 
 	const castDiv = document.createElement('div');
-	castDiv.className = 'castDiv';
+	castDiv.className = 'cast-div';
 	castDiv.appendChild(cast);
 
 	for (const key in Movie) {
@@ -61,13 +61,13 @@ export default function appendMovieDetailsToDOM({
 	posterDetails.appendChild(detailsDiv);
 
 	Movie.cast.forEach(actor => {
-		const paragraph = document.createElement('p');
-		paragraph.appendChild(
+		const actorRole = document.createElement('p');
+		actorRole.appendChild(
 			document.createTextNode(
 				`${actor['actor']} as ${actor['character']}`
 			)
 		);
-		castDiv.appendChild(paragraph);
+		castDiv.appendChild(actorRole);
 	});
 
 	posterDetails.appendChild(castDiv);
