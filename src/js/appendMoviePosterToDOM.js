@@ -1,4 +1,4 @@
-export default function appendMovieToDOM({
+export default function appendMoviePosterToDOM({
 	Movie,
 	moviePosterContainer,
 	posterImg
