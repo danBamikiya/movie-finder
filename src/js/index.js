@@ -1,5 +1,5 @@
 import getMovie from './getMovie';
-import appendMovieToDOM from './appendMovieToDOM';
+import appendMoviePosterToDOM from './appendMoviePosterToDOM';
 import appendMovieDetailsToDOM from './appendMovieDetailsToDOM';
 import backgroundActorNamesParse from './getActorsImgsUrl';
 
@@ -33,7 +33,7 @@ const AppendToDOMDependencies = {
 };
 
 function outputResponse(movie) {
-	Movie.title = movie['title'];
+	Movie.title = movie['title'].trim();
 	Movie.year = movie['year'];
 	Movie.length = movie['length'];
 	Movie.rating = movie['rating'];
@@ -42,7 +42,7 @@ function outputResponse(movie) {
 	Movie.cast = movie['cast'];
 
 	backgroundActorNamesParse(Movie);
-	appendMovieToDOM(AppendToDOMDependencies);
+	appendMoviePosterToDOM(AppendToDOMDependencies);
 	appendMovieDetailsToDOM(AppendToDOMDependencies);
 	startRecognition();
 }
@@ -69,11 +69,14 @@ function startRecognition() {
 
 async function start() {
 	/** detect faces and draw detected faces with thier corresponding names to the DOM **/
-
 	const LabeledFaceDescriptors = await loadLabeledImages();
+	if (!LabeledFaceDescriptors?.length) {
+		throw new Error('No labeled images found');
+	}
 	console.log(LabeledFaceDescriptors);
 	const faceMatcher = new faceapi.FaceMatcher(LabeledFaceDescriptors, 0.6);
 	const image = await faceapi.fetchImage(Movie.poster);
+
 	/* Preparing the overlay canvas */
 
 	// creating canvas from the image
@@ -86,13 +89,12 @@ async function start() {
 		.detectAllFaces(image)
 		.withFaceLandmarks()
 		.withFaceDescriptors();
-	// console.log(detections.length);
 	const resizedDetections = faceapi.resizeResults(detections, displaySize);
 	const results = resizedDetections.map(d =>
 		faceMatcher.findBestMatch(d.descriptor)
 	);
-	results.forEach((result, i) => {
-		const box = resizedDetections[i].detection.box;
+	results.forEach((result, index) => {
+		const box = resizedDetections[index].detection.box;
 		// draw detectedface
 		const drawBox = new faceapi.draw.DrawBox(box, {
 			label: result.toString()
@@ -122,18 +124,20 @@ function loadLabeledImages() {
 	// }
 	// console.log(`Done => ${allLabeledFaceDescriptors}`);
 	// // );
+
 	return Promise.all(
-		Movie.actorsImgsURL.map(async imgUrl => {
+		Movie.actorsImgsURL.map(async (imgUrl, index) => {
 			const descriptions = [];
-			console.log('Initializing');
 			const img = await faceapi.fetchImage(`${imgUrl}`);
-			console.log(img);
 			const detections = await faceapi
 				.detectSingleFace(img)
 				.withFaceLandmarks()
 				.withFaceDescriptor();
 			descriptions.push(detections.descriptor);
-			return new faceapi.LabeledFaceDescriptors(actorName, descriptions);
+			return new faceapi.LabeledFaceDescriptors(
+				Movie.cast[index].actor,
+				descriptions
+			);
 		})
 	);
 }
