@@ -1,12 +1,10 @@
-// import libraries
 import axios from 'axios';
 import cheerio from 'cheerio';
 
 let clearerImgSource;
 
 // make a GET HTTP request to an imdb search of the actor
-
-async function scrapeWebForActorsImages(actor) {
+export default async function scrapeWebForActorsImages(actor) {
 	await axios
 		.get(
 			`https://api.allorigins.win/get?url=${encodeURIComponent(
@@ -58,5 +56,3 @@ async function getClearerImage(scrapedHref) {
 			console.log(error);
 		});
 }
-
-export default scrapeWebForActorsImages;
