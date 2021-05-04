@@ -55,8 +55,8 @@ async function testAsync() {
 
 	await test();
 	if (
-		Array.isArray(Movie.actorsImgsURL) &&
-		Movie.actorsImgsURL.length === Movie.cast
+		Array.isArray(Object.keys(Movie.actorsImgsURL)) &&
+		Object.keys(Movie.actorsImgsURL).length === Movie.cast
 	) {
 		console.log('true', Movie.actorsImgsURL);
 		console.log('true', Movie);
@@ -64,9 +64,9 @@ async function testAsync() {
 		setTimeout(() => {
 			console.log('false', Movie.actorsImgsURL);
 			console.log('false', Movie);
-			console.log('false', Movie.actorsImgsURL.length);
-			Movie.actorsImgsURL.forEach(url => {
-				console.log(url);
+			console.log('false', Object.keys(Movie.actorsImgsURL).length);
+			Object.keys(Movie.actorsImgsURL).forEach(actorName => {
+				console.log(Movie.actorsImgsURL[actorName]);
 			});
 		}, 10000);
 	}
