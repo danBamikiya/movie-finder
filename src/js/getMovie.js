@@ -1,5 +1,3 @@
-import { outputResponse } from './index';
-
 function logError(err) {
 	console.log("Looks like there's a problem: \n", err);
 }
@@ -15,13 +13,12 @@ function validateResponse(res) {
 	return res;
 }
 
-export default async function getMovie(searchText) {
-	let movie; // refactor here
-
+export default async function getMovie(searchText, showMovie) {
 	if (searchText.length === 0) {
 		return;
 	}
-	movie = await fetch(
+
+	const movie = await fetch(
 		`https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/${searchText}`,
 		{
 			method: 'GET',
@@ -35,5 +32,5 @@ export default async function getMovie(searchText) {
 		.then(validateResponse)
 		.then(readResponseAsJSON)
 		.catch(logError);
-	outputResponse(movie);
+	showMovie(movie);
 }
