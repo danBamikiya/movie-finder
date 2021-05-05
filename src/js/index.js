@@ -2,7 +2,7 @@ import getMovie from './getMovie';
 import appendMoviePosterToDOM from './appendMoviePosterToDOM';
 import appendMovieDetailsToDOM from './appendMovieDetailsToDOM';
 import backgroundActorNamesParse from './getActorsImgsUrl';
-// import startRecognition from './startRecognition';
+import startRecognition from './startRecognition';
 
 const submitBtn = document.getElementById('submitBtn');
 const inputTxt = document.getElementById('inputTxt');
@@ -42,34 +42,10 @@ function showMovie(movie) {
 	Movie.plot = movie['plot'];
 	Movie.cast = movie['cast'];
 
+	backgroundActorNamesParse(Movie);
 	appendMoviePosterToDOM(AppendToDOMDependencies);
 	appendMovieDetailsToDOM(AppendToDOMDependencies);
-	testAsync();
-	// startRecognition(AppendToDOMDependencies);
-}
-
-async function testAsync() {
-	const test = async () => {
-		await backgroundActorNamesParse(Movie);
-	};
-
-	await test();
-	if (
-		Array.isArray(Object.keys(Movie.actorsImgsURL)) &&
-		Object.keys(Movie.actorsImgsURL).length === Movie.cast
-	) {
-		console.log('true', Movie.actorsImgsURL);
-		console.log('true', Movie);
-	} else {
-		setTimeout(() => {
-			console.log('false', Movie.actorsImgsURL);
-			console.log('false', Movie);
-			console.log('false', Object.keys(Movie.actorsImgsURL).length);
-			Object.keys(Movie.actorsImgsURL).forEach(actorName => {
-				console.log(Movie.actorsImgsURL[actorName]);
-			});
-		}, 10000);
-	}
+	startRecognition(AppendToDOMDependencies);
 }
 
 function submitValue(e) {
