@@ -1,7 +1,7 @@
-export default function actorNameParser(actor) {
+export default function actorNameParser(actorName) {
 	/** Regex to parse actors name */
 	const regexParser = /([^\W])([\w]+)/gi;
-	const result = actor.match(regexParser);
+	const result = actorName.match(regexParser);
 	let parsedName = '';
 	result.forEach(name => {
 		parsedName += `${name}+`;
