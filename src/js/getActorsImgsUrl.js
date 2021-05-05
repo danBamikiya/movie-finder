@@ -1,7 +1,7 @@
 import actorNameParser from './actorNameParser';
 import scrapeWebForActorsImages from './webScrapper';
 
-async function getActorsImgsURL(Movie) {
+function getActorsImgsURL(Movie) {
 	const actorsImgsURL = {};
 	Promise.all(
 		Movie.parsedActorNames.map(async (actorName, index) => {
@@ -12,7 +12,7 @@ async function getActorsImgsURL(Movie) {
 	).then((Movie.actorsImgsURL = actorsImgsURL));
 }
 
-export default async function backgroundActorNamesParse(Movie) {
+export default function backgroundActorNamesParse(Movie) {
 	const parsedActorNames = Movie.cast
 		.map(actor => actor['actor'])
 		.reduce(
