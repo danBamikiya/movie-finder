@@ -8,7 +8,19 @@ export default function startRecognition({
 		faceapi.nets.faceRecognitionNet.loadFromUri('../models'),
 		faceapi.nets.faceLandmark68Net.loadFromUri('../models'),
 		faceapi.nets.ssdMobilenetv1.loadFromUri('../models')
-	]).then(start(Movie, posterImg, moviePosterContainer));
+	]).then(
+		startWhenActorsImgsURLIsReady(Movie, posterImg, moviePosterContainer)
+	);
+}
+
+function startWhenActorsImgsURLIsReady(Movie, posterImg, moviePosterContainer) {
+	if (Object.keys(Movie.actorsImgsURL)?.length === Movie.cast) {
+		start(Movie, posterImg, moviePosterContainer);
+	} else {
+		setTimeout(() => {
+			start(Movie, posterImg, moviePosterContainer);
+		}, 10000);
+	}
 }
 
 async function start(Movie, posterImg, moviePosterContainer) {
@@ -53,20 +65,23 @@ async function start(Movie, posterImg, moviePosterContainer) {
 function loadLabeledImages(Movie) {
 	console.log(Movie);
 	return Promise.all(
-		Movie.actorsImgsURL.map(async (imgUrl, index) => {
+		Object.keys(Movie.actorsImgsURL).map(async actorName => {
 			const descriptions = [];
 
-			const img = await faceapi.fetchImage(`${imgUrl}`);
-			const detections = await faceapi
-				.detectSingleFace(img)
-				.withFaceLandmarks()
-				.withFaceDescriptor();
-			descriptions.push(detections.descriptor);
+			if (Movie.actorsImgsURL[actorName] === undefined) {
+				descriptions.push('');
+			} else {
+				const img = await faceapi.fetchImage(
+					`${Movie.actorsImgsURL[actorName]}`
+				);
+				const detections = await faceapi
+					.detectSingleFace(img)
+					.withFaceLandmarks()
+					.withFaceDescriptor();
+				descriptions.push(detections.descriptor);
+			}
 
-			return new faceapi.LabeledFaceDescriptors(
-				Movie.cast[index].actor,
-				descriptions
-			);
+			return new faceapi.LabeledFaceDescriptors(actorName, descriptions);
 		})
 	);
 }
