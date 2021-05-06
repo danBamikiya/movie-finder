@@ -1,7 +1,7 @@
 import getMovie from './getMovie';
 import appendMoviePosterToDOM from './appendMoviePosterToDOM';
 import appendMovieDetailsToDOM from './appendMovieDetailsToDOM';
-import backgroundActorNamesParse from './getActorsImgsUrl';
+import getActorsImgsURL from './getActorsImgsUrl';
 import startRecognition from './startRecognition';
 
 const submitBtn = document.getElementById('submitBtn');
@@ -42,7 +42,7 @@ function showMovie(movie) {
 	Movie.plot = movie['plot'];
 	Movie.cast = movie['cast'];
 
-	backgroundActorNamesParse(Movie);
+	getActorsImgsURL(Movie);
 	appendMoviePosterToDOM(AppendToDOMDependencies);
 	appendMovieDetailsToDOM(AppendToDOMDependencies);
 	startRecognition(AppendToDOMDependencies);
