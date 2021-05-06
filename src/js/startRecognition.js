@@ -14,7 +14,9 @@ export default function startRecognition({
 }
 
 function startWhenActorsImgsURLIsReady(Movie, posterImg, moviePosterContainer) {
-	if (Object.keys(Movie.actorsImgsURL)?.length === Movie.cast) {
+	const urlIsReady = actor => actor['actorImgURL'] !== undefined;
+
+	if (Movie.cast.every(urlIsReady)) {
 		start(Movie, posterImg, moviePosterContainer);
 	} else {
 		setTimeout(() => {
@@ -65,15 +67,13 @@ async function start(Movie, posterImg, moviePosterContainer) {
 function loadLabeledImages(Movie) {
 	console.log(Movie);
 	return Promise.all(
-		Object.keys(Movie.actorsImgsURL).map(async actorName => {
+		Movie.cast.map(async ({ actorImgURL, actor: actorName }) => {
 			const descriptions = [];
 
-			if (Movie.actorsImgsURL[actorName] === undefined) {
+			if (actorImgURL === undefined) {
 				descriptions.push('');
 			} else {
-				const img = await faceapi.fetchImage(
-					`${Movie.actorsImgsURL[actorName]}`
-				);
+				const img = await faceapi.fetchImage(`${actorImgURL}`);
 				const detections = await faceapi
 					.detectSingleFace(img)
 					.withFaceLandmarks()
