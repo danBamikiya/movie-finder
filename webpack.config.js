@@ -1,5 +1,6 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
+const { SourceMapDevToolPlugin } = require('webpack');
 
 module.exports = {
 	mode: 'development',
@@ -15,10 +16,21 @@ module.exports = {
 				test: /\.js$/, //using regex to tell babel exactly what files to transcompile
 				exclude: /node_modules/, // files to be ignored
 				use: {
-					loader: 'babel-loader' // specify the loader
+					loader: 'babel-loader' // loader to apply to the matched files
 				}
+			},
+			{
+				test: /\.js$/, //using regex to tell source-map-loader exactly what files to extract from
+				enforce: 'pre', // when to use the loader
+				use: ['source-map-loader'] // using a loader to extract source maps from existing source files
 			}
 		]
 	},
-	plugins: [new Dotenv()]
+	devtool: false,
+	resolve: {
+		fallback: {
+			fs: false
+		}
+	},
+	plugins: [new Dotenv(), new SourceMapDevToolPlugin({})]
 };

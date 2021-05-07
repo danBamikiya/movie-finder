@@ -42,6 +42,7 @@
 		"dotenv-webpack": "^7.0.1",
 		"path": "^0.12.7",
 		"reload": "^3.1.1",
+		"source-map-loader": "^2.0.1",
 		"webpack": "^5.11.1",
 		"webpack-cli": "^4.3.1",
 		"webpack-dev-server": "^3.11.2"
