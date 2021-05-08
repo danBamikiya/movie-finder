@@ -7,8 +7,8 @@
 		"dev": "node scripts/serve-shim.js && npm-run-all --parallel watch:dev serve:dev reload",
 		"watch:dev": "webpack --mode development  --watch",
 		"build": "webpack --mode production",
-		"serve:dev": "http-server ./ -c-1 --proxy http://localhost:8080?",
-		"serve:build": "http-server ./ --proxy http://localhost:8080?",
+		"serve:dev": "http-server ./ -c-1 --cors --proxy http://localhost:8080?",
+		"serve:build": "http-server ./ -c-1 --cors --proxy http://localhost:8080?",
 		"reload": "reload --browser"
 	},
 	"repository": {
@@ -26,11 +26,9 @@
 	"dependencies": {
 		"@babel/polyfill": "^7.12.1",
 		"@babel/runtime": "^7.12.5",
-		"@vladmandic/face-api": "^1.2.1",
 		"axios": "^0.21.1",
 		"cheerio": "^1.0.0-rc.5",
 		"core-js": "^3.8.2",
-		"face-api.js": "^0.22.2",
 		"http-server": "^0.12.3",
 		"npm-run-all": "^4.1.5"
 	},
