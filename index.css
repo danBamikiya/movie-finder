@@ -205,7 +205,7 @@ canvas {
 .movie-poster-details-container {
 	grid-area: movie-poster-details-container;
 	margin: 0 20px;
-	font-family: poppins;
+	font-family: Poppins;
 	font-size: 14px;
 }
 
@@ -302,4 +302,20 @@ input[type='text'] {
 	letter-spacing: 2.5px;
 	text-align: center;
 	font-size: 1.3vw;
+}
+
+.actor-name {
+	cursor: default;
+	position: relative;
+	font-weight: 500;
+}
+
+.actor-name::before {
+	content: '';
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	background-color: rgb(48, 54, 61);
+	border-radius: 5px;
+	display: none;
 }
