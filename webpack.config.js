@@ -4,7 +4,7 @@ const { SourceMapDevToolPlugin } = require('webpack');
 
 module.exports = {
 	mode: 'development',
-	entry: './src/js/index.js', //location of your js files
+	entry: ['./src/js/index.js', './src/js/useHoverCard.js'], //location of js files
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'js/main.js' // where js files would be bundled to
