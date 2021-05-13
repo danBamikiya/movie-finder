@@ -3,11 +3,7 @@ import scrapeWebForActorsImages from './webScrapper';
 
 function parseActorsNames(movieCast) {
 	movieCast.forEach(
-		actor =>
-			(actor['parsedActorName'] = actorNameParser(
-				actor['actor'],
-				'casedName'
-			))
+		actor => (actor['parsedActorName'] = actorNameParser(actor['actor']))
 	);
 }
 
