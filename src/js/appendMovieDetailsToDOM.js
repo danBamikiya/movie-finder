@@ -62,11 +62,13 @@ export default function appendMovieDetailsToDOM({
 
 	Movie.cast.forEach(actor => {
 		const actorRole = document.createElement('p');
-		actorRole.appendChild(
-			document.createTextNode(
-				`${actor['actor']} as ${actor['character']}`
-			)
-		);
+		const actorName = document.createElement('a');
+		actorName.className = 'actor-name';
+		actorName.href = `https://www.imdb.com/name/${actor['actor_id']}/bio`;
+		actorName.innerText = `${actor['actor']}`;
+		actorRole.insertAdjacentElement('afterbegin', actorName);
+		actorName.insertAdjacentText('afterend', ` as ${actor['character']}`);
+
 		castDiv.appendChild(actorRole);
 	});
 
