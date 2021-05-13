@@ -2,7 +2,7 @@ import getMovie from './getMovie';
 import appendMoviePosterToDOM from './appendMoviePosterToDOM';
 import appendMovieDetailsToDOM from './appendMovieDetailsToDOM';
 import getActorsImgsURL from './getActorsImgsUrl';
-import startRecognition from './startRecognition';
+import useActorsImgsUrlWhenReady from './useActorsImgsUrl';
 
 const submitBtn = document.getElementById('submitBtn');
 const inputTxt = document.getElementById('inputTxt');
@@ -45,7 +45,7 @@ function showMovie(movie) {
 	getActorsImgsURL(Movie);
 	appendMoviePosterToDOM(AppendToDOMDependencies);
 	appendMovieDetailsToDOM(AppendToDOMDependencies);
-	startRecognition(AppendToDOMDependencies);
+	useActorsImgsUrlWhenReady(Movie);
 }
 
 function submitValue(e) {
