@@ -11,7 +11,7 @@ function parseActorsNames(movieCast) {
 	);
 }
 
-export default function getActorsImgsURL({ cast: movieCast }) {
+export default function getActorsImgsUrl({ cast: movieCast }) {
 	parseActorsNames(movieCast);
 
 	movieCast.forEach(
