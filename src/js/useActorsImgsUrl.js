@@ -5,15 +5,15 @@ export default function useActorsImgsUrlWhenReady({ cast: movieCast }) {
 
 	// refactor here with recursion
 	if (movieCast.every(urlIsReady)) {
-		useActorsImgsURL(Movie);
+		useActorsImgsURL(movieCast);
 	} else {
 		setTimeout(() => {
-			useActorsImgsURL(Movie);
+			useActorsImgsURL(movieCast);
 		}, 10000);
 	}
 }
 
-function useActorsImgsURL(cast) {
+function useActorsImgsURL(movieCast) {
 	const actors = Array.from(document.getElementsByClassName('actor-name'));
 
 	if (!actors.length) return;
@@ -23,7 +23,7 @@ function useActorsImgsURL(cast) {
 
 		actor.setAttribute(
 			'data-hovercard-img-url',
-			`${cast[index].actorImgURL}`
+			`${movieCast[index].actorImgURL}`
 		);
 	});
 }
