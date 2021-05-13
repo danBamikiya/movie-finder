@@ -10,7 +10,6 @@ const moviePosterContainer = document.getElementsByClassName(
 	'movie-poster-container'
 )[0];
 const moviePosterDetailsContainer = moviePosterContainer.nextElementSibling;
-const canvasElement = document.getElementsByTagName('canvas')[0];
 
 const posterImg = document.createElement('img');
 const posterDetails = document.createElement('div');
