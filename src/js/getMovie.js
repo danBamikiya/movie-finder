@@ -14,9 +14,7 @@ function validateResponse(res) {
 }
 
 export default async function getMovie(searchText, showMovie) {
-	if (searchText.length === 0) {
-		return;
-	}
+	if (!searchText.length) return;
 
 	const movie = await fetch(
 		`https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/${searchText}`,
