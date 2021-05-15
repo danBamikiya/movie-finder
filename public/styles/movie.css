@@ -1,0 +1,57 @@
+.movie-poster {
+	max-width: 100%;
+	height: auto;
+}
+
+.movie-poster-container {
+	position: relative;
+}
+
+.movie-poster-details-container {
+	margin: 0 20px;
+	font-family: Poppins;
+	font-size: 14px;
+}
+
+.details-div {
+	width: 47%;
+	border: 1px solid var(--color-light-text-scale-0);
+}
+
+.cast-div {
+	border: 1px solid var(--color-light-text-scale-0);
+}
+
+.details-header {
+	border-bottom: 1px solid var(--color-light-text-scale-0);
+	padding: 5px;
+	margin: 0;
+}
+
+.cast-header {
+	border-bottom: 1px solid var(--color-light-text-scale-0);
+	padding: 5px;
+	margin: 0;
+}
+
+.poster-details {
+	color: var(--color-base-blue);
+	display: flex;
+	flex-direction: row;
+}
+
+.poster-details p {
+	margin: 0;
+	padding: 5px;
+}
+
+.actor-name {
+	cursor: default;
+	position: relative;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.actor-name:hover {
+	color: var(--color-text-link);
+}

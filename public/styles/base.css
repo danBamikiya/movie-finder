@@ -1,0 +1,32 @@
+.container {
+	display: grid;
+	grid-template-areas: 'movie-poster-container movie-poster-details-container activity-section';
+	grid-template-columns: 32% 1fr 29%;
+	height: 100%;
+	width: 95%;
+	max-width: 1300px;
+	margin: 0.5rem auto 0 auto;
+}
+
+.movie-poster-container {
+	grid-area: movie-poster-container;
+}
+
+.movie-poster-details-container {
+	grid-area: movie-poster-details-container;
+}
+
+.activity-section {
+	grid-area: activity-section;
+	display: flex;
+	flex-direction: column;
+}
+
+.px-3 {
+	padding-right: 16px;
+	padding-left: 16px;
+}
+
+.pb-3 {
+	padding-bottom: 16px;
+}

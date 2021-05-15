@@ -1,0 +1,127 @@
+.hover-card-container {
+	position: absolute;
+	display: none;
+	outline: none;
+	z-index: 100;
+}
+
+.hover-card-message {
+	width: 320px;
+	background-color: var(--color-bg-overlay);
+	position: relative;
+	/* width: 232px; */
+	margin-right: auto;
+	/* margin-left: auto; */
+	box-shadow: var(--color-dark-shadow);
+	border: 1px solid var(--color-border-overlay);
+	border-radius: 6px;
+}
+
+.hover-card-message::before {
+	top: -16px;
+	margin-left: -9px;
+	border: 8px solid transparent;
+	border-bottom: 8px solid var(--color-border-overlay);
+}
+
+.hover-card-message::after,
+.hover-card-message::before {
+	position: absolute;
+	left: 50%;
+	display: inline-block;
+	content: '';
+}
+
+.hover-card-message--bottom-left,
+.hover-card-message--top-left {
+	left: -9px;
+	margin-left: 0;
+}
+
+.hover-card-message--bottom-left::before,
+.hover-card-message--bottom-right::before,
+.hover-card-message--bottom::before {
+	bottom: -16px;
+	border-top-color: var(--color-border-overlay);
+}
+
+.hover-card-message--bottom-left::after,
+.hover-card-message--bottom-left::before,
+.hover-card-message--top-left::after,
+.hover-card-message--top-left::before {
+	left: 24px;
+	margin-left: 0;
+}
+
+.hover-card-message--bottom-left::after,
+.hover-card-message--bottom-left::before,
+.hover-card-message--bottom-right::after,
+.hover-card-message--bottom-right::before,
+.hover-card-message--bottom::after,
+.hover-card-message--bottom::before {
+	top: auto;
+	border-bottom-color: transparent;
+}
+
+.hover-card-message-name-bar {
+	/* text-align: center; */
+	border-bottom: 1px solid var(--color-border-primary);
+	margin-right: -16px;
+	margin-left: -16px;
+	display: flex;
+	align-items: center;
+	align-items: stretch;
+}
+
+.hover-card-message-name {
+	display: flex;
+	align-items: center;
+	padding: 8px;
+	width: 100%;
+}
+
+.hover-card-message-name a {
+	font-size: 14px;
+	font-size: 600;
+	line-height: 1.25;
+	text-decoration: none;
+	color: var(--color-light-text-scale-0);
+}
+
+.hover-card-message-name > a:hover {
+	color: var(--color-text-link);
+}
+
+.hover-card-message-img-bar {
+	display: flex;
+	margin-top: 16px;
+	align-self: flex-start;
+	text-align: center;
+}
+
+.hover-card-message-img-bar > div {
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.hover-card-message-img-link {
+	color: var(--color-text-link);
+	text-decoration: none;
+}
+
+.hover-card-message-img-link-avatar {
+	display: block;
+	border-radius: 50%;
+	border-style: none;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+	word-wrap: normal;
+	overflow: hidden;
+}
