@@ -181,12 +181,6 @@ header {
 		linear-gradient(90deg, rgb(239, 53, 115), rgb(79, 2, 93));
 }
 
-canvas {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
 .container {
 	display: grid;
 	grid-template-areas: 'movie-poster-container movie-poster-details-container activity-section';
@@ -310,7 +304,7 @@ input[type='text'] {
 	font-weight: 500;
 }
 
-.actor-name::before {
+/* .actor-name::before {
 	content: '';
 	position: absolute;
 	width: 200px;
@@ -318,4 +312,50 @@ input[type='text'] {
 	background-color: rgb(48, 54, 61);
 	border-radius: 5px;
 	display: none;
+} */
+
+.hover-card-message--bottom-left,
+.hover-card-message--top-left {
+	left: -9px;
+	margin-left: 0;
+}
+
+.hover-card-message--bottom-left::after,
+.hover-card-message--bottom-left::before,
+.hover-card-message--top-left::after,
+.hover-card-message--top-left::before {
+	left: 24px;
+	margin-left: 0;
+}
+
+.hover-card-message--bottom-left::before,
+.hover-card-message--bottom-right::before,
+.hover-card-message--bottom::before {
+	bottom: -16px;
+	border-top-color: rgb(48, 54, 61);
+}
+
+.hover-card-message--bottom-left::after,
+.hover-card-message--bottom-left::before,
+.hover-card-message--bottom-right::after,
+.hover-card-message--bottom-right::before,
+.hover-card-message--bottom::after,
+.hover-card-message--bottom::before {
+	top: auto;
+	border-bottom-color: transparent;
+}
+
+.hovercard-message::before {
+	top: -16px;
+	margin-left: -9px;
+	border: 8px solid transparent;
+	border-bottom: 8px solid var(--color-border-overlay);
+}
+
+.hover-card-message::after,
+.hover-card-message::before {
+	position: absolute;
+	left: 50%;
+	display: inline-block;
+	content: '';
 }
