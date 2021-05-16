@@ -7,9 +7,9 @@
 		"dev": "cross-env NODE_ENV=development node scripts/serve-shim.js && npm-run-all --parallel watch:dev serve:dev reload",
 		"watch:dev": "webpack --mode development  --watch",
 		"build": "webpack --mode production",
-		"serve:dev": "http-server ./ -c-1 --cors --proxy http://localhost:8080?",
-		"serve:build": "http-server ./ -c-1 --cors --proxy http://localhost:8080?",
-		"reload": "reload --browser"
+		"serve:dev": "http-server ./ -c-1 --cors -o public/ --proxy http://localhost:8080?",
+		"serve:build": "http-server ./ -c-1 --cors -o public/ --proxy http://localhost:8080?",
+		"reload": "reload --browser --dir public/"
 	},
 	"repository": {
 		"type": "git",
