@@ -65,7 +65,7 @@
 
 .hover-card-message-name-bar {
 	/* text-align: center; */
-	border-bottom: 1px solid var(--color-border-primary);
+	border-bottom: 1px solid var(--color-border-secondary);
 	margin-right: -16px;
 	margin-left: -16px;
 	display: flex;
@@ -82,7 +82,8 @@
 
 .hover-card-message-name a {
 	font-size: 14px;
-	font-size: 600;
+	font-weight: 600;
+	font-family: Poppins, sans-serif;
 	line-height: 1.25;
 	text-decoration: none;
 	color: var(--color-light-text-scale-0);
@@ -113,6 +114,9 @@
 	display: block;
 	border-radius: 50%;
 	border-style: none;
+	width: 60px;
+	aspect-ratio: auto 60 / 60;
+	height: 60px;
 }
 
 .sr-only {
