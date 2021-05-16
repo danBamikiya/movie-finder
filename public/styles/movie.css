@@ -50,6 +50,7 @@
 	position: relative;
 	font-weight: 500;
 	text-decoration: none;
+	color: inherit;
 }
 
 .actor-name:hover {
