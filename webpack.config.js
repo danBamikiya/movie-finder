@@ -6,7 +6,7 @@ module.exports = {
 	mode: 'development',
 	entry: ['./src/js/index.js', './src/js/useHoverCard.js'], //location of js files
 	output: {
-		path: path.resolve(__dirname, 'dist'),
+		path: path.resolve(__dirname, 'public'),
 		filename: 'js/main.js' // where js files would be bundled to
 	},
 	watch: true,
