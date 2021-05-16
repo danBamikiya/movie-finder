@@ -21,11 +21,11 @@ module.exports = {
 			}
 		]
 	},
-	devtool: false,
+	devtool: false, // comment this out to view source files in the browser DevTools
 	resolve: {
 		fallback: {
 			fs: false
 		}
 	},
-	plugins: [new Dotenv(), new SourceMapDevToolPlugin({})]
+	plugins: [new Dotenv(), new SourceMapDevToolPlugin({})] // comment out 'new SourceMapDevToolPlugin({})' to view source files in the browser DevTools
 };
