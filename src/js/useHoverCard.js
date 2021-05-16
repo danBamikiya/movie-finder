@@ -1,5 +1,5 @@
 import { observe } from 'selector-observer';
-import { compose, fromEvent } from '../subscription';
+import { compose, fromEvent } from '../lib/subscription';
 
 import {
 	activateWithTimeout,
@@ -11,7 +11,7 @@ import {
 } from './hoverCard';
 
 // The hover card. Moved around the page to where the current hover is
-const hoverCardContainer = document.querySelector('hover-card-container');
+const hoverCardContainer = document.querySelector('.hover-card-container');
 
 if (hoverCardContainer) {
 	observe('[data-hovercard-img-url]', {
@@ -30,7 +30,7 @@ if (hoverCardContainer) {
 		}
 	});
 
-	observe('hover-card-container', {
+	observe('.hover-card-container', {
 		subscribe: element =>
 			compose(
 				fromEvent(element, 'mouseover', cancelDeactivation),
