@@ -7,6 +7,8 @@
 	--color-dark-bg-scale-0: #ffffff26;
 	--color-dark-bg-scale-1: #444;
 	--color-border-overlay: #30363d;
+	--color-border-primary: #ffffff;
+	--color-border-secondary: var(--color-border-overlay);
 	--color-bg-overlay: #1c2128;
 	--color-dark-shadow: 0 8px 24px #010409;
 	--color-text-link: #58a6ff;
