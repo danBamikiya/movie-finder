@@ -18,10 +18,10 @@
 
 .hover-card-message::after,
 .hover-card-message::before {
+	content: '';
 	position: absolute;
 	left: 50%;
 	display: inline-block;
-	content: '';
 }
 
 .hover-card-message::before {
