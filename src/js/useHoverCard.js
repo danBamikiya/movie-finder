@@ -26,7 +26,7 @@ if (hoverCardContainer) {
 	observe('[data-hovercard-img-url]', {
 		remove(element) {
 			// Hide card if the element that triggered it is being removed
-			currentTarget === element && hideCard();
+			if (currentTarget === element) hideCard();
 		}
 	});
 
