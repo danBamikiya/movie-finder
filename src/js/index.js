@@ -11,7 +11,6 @@ const moviePosterContainer = document.getElementsByClassName(
 )[0];
 const moviePosterDetailsContainer = moviePosterContainer.nextElementSibling;
 
-const posterImg = document.createElement('img');
 const posterDetails = document.createElement('div');
 posterDetails.className = 'poster-details';
 const div = document.createElement('div');
@@ -24,7 +23,7 @@ const AppendToDOMDependencies = {
 	posterDetails,
 	moviePosterDetailsContainer,
 	moviePosterContainer,
-	posterImg,
+	posterImg: new Image(),
 	title_paragraph: document.createElement('p'),
 	year_paragraph: document.createElement('p'),
 	length_paragraph: document.createElement('p'),
