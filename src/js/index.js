@@ -6,6 +6,7 @@ import useActorsImgsUrlWhenReady from './useActorsImgsUrl';
 
 const submitBtn = document.getElementById('submitBtn');
 const inputTxt = document.getElementById('inputTxt');
+
 const moviePosterContainer = document.getElementsByClassName(
 	'movie-poster-container'
 )[0];
@@ -13,8 +14,6 @@ const moviePosterDetailsContainer = moviePosterContainer.nextElementSibling;
 
 const posterDetails = document.createElement('div');
 posterDetails.className = 'poster-details';
-const div = document.createElement('div');
-div.className = 'movie-poster-details';
 
 const Movie = {};
 
