@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 .container {
 	display: grid;
 	grid-template-areas: 'movie-poster-container movie-poster-details-container activity-section';

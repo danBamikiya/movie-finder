@@ -38,6 +38,8 @@
 	color: var(--color-base-blue);
 	display: flex;
 	flex-direction: row;
+	align-items: stretch;
+	justify-content: center;
 }
 
 .poster-details p {
