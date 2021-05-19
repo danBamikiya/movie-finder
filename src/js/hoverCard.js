@@ -307,6 +307,7 @@ export {
 	activateWithTimeout,
 	deactivateWithTimeout,
 	handleKeyUp,
+	currentTarget,
 	hideCard,
 	cancelDeactivation,
 	deactivate
