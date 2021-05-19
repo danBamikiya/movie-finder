@@ -46,7 +46,7 @@ export default function processHoverCardDocumentFragment(
 	actorImdbPage,
 	hovercardImgUrl
 ) {
-	if (!actorImdbPage && !hovercardImgUrl) return;
+	if (!actorImdbPage && !actorName) return;
 
 	const fragment = new DocumentFragment();
 	const fragmentContent = div.cloneNode();
@@ -59,7 +59,7 @@ export default function processHoverCardDocumentFragment(
 	);
 
 	fragmentContent.append(
-		renderInto('a', actorName, actorImdbPage, hovercardImgUrl),
+		renderInto('a', actorName, actorImdbPage),
 		renderInto('img', actorName, actorImdbPage, hovercardImgUrl),
 		srClose
 	);
