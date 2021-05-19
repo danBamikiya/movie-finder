@@ -1,8 +1,7 @@
 import getMovie from './getMovie';
 import appendMoviePosterToDOM from './appendMoviePosterToDOM';
 import appendMovieDetailsToDOM from './appendMovieDetailsToDOM';
-import getActorsImgsUrl from './getActorsImgsUrl';
-import useActorsImgsUrlWhenReady from './useActorsImgsUrl';
+import setActorsImgsUrl from './setActorsImgsUrl';
 
 const submitBtn = document.getElementById('submitBtn');
 const inputTxt = document.getElementById('inputTxt');
@@ -39,10 +38,9 @@ function showMovie(movie) {
 	Movie.plot = movie['plot'];
 	Movie.cast = movie['cast'];
 
-	getActorsImgsUrl(Movie);
+	setActorsImgsUrl(Movie);
 	appendMoviePosterToDOM(AppendToDOMDependencies);
 	appendMovieDetailsToDOM(AppendToDOMDependencies);
-	useActorsImgsUrlWhenReady(Movie);
 }
 
 function submitValue(e) {
