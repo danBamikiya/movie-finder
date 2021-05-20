@@ -1,6 +1,6 @@
-const div = document.createElement('div');
-
 function renderInto(element, actor, imdbPage, imgUrl) {
+	const div = document.createElement('div');
+
 	switch (element) {
 		case 'img':
 			const hoverCardMsgImgContainer = div.cloneNode();
@@ -12,11 +12,14 @@ function renderInto(element, actor, imdbPage, imgUrl) {
 			);
 			hoverCardImgLink.className = 'hover-card-message-img-link';
 			hoverCardImgLink.href = imdbPage;
+			hoverCardImgLink.target = '_blank';
+
 			const img = document.createElement(element);
 			img.src = imgUrl;
 			img.alt = actor;
 			img.className = 'hover-card-message-img-link-avatar';
 			img.crossOrigin = 'anonymous';
+
 			hoverCardImgLink.appendChild(img);
 
 			return hoverCardMsgImgContainer;
@@ -31,6 +34,7 @@ function renderInto(element, actor, imdbPage, imgUrl) {
 
 			const actorName = document.createElement(element);
 			actorName.href = imdbPage;
+			actorName.target = '_blank';
 			actorName.innerText = actor;
 			hoverCardMsgNameContainer.firstElementChild.appendChild(actorName);
 
@@ -47,6 +51,8 @@ export default function processHoverCardDocumentFragment(
 	hovercardImgUrl
 ) {
 	if (!actorImdbPage && !actorName) return;
+
+	const div = document.createElement('div');
 
 	const fragment = new DocumentFragment();
 	const fragmentContent = div.cloneNode();
