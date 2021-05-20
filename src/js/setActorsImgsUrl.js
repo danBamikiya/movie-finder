@@ -1,5 +1,5 @@
 import actorNameParser from './actorNameParser';
-import scrapeWebForActorsImages from './webScrapper';
+import { scrapeWebForActorsImages } from './webScrapper';
 import useActorImgURL from './useActorImgURL';
 
 function parseActorsNames(movieCast) {
@@ -9,9 +9,7 @@ function parseActorsNames(movieCast) {
 }
 
 async function fetchActorImgUrl(actor, index) {
-	actor['actorImgURL'] = await scrapeWebForActorsImages(
-		actor['parsedActorName']
-	);
+	actor['actorImgURL'] = await scrapeWebForActorsImages(actor['actor_id']);
 
 	useActorImgURL(actor.actorImgURL, index);
 }
