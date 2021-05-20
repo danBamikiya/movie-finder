@@ -15,9 +15,11 @@ function renderInto(element, actor, imdbPage, imgUrl) {
 			hoverCardImgLink.target = '_blank';
 
 			const img = document.createElement(element);
-			img.src = imgUrl;
-			img.alt = actor;
-			img.className = 'hover-card-message-img-link-avatar';
+			img.src = imgUrl || '/assets/imgs/no_pic_image.png';
+			img.alt = imgUrl ? actor : `No photo available for ${actor}`;
+			img.className = `hover-card-message-img-link-avatar${
+				!imgUrl ? ' no-pic-image' : ''
+			}`;
 			img.crossOrigin = 'anonymous';
 
 			hoverCardImgLink.appendChild(img);

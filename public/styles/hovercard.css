@@ -170,3 +170,7 @@
 	word-wrap: normal;
 	overflow: hidden;
 }
+
+.no-pic-image {
+	background: var(--color-light-bg-scale-1);
+}
