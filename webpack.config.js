@@ -1,8 +1,16 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
+const NODE_ENV = process.env.NODE_ENV;
+if (!NODE_ENV) {
+	console.error('NODE_ENV not set');
+	process.exit(1);
+}
+
+const __DEV__ = NODE_ENV === 'development';
+
 module.exports = {
-	mode: 'development',
+	mode: __DEV__ ? 'development' : 'production',
 	entry: ['./src/js/index.js', './src/js/useHoverCard.js'], //entrypoint of js files
 	output: {
 		path: path.resolve(__dirname, 'public'),
@@ -20,7 +28,7 @@ module.exports = {
 			}
 		]
 	},
-	devtool: process.env.NODE_ENV === 'development', // enable source maps in only in development
+	devtool: __DEV__ ? 'eval-cheap-module-source-map' : 'source-map', // enable source maps
 	resolve: {
 		fallback: {
 			fs: false
