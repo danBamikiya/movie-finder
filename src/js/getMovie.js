@@ -15,17 +15,17 @@ export default async function getMovie(searchText, showMovie) {
 	if (!searchText.length) return;
 
 	let movie;
+	const movieHeaders = new Headers({
+		'x-rapidapi-key': process.env.RAPID_API_KEY,
+		'x-rapidapi-host': 'imdb-internet-movie-database-unofficial.p.rapidapi.com'
+	});
 
 	try {
 		movie = await cachedFetchSafeMovie(
 			`https://imdb-internet-movie-database-unofficial.p.rapidapi.com/film/${searchText}`,
 			{
 				method: 'GET',
-				headers: {
-					'x-rapidapi-key': process.env.RAPID_API_KEY,
-					'x-rapidapi-host':
-						'imdb-internet-movie-database-unofficial.p.rapidapi.com'
-				}
+				headers: movieHeaders
 			},
 			parseResponse
 		);
