@@ -1,4 +1,8 @@
 import cheerio from 'cheerio';
+import memoize from '../lib/memoizer';
+import { fetchSafeResponse } from '../utils/fetch';
+
+const cachedFetchSafeImgsUrl = memoize(fetchSafeResponse);
 
 function handleError(error) {
 	console.log(error);
@@ -20,22 +24,10 @@ function readResponseAsJSON(response) {
 	return response.json();
 }
 
-/*
-	@desc: This validates the HTTP response of the fetch request
-			because fetch() won’t reject on HTTP error status
-			even if the response is an HTTP 404 or 500.
-			It resolves normally with `ok` set to false.
-*/
-function validateResponse(response) {
-	if (!response.ok) {
-		throw Error(response.statusText);
-	}
-	return response;
-}
-
-export async function scrapeWebForActorsImages(actorId) {
+export async function scrapeWebForActorsImgsUrl(actorId) {
 	if (!actorId.length) return '';
 
+	let scrapedImgSource;
 	const url = `https://www.imdb.com/name/${actorId}/`;
 
 	/*
@@ -44,13 +36,14 @@ export async function scrapeWebForActorsImages(actorId) {
 				The imdb page url is encoded for better parsing by the
 				api server.
 	*/
-	const scrapedImgSource = await fetch(
-		`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
-	)
-		.then(validateResponse)
-		.then(readResponseAsJSON)
-		.then(parseResponse)
-		.catch(handleError);
+	try {
+		scrapedImgSource = await cachedFetchSafeImgsUrl(
+			`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+			[readResponseAsJSON, parseResponse]
+		);
+	} catch (error) {
+		handleError(error);
+	}
 
 	return scrapedImgSource;
 }
