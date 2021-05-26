@@ -8,28 +8,42 @@ if (!NODE_ENV) {
 }
 
 const __DEV__ = NODE_ENV === 'development';
+const outputDir = 'public';
 
 module.exports = {
 	mode: __DEV__ ? 'development' : 'production',
-	entry: ['./src/js/index.js', './src/js/useHoverCard.js'], //entrypoint of js files
+	entry: ['./src/js/index.ts', './src/js/hooks/useHoverCard.ts'], //entrypoint of js files
 	output: {
-		path: path.resolve(__dirname, 'public'),
-		filename: 'js/main.js' // where js files would be bundled to
+		path: path.resolve(__dirname, outputDir),
+		filename: 'js/main.js' // where js files will be bundled to
 	},
 	watch: true,
 	module: {
 		rules: [
 			{
-				test: /\.js$/, //using regex to tell babel exactly what files to transcompile
+				test: /\.ts$/, //using regex to tell babel exactly what files to transcompile
 				exclude: /node_modules/, // files to be ignored
+				use: [
+					{
+						loader: 'babel-loader'
+					},
+					{
+						loader: 'ts-loader'
+					}
+				]
+			},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
 				use: {
-					loader: 'babel-loader' // loader to apply to the matched files
+					loader: 'babel-loader'
 				}
 			}
 		]
 	},
 	devtool: __DEV__ ? 'eval-cheap-module-source-map' : 'source-map', // enable source maps
 	resolve: {
+		extensions: ['.ts', '.js'],
 		fallback: {
 			fs: false
 		}

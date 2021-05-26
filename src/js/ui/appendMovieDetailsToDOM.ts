@@ -1,3 +1,16 @@
+import { Movie } from '../types';
+
+type AppendParams = {
+	Movie: Movie;
+	posterDetails: HTMLDivElement;
+	moviePosterDetailsContainer: Element;
+	title_paragraph: HTMLParagraphElement;
+	year_paragraph: HTMLParagraphElement;
+	length_paragraph: HTMLParagraphElement;
+	rating_paragraph: HTMLParagraphElement;
+	plot_paragraph: HTMLParagraphElement;
+};
+
 export default function appendMovieDetailsToDOM({
 	Movie,
 	posterDetails,
@@ -7,8 +20,8 @@ export default function appendMovieDetailsToDOM({
 	length_paragraph,
 	rating_paragraph,
 	plot_paragraph
-}) {
-	posterDetails.innerHTML = null; // clear previous poster details
+}: AppendParams) {
+	posterDetails.innerHTML = ''; // clear previous poster details
 
 	const details = document.createElement('p');
 	details.className = 'details-header';

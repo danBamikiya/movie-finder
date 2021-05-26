@@ -4,15 +4,31 @@ import processHoverCardDocumentFragment from './processFragment';
 // The hover card. Moved around the page to where the current hover is
 const hoverCardContainer = document.querySelector('.hover-card-container');
 
+type Position = {
+	containerTop: number;
+	containerLeft: number;
+	contentClassSuffix: string;
+};
+
 const cachedHoverCardDocumentFragment = memoize(
 	processHoverCardDocumentFragment
 );
 
-let currentTarget;
+let currentTarget: Element | null | undefined;
 
-let activatingElement;
+let activatingElement: Element | null = null;
 
-let deactivateTimer;
+let deactivateTimer: number | null;
+
+// Mouse position for when links wrap lines
+let mouseX = 0;
+
+/*
+NOTE: This need to stay in sync with certain CSS rules in order to keep the
+caret pointing at the target.
+*/
+const caretDistanceFromTarget = 12;
+const caretPaddingX = 24; //  caret distance from edge of card
 
 // The amount of extra time given to move into the content
 const deactivateTimeout = 100;
@@ -20,23 +36,12 @@ const deactivateTimeout = 100;
 // The minimum time before opening the hovercard via mouseover
 const activateTimeout = 250;
 
-// Mouse position for when links wrap lines
-let mouseX = 0;
+/**
+ * Get the content class of a given selector.
+ * (Prefixes the selector with `hover-card-message--`).
+ */
 
-const caretDistanceFromTarget = 12;
-
-/*
-	For calculating position of the card when it hangs to the left
-	NOTE: These need to stay in sync with certain CSS rules in order to keep the
-	caret pointing at the target.
-*/
-
-//  caret distance from edge of card
-const caretPaddingX = 24;
-
-// Get the content class of a given selector.
-// (Prefixes the selector with `hover-card-message--`).
-function contentClass(suffix) {
+function contentClass(suffix: string): string {
 	const contentClassPrefix = 'hover-card-message--';
 	return contentClassPrefix + suffix;
 }
@@ -51,7 +56,7 @@ function hideCard() {
 	currentTarget = null;
 }
 
-function selectRectNearestMouse(target) {
+function selectRectNearestMouse(target: Element): ClientRect {
 	const rects = target.getClientRects();
 	let foundRect = rects[0] ||
 		target.getBoundingClientRect() || {
@@ -73,11 +78,11 @@ function selectRectNearestMouse(target) {
 	return foundRect;
 }
 
-function calculatePositions(target) {
+function calculatePositions(target: Element): Position {
 	const {
 		width: contentWidth,
 		height: contentHeight
-	} = hoverCardContainer?.getBoundingClientRect();
+	} = hoverCardContainer!.getBoundingClientRect();
 
 	const {
 		left: targetX,
@@ -88,7 +93,7 @@ function calculatePositions(target) {
 
 	const roomAbove = targetY > contentHeight;
 
-	/* If there is room, show hovercard above hover position. Else, show it below */
+	// If there is room, show hovercard above hover position. Else, show it below.
 	const roomRight = window.innerHeight - targetX > contentWidth;
 	const targetCenterX = targetX + targetWidth / 2;
 	const left = roomRight
@@ -108,10 +113,10 @@ function calculatePositions(target) {
 	return { containerTop: top, containerLeft: left, contentClassSuffix };
 }
 
-function positionCard(target, cardContent) {
+function positionCard(target: Element, cardContent: Element) {
 	if (!(hoverCardContainer instanceof HTMLElement)) return;
 
-	/* Hide container, reset hovercard styles */
+	// Hide container, reset hovercard styles
 	hoverCardContainer.style.visibility = 'hidden';
 	hoverCardContainer.style.display = 'block';
 	cardContent.classList.remove(
@@ -141,12 +146,12 @@ function positionCard(target, cardContent) {
 	hoverCardContainer.style.visibility = 'initial';
 }
 
-function showCard(fragment, target) {
+function showCard(fragment: DocumentFragment, target: Element) {
 	if (!(hoverCardContainer instanceof HTMLElement)) return;
 
 	const cardContent = hoverCardContainer.children[0];
 
-	cardContent.innerHTML = null; // clear previous hovercard content
+	cardContent.innerHTML = ''; // clear previous hovercard content
 
 	const cardContentBody = document.createElement('div');
 	for (const child of fragment.children) {
@@ -160,7 +165,7 @@ function showCard(fragment, target) {
 	hoverCardContainer.style.display = 'block';
 }
 
-function hovercardImgUrlFromTarget(target) {
+function hovercardImgUrlFromTarget(target: Element): string {
 	const hovercardImgUrl = target.getAttribute('data-hovercard-img-url');
 
 	if (hovercardImgUrl) {
@@ -169,7 +174,7 @@ function hovercardImgUrlFromTarget(target) {
 	return '';
 }
 
-function actorImdbPageUrlFromTarget(target) {
+function actorImdbPageUrlFromTarget(target: Element): string {
 	const actorImdbPageUrl = target.getAttribute('href');
 
 	if (actorImdbPageUrl) {
@@ -178,7 +183,7 @@ function actorImdbPageUrlFromTarget(target) {
 	return '';
 }
 
-function actorNameFromTarget(target) {
+function actorNameFromTarget(target: HTMLElement): string {
 	const actorName = target.innerText;
 
 	if (actorName) {
@@ -187,15 +192,18 @@ function actorNameFromTarget(target) {
 	return '';
 }
 
-// When mousing over a hovercard target, load the data and show the card.
-async function activate(event, minimumTimeout) {
+/**
+ * When mousing over a hovercard target, load the data and show the card.
+ */
+
+async function activate(event: Event, minimumTimeout: number): Promise<void> {
 	const target = event.currentTarget;
 
 	if (event instanceof MouseEvent) {
 		mouseX = event.clientX;
 	}
 
-	if (!(target instanceof Element)) return;
+	if (!(target instanceof HTMLElement)) return;
 	if (currentTarget === target) return;
 	if (target.closest('.hover-card-container')) return;
 
@@ -219,8 +227,8 @@ async function activate(event, minimumTimeout) {
 	);
 	await forcedDelay;
 
-	// Ensure that the target is stll the active one
-	if (target === currentTarget) {
+	// Ensure that the target is stll the active one and a document fragment is returned
+	if (target === currentTarget && fragment instanceof DocumentFragment) {
 		showCard(fragment, target);
 
 		if (
@@ -232,17 +240,21 @@ async function activate(event, minimumTimeout) {
 	}
 }
 
-/*  Load the data but don't show until at least `activateTimeout`.
-    Only used when loading via mouseover.
-*/
-function activateWithTimeout(event) {
+/**
+ * Load the data but don't show until at least `activateTimeout`.
+ * Only used when loading via mouseover.
+ */
+
+function activateWithTimeout(event: Event) {
 	activate(event, activateTimeout);
 }
 
-/*  When leaving a hovercard, deactivate unless we're moving to another child.
-    This allows the user to hover into the content area without dismissing.
-*/
-function deactivate(event) {
+/**
+ * When leaving a hovercard, deactivate unless we're moving to another child.
+ * This allows the user to hover into the content area without dismissing.
+ */
+
+function deactivate(event: Event) {
 	if (!currentTarget) return;
 
 	if (
@@ -268,10 +280,12 @@ function deactivate(event) {
 	hideCard();
 }
 
-/*  Deactivate after 250ms unless the deactivate timer is canceled as a result
-    of the user entering the hovercard content area.
-*/
-function deactivateWithTimeout(event) {
+/**
+ * Deactivate after 250ms unless the deactivate timer is canceled as a result
+ * of the user entering the hovercard content area.
+ */
+
+function deactivateWithTimeout(event: Event) {
 	const targetWas = currentTarget;
 
 	deactivateTimer = window.setTimeout(() => {
@@ -279,21 +293,26 @@ function deactivateWithTimeout(event) {
 	}, deactivateTimeout);
 }
 
-/*  Triggered when a key is pressed while either a container is focused or
-    while inside of an open hovercard.
-*/
-function handleKeyUp(event) {
+/**
+ * Triggered when a key is pressed while either a container is focused or
+ * while inside of an open hovercard.
+ */
+
+function handleKeyUp(event: Event) {
 	if (!(event instanceof KeyboardEvent)) return;
 
 	if (event.key === 'Escape') deactivate(event);
 }
 
-// Cancel the deactivation timer since the user is inside the content now
+/**
+ * Cancel the deactivation timer since the user is inside the content now
+ */
+
 function cancelDeactivation() {
 	if (deactivateTimer) clearTimeout(deactivateTimer);
 }
 
-function setZIndexOverride(target, container) {
+function setZIndexOverride(target: Element, container: HTMLElement) {
 	const zIndex = target.getAttribute('data-hovercard-z-index-override');
 	if (zIndex) {
 		container.style.zIndex = zIndex;

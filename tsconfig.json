@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"target": "es2015",
+		"module": "es6",
+		"rootDir": "./src",
+		"outDir": "./public/js/",
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "node",
+		"lib": ["DOM", "es2015", "es2016", "DOM.Iterable", "ESNext.AsyncIterable"],
+		"noImplicitAny": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"allowJs": true,
+		"checkJs": true,
+		"strict": true,
+		"sourceMap": true,
+		"skipLibCheck": true
+	},
+	"compileOnSave": true
+}

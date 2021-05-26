@@ -2,10 +2,12 @@
 
 // Lightweight TC39 observable Subscription
 class Subscription {
-	constructor(cleanup) {
-		this.closed = false; // indicates whether the subscription is closed
+	closed: boolean; // Indicates whether the subscription is closed.
+	unsubscribe: () => void; // Cancels the subscription.
+
+	constructor(cleanup: () => void) {
+		this.closed = false;
 		this.unsubscribe = () => {
-			// cancels the subscription
 			cleanup();
 			this.closed = true;
 		};
@@ -13,7 +15,12 @@ class Subscription {
 }
 
 // Create a Subscription from an event
-export function fromEvent(target, eventName, listener, options) {
+export function fromEvent(
+	target: EventTarget,
+	eventName: string,
+	listener: EventListenerOrEventListenerObject,
+	options: AddEventListenerOptions = { capture: false }
+) {
 	target.addEventListener(eventName, listener, options);
 	const cleanup = () =>
 		target.removeEventListener(eventName, listener, options);
@@ -21,7 +28,7 @@ export function fromEvent(target, eventName, listener, options) {
 }
 
 // Combine several subscriptions into a single subscription
-export function compose(...subscriptions) {
+export function compose(...subscriptions: Subscription[]): Subscription {
 	const cleanupAll = () => {
 		for (const subscription of subscriptions) {
 			subscription.unsubscribe();
