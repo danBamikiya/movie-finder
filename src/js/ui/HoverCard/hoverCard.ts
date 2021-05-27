@@ -1,4 +1,4 @@
-import memoize from '../lib/memoizer';
+import memoize from '../../lib/memoizer';
 import processHoverCardDocumentFragment from './processFragment';
 
 // The hover card. Moved around the page to where the current hover is

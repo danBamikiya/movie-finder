@@ -9,7 +9,7 @@ import {
 	hideCard,
 	cancelDeactivation,
 	deactivate
-} from '../ui/hoverCard';
+} from '../ui/HoverCard/hoverCard';
 
 (function () {
 	// The hover card. Moved around the page to where the current hover is

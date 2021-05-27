@@ -1,5 +1,5 @@
-import { processFragment } from '../helpers/fragment';
-import { HoverRendererParams, RendererFunction } from '../types';
+import { processFragment } from '../../helpers/fragment';
+import { HoverRendererParams, RendererFunction } from '../../types';
 
 function hoverCardMsgImgRenderer(
 	div: Element,
