@@ -9,7 +9,8 @@ function logError(err: Error) {
 	console.log("Looks like there's a problem: \n", err);
 }
 
-function parseResponse(movie: any): Movie {
+function parseResponse(movie: any): Movie | undefined {
+	if (!movie) return;
 	return {
 		title: movie['title'].trim(),
 		year: movie['year'],
@@ -25,8 +26,10 @@ function readResponseAsJSON(response: Response): Promise<any> {
 	return response.json();
 }
 
-export default async function getMovie(searchText: string): Promise<Movie> {
-	let movie!: Movie;
+export default async function getMovie(
+	searchText: string
+): Promise<Movie | undefined> {
+	let movie!: Movie | undefined;
 
 	try {
 		movie = await cachedFetchSafeMovie(

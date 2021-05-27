@@ -34,7 +34,10 @@ const AppendToDOMDependencies = {
 };
 
 function showMovie(searchTxt: string) {
-	getMovie(searchTxt).then(results => (Movie = { ...results }));
+	getMovie(searchTxt).then(results => {
+		if (!results) throw new Error('Movie not found');
+		Movie = { ...results };
+	});
 
 	setActorsImgsUrl(Movie);
 	appendMoviePosterToDOM(AppendToDOMDependencies);
