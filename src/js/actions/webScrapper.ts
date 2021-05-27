@@ -28,10 +28,10 @@ function readResponseAsJSON(response: Response): Promise<any> {
 
 export async function scrapeWebForActorsImgsUrl(
 	actorId: string
-): Promise<string> {
+): Promise<string | undefined> {
 	if (!actorId.length) return '';
 
-	let scrapedImgSource;
+	let scrapedImgSource!: string | undefined;
 	const url = `https://www.imdb.com/name/${actorId}/`;
 
 	/**
