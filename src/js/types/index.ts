@@ -6,19 +6,19 @@ type MemoizableFunction<
 	T extends unknown
 > = (this: T, ...args: A) => R;
 
-type RendererParams = {
+type HoverRendererParams = {
 	actor: string;
 	imdbPage: string;
 	imgUrl?: string;
 };
 
-type RendererFunction = (div: HTMLElement, {}: RendererParams) => HTMLElement;
+type RendererFunction<P> = (parent: HTMLElement, {}: P) => HTMLElement;
 
 type Actor = {
 	actor: string;
 	actor_id: string;
 	character: string;
-	actorImgURL: string;
+	actorImgURL: string | undefined;
 };
 
 type Movie = {
@@ -32,9 +32,9 @@ type Movie = {
 };
 
 type FetchParams = {
-	url: string;
+	url: RequestInfo;
+	callback: Callback | Callback[];
 	options?: RequestInit;
-	callback?: Callback | Callback[];
 };
 
 export {
@@ -42,7 +42,7 @@ export {
 	Actor,
 	Movie,
 	MemoizableFunction,
-	RendererParams,
+	HoverRendererParams,
 	RendererFunction,
 	FetchParams
 };
