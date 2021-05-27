@@ -1,7 +1,7 @@
 import { Movie } from './types';
 import getMovie from './actions/getMovie';
-import appendMoviePosterToDOM from './ui/appendMoviePosterToDOM';
-import appendMovieDetailsToDOM from './ui/appendMovieDetailsToDOM';
+import appendMoviePosterToDOM from './ui/Movie/appendMoviePosterToDOM';
+import appendMovieDetailsToDOM from './ui/Movie/appendMovieDetailsToDOM';
 import setActorsImgsUrl from './actions/setActorsImgsUrl';
 
 const submitBtn = document.getElementById('submitBtn');
