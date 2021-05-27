@@ -1,8 +1,9 @@
-import { RendererParams, RendererFunction } from '../types';
+import { processFragment } from '../helpers/fragment';
+import { HoverRendererParams, RendererFunction } from '../types';
 
 function hoverCardMsgImgRenderer(
 	div: Element,
-	{ actor, imdbPage, imgUrl }: RendererParams
+	{ actor, imdbPage, imgUrl }: HoverRendererParams
 ): HTMLElement {
 	const hoverCardMsgImgContainer = div.cloneNode() as HTMLElement;
 	hoverCardMsgImgContainer.className = 'hover-card-message-img-bar';
@@ -30,7 +31,7 @@ function hoverCardMsgImgRenderer(
 
 function hoverCardMsgNameRenderer(
 	div: Element,
-	{ actor, imdbPage }: RendererParams
+	{ actor, imdbPage }: HoverRendererParams
 ): HTMLElement {
 	const hoverCardMsgNameContainer = div.cloneNode() as HTMLElement;
 	hoverCardMsgNameContainer.className = 'hover-card-message-name-bar';
@@ -48,28 +49,22 @@ function hoverCardMsgNameRenderer(
 	return hoverCardMsgNameContainer;
 }
 
-function renderInto(
-	rendererParams: RendererParams,
-	renderer: RendererFunction
+function renderInto<P extends HoverRendererParams>(
+	rendererParams: P,
+	renderer: RendererFunction<P>
 ): HTMLElement {
 	const div = document.createElement('div');
 	return renderer(div, rendererParams);
 }
 
-export default function processHoverCardDocumentFragment(
-	actor: string,
-	imdbPage: string,
-	imgUrl: string
-): DocumentFragment | undefined {
-	if (!actor && !imdbPage) return;
-
-	const div = document.createElement('div');
-
-	const fragment = new DocumentFragment();
-	const fragmentContent = div.cloneNode() as HTMLElement;
+function fragmentRenderer(
+	parent: HTMLElement,
+	{ actor, imdbPage, imgUrl }: HoverRendererParams
+): HTMLElement {
+	const fragmentContent = parent.cloneNode() as HTMLElement;
 	fragmentContent.classList.add('pb-3', 'px-3');
 
-	const srClose = div.cloneNode() as HTMLElement;
+	const srClose = parent.cloneNode() as HTMLElement;
 	srClose.className = 'sr-only';
 	srClose.appendChild(
 		document.createTextNode('Press Escape to close this hovercard')
@@ -81,7 +76,15 @@ export default function processHoverCardDocumentFragment(
 		srClose
 	);
 
-	fragment.appendChild(fragmentContent);
+	return fragmentContent;
+}
 
-	return fragment;
+export default function processHoverCardDocumentFragment(
+	actor: string,
+	imdbPage: string,
+	imgUrl: string
+): DocumentFragment | undefined {
+	if (!actor && !imdbPage) return;
+
+	return processFragment({ actor, imdbPage, imgUrl }, fragmentRenderer);
 }
