@@ -264,7 +264,6 @@ function deactivate(event: Event) {
 		const relatedTarget = event.relatedTarget;
 		if (
 			relatedTarget.closest('.hover-card-container') ||
-			// relatedTarget.closest('') ||
 			relatedTarget.closest('[data-hovercard-img-url]')
 		) {
 			return;
