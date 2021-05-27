@@ -18,7 +18,7 @@ const posterDetails = document.createElement('div');
 posterDetails.className = 'poster-details';
 
 // The global state of the app
-const Movie = <Movie>{};
+let Movie = <Movie>{};
 
 const AppendToDOMDependencies = {
 	Movie,
@@ -33,14 +33,8 @@ const AppendToDOMDependencies = {
 	plot_paragraph: document.createElement('p')
 };
 
-function showMovie(movie: Movie) {
-	Movie.title = movie['title'].trim();
-	Movie.year = movie['year'];
-	Movie.length = movie['length'];
-	Movie.rating = movie['rating'];
-	Movie.poster = movie['poster'];
-	Movie.plot = movie['plot'];
-	Movie.cast = movie['cast'];
+function showMovie(searchTxt: string) {
+	getMovie(searchTxt).then(results => (Movie = { ...results }));
 
 	setActorsImgsUrl(Movie);
 	appendMoviePosterToDOM(AppendToDOMDependencies);
@@ -49,9 +43,10 @@ function showMovie(movie: Movie) {
 
 function submitValue(e: MouseEvent) {
 	e.preventDefault();
-	// get input field value
-	let txtValue = inputTxt.value;
-	getMovie(txtValue, showMovie);
+	// check for movie name in input field
+	if (!inputTxt.value.length) return;
+
+	showMovie(inputTxt.value);
 	// clear input field
 	inputTxt.value = '';
 }
