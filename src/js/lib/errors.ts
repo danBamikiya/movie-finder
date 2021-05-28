@@ -1,5 +1,5 @@
 abstract class ClientError extends Error {
-	readonly name!: string;
+	readonly name: string;
 
 	constructor(message: object | string) {
 		super(message instanceof Object ? JSON.stringify(message) : message);
@@ -25,7 +25,7 @@ export class ClientURIError extends ClientError {
 }
 
 export class ResponseError extends Error {
-	response;
+	response: Response;
 
 	constructor(response: Response) {
 		super();
