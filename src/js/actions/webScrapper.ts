@@ -35,10 +35,18 @@ export async function scrapeWebForActorsImgsUrl(
 	const url = `https://www.imdb.com/name/${actorId}/`;
 
 	/**
-	 * Make a GET HTTP request for the imdb page of the actor.
+	 * Make a fetch() request (which by default is a GET HTTP request)
+	 * for the imdb page of the actor using a fetch helper function.
 	 * This request uses an all origins api to prevent cors error.
 	 * The imdb page url is encoded for better parsing by the
 	 * api server.
+	 * Callbacks to parse the response are also passed to the function.
+	 * The scraped image is cached.
+	 *
+	 * NOTE: This level of caching caches the individual scraped images so
+	 * that when a new searched movie has same actors as other previously searched
+	 * movies those cached actors images is returned rather than scraping for the
+	 * new movie's actors images.
 	 */
 
 	try {
