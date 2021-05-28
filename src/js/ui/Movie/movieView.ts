@@ -13,5 +13,6 @@ export default function renderMovie(movie: Movie) {
 
 	const fragment = cachedMovieDocumentFragment(movie);
 
+	/** The Document Fragment is being cloned so that the cached original can be reused */
 	container.insertBefore(fragment.cloneNode(true), container.firstElementChild);
 }
