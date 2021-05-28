@@ -1,80 +1,62 @@
 import { Movie } from '../../types';
 
-type AppendParams = {
-	Movie: Movie;
-	posterDetails: HTMLDivElement;
-	moviePosterDetailsContainer: Element;
-	title_paragraph: HTMLParagraphElement;
-	year_paragraph: HTMLParagraphElement;
-	length_paragraph: HTMLParagraphElement;
-	rating_paragraph: HTMLParagraphElement;
-	plot_paragraph: HTMLParagraphElement;
-};
+export default function movieDetailsRenderer(
+	div: HTMLElement,
+	{ title, year, length, rating, plot, cast: movieCast }: Movie
+): HTMLElement {
+	const moviePosterDetailsContainer = div.cloneNode() as HTMLElement;
+	moviePosterDetailsContainer.className = 'movie-poster-details-container';
 
-export default function appendMovieDetailsToDOM({
-	Movie,
-	posterDetails,
-	moviePosterDetailsContainer,
-	title_paragraph,
-	year_paragraph,
-	length_paragraph,
-	rating_paragraph,
-	plot_paragraph
-}: AppendParams) {
-	posterDetails.innerHTML = ''; // clear previous poster details
+	const p = document.createElement('p');
 
-	const details = document.createElement('p');
+	const posterDetails = div.cloneNode() as HTMLElement;
+	posterDetails.className = 'poster-details';
+
+	const details = p.cloneNode() as HTMLElement;
 	details.className = 'details-header';
 	details.innerHTML = 'Details';
 
-	const cast = document.createElement('p');
+	const cast = p.cloneNode() as HTMLElement;
 	cast.className = 'cast-header';
 	cast.innerHTML = 'Cast';
 
-	const detailsDiv = document.createElement('div');
-	detailsDiv.className = 'details-div';
-	detailsDiv.appendChild(details);
+	const detailsParent = div.cloneNode() as HTMLElement;
+	detailsParent.className = 'details-div';
+	detailsParent.appendChild(details);
 
-	const castDiv = document.createElement('div');
-	castDiv.className = 'cast-div';
-	castDiv.appendChild(cast);
+	const castParent = div.cloneNode() as HTMLElement;
+	castParent.className = 'cast-div';
+	castParent.appendChild(cast);
 
-	for (const key in Movie) {
-		switch (key) {
-			case 'title':
-				title_paragraph.innerHTML = `${key}: ${Movie[key]}`;
-				title_paragraph.id = 'title-paragraph';
-				detailsDiv.appendChild(title_paragraph);
-				break;
-			case 'year':
-				year_paragraph.innerHTML = `${key}: ${Movie[key]}`;
-				year_paragraph.id = 'year-paragraph';
-				detailsDiv.appendChild(year_paragraph);
-				break;
-			case 'length':
-				length_paragraph.innerHTML = `${key}: ${Movie[key]}`;
-				length_paragraph.id = 'length-paragraph';
-				detailsDiv.appendChild(length_paragraph);
-				break;
-			case 'rating':
-				rating_paragraph.innerHTML = `${key}: ${Movie[key]}`;
-				rating_paragraph.id = 'rating-paragraph';
-				detailsDiv.appendChild(rating_paragraph);
-				break;
-			case 'plot':
-				plot_paragraph.innerHTML = `${key}: <p>${Movie[key]}</p>`;
-				plot_paragraph.id = 'plot-paragraph';
-				detailsDiv.appendChild(plot_paragraph);
-				break;
-			default:
-				break;
-		}
-	}
+	const title_paragraph = p.cloneNode() as HTMLElement;
+	title_paragraph.innerHTML = `Title: ${title}`;
+	title_paragraph.id = 'title-paragraph';
+	detailsParent.appendChild(title_paragraph);
 
-	posterDetails.appendChild(detailsDiv);
+	const year_paragraph = p.cloneNode() as HTMLElement;
+	year_paragraph.innerHTML = `Year: ${year}`;
+	year_paragraph.id = 'year-paragraph';
+	detailsParent.appendChild(year_paragraph);
 
-	Movie.cast.forEach(actor => {
-		const actorRole = document.createElement('p');
+	const length_paragraph = p.cloneNode() as HTMLElement;
+	length_paragraph.innerHTML = `Length: ${length}`;
+	length_paragraph.id = 'length-paragraph';
+	detailsParent.appendChild(length_paragraph);
+
+	const rating_paragraph = p.cloneNode() as HTMLElement;
+	rating_paragraph.innerHTML = `Rating: ${rating}`;
+	rating_paragraph.id = 'rating-paragraph';
+	detailsParent.appendChild(rating_paragraph);
+
+	const plot_paragraph = p.cloneNode() as HTMLElement;
+	plot_paragraph.innerHTML = `Plot: <p>${plot}</p>`;
+	plot_paragraph.id = 'plot-paragraph';
+	detailsParent.appendChild(plot_paragraph);
+
+	posterDetails.appendChild(detailsParent);
+
+	movieCast.forEach(actor => {
+		const actorRole = p.cloneNode() as HTMLElement;
 		const actorName = document.createElement('a');
 		actorName.className = 'actor-name';
 		actorName.href = `https://www.imdb.com/name/${actor['actor_id']}/`;
@@ -83,10 +65,12 @@ export default function appendMovieDetailsToDOM({
 		actorRole.insertAdjacentElement('afterbegin', actorName);
 		actorName.insertAdjacentText('afterend', ` as ${actor['character']}`);
 
-		castDiv.appendChild(actorRole);
+		castParent.appendChild(actorRole);
 	});
 
-	posterDetails.appendChild(castDiv);
+	posterDetails.appendChild(castParent);
 
 	moviePosterDetailsContainer.appendChild(posterDetails);
+
+	return moviePosterDetailsContainer;
 }
