@@ -10,7 +10,7 @@ function logError(err: Error) {
 }
 
 function parseResponse(movie: any): Movie | undefined {
-	if (!movie) return;
+	if (!movie || !Object.keys(movie).length) return;
 	return {
 		title: movie['title'].trim(),
 		year: movie['year'],
@@ -30,6 +30,13 @@ export default async function getMovie(
 	searchText: string
 ): Promise<Movie | undefined> {
 	let movie!: Movie | undefined;
+
+	/**
+	 * This makes a fetch() request to a movies api using a fetch helper function.
+	 * Callbacks to parse the response and the request headers are also passed to
+	 * the function.
+	 * The movie response is cached.
+	 */
 
 	try {
 		movie = await cachedFetchSafeMovie(
