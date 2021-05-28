@@ -1,3 +1,9 @@
+type Position = {
+	containerTop: number;
+	containerLeft: number;
+	contentClassSuffix: string;
+};
+
 type Callback = (arg: any) => any;
 
 type MemoizableFunction<
@@ -38,6 +44,7 @@ type FetchParams = {
 };
 
 export {
+	Position,
 	Callback,
 	Actor,
 	Movie,
