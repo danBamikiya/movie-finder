@@ -2,10 +2,8 @@ import { Movie } from './types';
 import { Elements } from './base';
 import getMovie from './actions/getMovie';
 import renderMovie from './ui/Movie';
+import initHoverCard from './ui/HoverCard';
 import setActorsImgsUrl from './actions/setActorsImgsUrl';
-
-const submitBtn = Elements.submitBtn;
-const inputTxt = Elements.inputTxt;
 
 // Temporary state of the app
 /*
@@ -26,14 +24,24 @@ function showMovie(searchTxt: string) {
 
 function submitValue(e: MouseEvent) {
 	e.preventDefault();
-	const searchTxt = inputTxt.value;
+	const searchTxt = Elements.inputTxt.value;
 
 	// check for movie name in input field
 	if (!searchTxt.length) return;
 
 	showMovie(searchTxt);
 	// clear input field
-	inputTxt.value = '';
+	Elements.inputTxt.value = '';
 }
 
-submitBtn!.addEventListener('click', submitValue);
+function initApp() {
+	Elements.submitBtn!.addEventListener('click', submitValue);
+}
+
+function start() {
+	initApp();
+	initHoverCard();
+}
+
+// Init On DOM Load
+document.addEventListener('DOMContentLoaded', start);
