@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const NODE_ENV = process.env.NODE_ENV;
@@ -12,10 +13,15 @@ const outputDir = 'public';
 
 module.exports = {
 	mode: __DEV__ ? 'development' : 'production',
-	entry: ['./src/ts/index.ts'], //entrypoint of ts files
+	entry: ['./src/ts/index.ts', './src/ts/ui/HoverCard/index.ts'], //entrypoint of ts files
 	output: {
 		path: path.resolve(__dirname, outputDir),
-		filename: 'js/main.js' // where js files will be bundled to
+		filename: 'js/[name].[contenthash].bundle.js', // where js files will be bundled to
+		clean: true // clean up the js folder before each build
+	},
+	devServer: {
+		contentBase: path.join(__dirname, outputDir),
+		port: 8080
 	},
 	watch: true,
 	module: {
@@ -48,5 +54,25 @@ module.exports = {
 			fs: false
 		}
 	},
-	plugins: [new Dotenv()]
+	plugins: [
+		new HtmlWebpackPlugin({
+			filename: 'index.[contenthash].html',
+			template: './src/index.html'
+		}),
+		new Dotenv()
+	],
+	optimization: {
+		moduleIds: 'deterministic', // Optimize bundles during subsequent builds
+		runtimeChunk: 'single', // Prevent module duplication when code splitting
+		splitChunks: {
+			cacheGroups: {
+				vendor: {
+					// Split dependencies into its own chunk file for better caching
+					test: /[\\/]node_modules[\\/]/,
+					name: 'vendors',
+					chunks: 'all'
+				}
+			}
+		}
+	}
 };
