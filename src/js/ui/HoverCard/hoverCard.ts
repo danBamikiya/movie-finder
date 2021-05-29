@@ -150,6 +150,7 @@ function showCard(fragment: DocumentFragment, target: Element) {
 	cardContent.innerHTML = ''; // clear previous hovercard content
 
 	const cardContentBody = document.createElement('div');
+	/** The Document Fragment is being cloned so that the cached original can be reused */
 	for (const child of fragment.children) {
 		cardContentBody.appendChild(child.cloneNode(true));
 	}
