@@ -1,6 +1,6 @@
 import { Movie } from './types';
 import getMovie from './actions/getMovie';
-import renderMovie from './ui/Movie/movieView';
+import renderMovie from './ui/Movie';
 import setActorsImgsUrl from './actions/setActorsImgsUrl';
 
 const submitBtn = document.getElementById('submitBtn');
