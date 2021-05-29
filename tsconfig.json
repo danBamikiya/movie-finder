@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"target": "es2015",
 		"module": "es6",
-		"rootDir": "./src",
+		"rootDir": "./src/ts/",
 		"outDir": "./public/js/",
 		"allowSyntheticDefaultImports": true,
 		"moduleResolution": "node",

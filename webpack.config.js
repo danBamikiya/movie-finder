@@ -12,7 +12,7 @@ const outputDir = 'public';
 
 module.exports = {
 	mode: __DEV__ ? 'development' : 'production',
-	entry: ['./src/js/index.ts'], //entrypoint of js files
+	entry: ['./src/ts/index.ts'], //entrypoint of ts files
 	output: {
 		path: path.resolve(__dirname, outputDir),
 		filename: 'js/main.js' // where js files will be bundled to
