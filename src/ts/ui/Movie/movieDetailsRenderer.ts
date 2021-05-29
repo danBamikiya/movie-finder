@@ -1,4 +1,4 @@
-import { Movie } from '../../types';
+import { Movie, Actor } from '../../types';
 
 export default function movieDetailsRenderer(
 	div: HTMLElement,
@@ -55,7 +55,7 @@ export default function movieDetailsRenderer(
 
 	posterDetails.appendChild(detailsParent);
 
-	movieCast.forEach(actor => {
+	const createActorName = (actor: Actor) => {
 		const actorRole = p.cloneNode() as HTMLElement;
 		const actorName = document.createElement('a');
 		actorName.className = 'actor-name';
@@ -66,7 +66,9 @@ export default function movieDetailsRenderer(
 		actorName.insertAdjacentText('afterend', ` as ${actor['character']}`);
 
 		castParent.appendChild(actorRole);
-	});
+	};
+
+	movieCast.forEach(createActorName);
 
 	posterDetails.appendChild(castParent);
 
