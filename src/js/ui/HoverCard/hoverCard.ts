@@ -1,9 +1,10 @@
-import memoize from '../../lib/memoizer';
 import { Position } from '../../types';
+import { Elements } from '../../base';
+import memoize from '../../lib/memoizer';
 import processHoverCardDocumentFragment from './processFragment';
 
 // The hover card. Moved around the page to where the current hover is
-const hoverCardContainer = document.querySelector('.hover-card-container');
+const hoverCardContainer = Elements.hoverCardContainer;
 
 const cachedHoverCardDocumentFragment = memoize(
 	processHoverCardDocumentFragment

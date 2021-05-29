@@ -1,5 +1,6 @@
 import { observe } from 'selector-observer';
 import { compose, fromEvent } from '../lib/subscription';
+import { Elements } from '../base';
 
 import {
 	activateWithTimeout,
@@ -13,7 +14,7 @@ import {
 
 (function () {
 	// The hover card. Moved around the page to where the current hover is
-	const hoverCardContainer = document.querySelector('.hover-card-container');
+	const hoverCardContainer = Elements.hoverCardContainer;
 
 	if (hoverCardContainer) {
 		observe('[data-hovercard-img-url]', {

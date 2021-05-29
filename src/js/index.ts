@@ -1,10 +1,11 @@
 import { Movie } from './types';
+import { Elements } from './base';
 import getMovie from './actions/getMovie';
 import renderMovie from './ui/Movie';
 import setActorsImgsUrl from './actions/setActorsImgsUrl';
 
-const submitBtn = document.getElementById('submitBtn');
-const inputTxt = document.getElementById('inputTxt') as HTMLInputElement;
+const submitBtn = Elements.submitBtn;
+const inputTxt = Elements.inputTxt;
 
 // Temporary state of the app
 /*

@@ -1,11 +1,12 @@
 import { Movie } from '../../types';
+import { Elements } from '../../base';
 import processMovieDocumentFragment from './processFragment';
 import memoize from '../../lib/memoizer';
 
 const cachedMovieDocumentFragment = memoize(processMovieDocumentFragment);
+const container = Elements.container;
 
 export default function renderMovie(movie: Movie) {
-	const container = document.querySelector('.container');
 	if (!(container instanceof HTMLElement)) return;
 
 	document.querySelector('.movie-poster-details-container')?.remove();
