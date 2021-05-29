@@ -7,6 +7,9 @@ const submitBtn = document.getElementById('submitBtn');
 const inputTxt = document.getElementById('inputTxt') as HTMLInputElement;
 
 // Temporary state of the app
+/*
+  - Current movie object
+*/
 let Movie = <Movie>{};
 
 function showMovie(searchTxt: string) {
