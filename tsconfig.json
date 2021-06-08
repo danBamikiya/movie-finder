@@ -6,7 +6,7 @@
 		// "checkJs": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
-		"module": "es6",
+		"module": "esnext",
 		"moduleResolution": "node",
 		"noImplicitAny": true,
 		"noUnusedLocals": true,
