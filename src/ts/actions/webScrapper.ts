@@ -7,7 +7,7 @@ const cachedFetchSafeImgsUrl = memoize(fetchSafeResponse);
 
 function handleError(error: Error) {
 	if (error instanceof URIError) handleURIError();
-	else console.log(`Did not expect ${error}`);
+	else throw new Error(`Did not expect ${error}`);
 }
 
 function parseResponse(response: { contents: string }): string | undefined {

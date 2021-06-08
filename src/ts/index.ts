@@ -13,7 +13,11 @@ let Movie = <Movie>{};
 
 function showMovie(searchTxt: string) {
 	getMovie(searchTxt).then(results => {
-		if (!results) throw new Error('Movie not found');
+		if (!results) {
+			console.log('Movie not found');
+			return;
+		}
+
 		Movie = { ...results };
 	});
 
