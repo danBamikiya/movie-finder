@@ -3,5 +3,7 @@
 	"editor.formatOnSave": true,
 	"editor.tabSize": 2,
 	"editor.wordWrap": "wordWrapColumn",
-	"editor.wordWrapColumn": 90
+	"editor.wordWrapColumn": 90,
+	"js/ts.implicitProjectConfig.checkJs": false,
+	"js/ts.implicitProjectConfig.strictFunctionTypes": false
 }
