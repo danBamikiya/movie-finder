@@ -2,6 +2,7 @@ import { Movie } from './types';
 import { Elements } from './base';
 import getMovie from './actions/getMovie';
 import renderMovie from './ui/Movie';
+import initHoverCard from './ui/HoverCard';
 import setActorsImgsUrl from './actions/setActorsImgsUrl';
 
 // Temporary state of the app
@@ -45,6 +46,7 @@ function initApp() {
 
 function start() {
 	initApp();
+	initHoverCard();
 }
 
 // Init On DOM Load

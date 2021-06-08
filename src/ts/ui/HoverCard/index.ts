@@ -12,7 +12,7 @@ import {
 	deactivate
 } from './hoverCard';
 
-(() => {
+export default function initHoverCard() {
 	// The hover card. Moved around the page to where the current hover is
 	const hoverCardContainer = Elements.hoverCardContainer;
 
@@ -42,4 +42,4 @@ import {
 				)
 		});
 	}
-})();
+}
