@@ -23,6 +23,11 @@ const postcssNormalize = require('postcss-normalize');
 // Source maps are resource heavy
 const shouldUseSourceMap = !isEnvProduction;
 
+// Images that are less than 10,000 bytes
+// returns a data URI instead of a path.
+// This reduces the number of requests to the server
+const imageInlineSizeLimit = 10000;
+
 // Path to the uncompiled service worker (if it exists).
 const swSrc = paths.swSrc;
 
@@ -161,7 +166,6 @@ module.exports = webpackEnv => {
 							loader: require.resolve('url-loader'),
 							options: {
 								limit: imageInlineSizeLimit,
-								mimetype: 'image/avif',
 								name: 'static/media/[name].[hash:8].[ext]'
 							}
 						},
