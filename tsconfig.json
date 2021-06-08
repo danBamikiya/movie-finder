@@ -1,14 +1,13 @@
 {
 	"compilerOptions": {
 		"target": "es2015",
-		"lib": ["DOM", "es2015", "es2016", "DOM.Iterable", "ESNext.AsyncIterable"],
+		"lib": ["DOM", "es2015", "es2016", "DOM.Iterable", "ESNext"],
 		"allowJs": true,
-		"checkJs": true,
+		// "checkJs": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"module": "es6",
 		"moduleResolution": "node",
-		"isolatedModules": true,
 		"noImplicitAny": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
