@@ -18,6 +18,7 @@ export default function hoverCardMsgImgRenderer(
 	hoverCardImgLink.target = '_blank';
 
 	const img = new Image(60, 60);
+	// consider dynamically importing `noPicImage`
 	img.src = imgUrl || noPicImage;
 	img.alt = imgUrl ? actor : `No photo available for ${actor}`;
 	img.crossOrigin = 'anonymous';
