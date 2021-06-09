@@ -10,14 +10,7 @@ function printInstructions(appName, urls) {
 	console.log(`You can now view ${chalk.bold(appName)} in the browser.`);
 	console.log();
 
-	if (urls.lanUrlForTerminal) {
-		console.log(`   ${chalk.bold('Local:')}       ${urls.localUrlForTerminal}`);
-		console.log(
-			`   ${chalk.bold('On Your Network:')} ${urls.lanUrlForTerminal}`
-		);
-	} else {
-		console.log(` ${urls.localUrlForTerminal}`);
-	}
+	console.log(`   ${chalk.bold('Local:')}       ${urls.localUrlForTerminal}`);
 
 	console.log();
 	console.log('Note that the development build is not optimized.');
@@ -34,7 +27,7 @@ function createCompiler({ appName, config, urls, webpack }) {
 	} catch (error) {
 		console.log(chalk.red('Failed to compile.'));
 		console.log();
-		console.log(err.message || err);
+		console.log(error.message || error);
 		console.log();
 		process.exit(1);
 	}

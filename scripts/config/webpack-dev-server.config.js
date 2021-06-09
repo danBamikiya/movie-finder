@@ -1,12 +1,11 @@
 'use strict';
 
 const paths = require('../paths');
+const ignoredFiles = require('../dev-utils/ignoredFiles');
 const redirectServedPath = require('../dev-utils/redirectServedPathMiddleware');
 const noopServiceWorkerMiddleware = require('../dev-utils/noopServiceWorkerMiddleware');
 
-const host = '0.0.0.0';
-
-module.exports = allowedHost => {
+module.exports = port => {
 	return {
 		contentBase: paths.appPublic,
 		contentBasePublicPath: paths.publicUrlOrPath,
@@ -22,13 +21,12 @@ module.exports = allowedHost => {
 		watchOptions: {
 			ignored: ignoredFiles(paths.appSrc)
 		},
-		host,
+		port,
 		overlay: true,
 		historyApiFallback: {
 			disableDotRule: true,
 			index: paths.publicUrlOrPath
 		},
-		public: allowedHost,
 		after(app) {
 			// Redirect to homepage if url not match
 			app.use(redirectServedPath(paths.publicUrlOrPath));
