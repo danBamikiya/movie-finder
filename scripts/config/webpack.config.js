@@ -6,6 +6,7 @@ const resolve = require('resolve');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const safePostCssParser = require('postcss-safe-parser');
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
@@ -18,10 +19,6 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const paths = require('../paths');
 const postcssNormalize = require('postcss-normalize');
-
-// Turn off source maps in production
-// Source maps are resource heavy
-const shouldUseSourceMap = !isEnvProduction;
 
 // Images that are less than 10,000 bytes
 // returns a data URI instead of a path.
@@ -40,6 +37,10 @@ const sassRegex = /\.(scss|sass)$/;
 module.exports = webpackEnv => {
 	const isEnvDevelopment = webpackEnv === 'development';
 	const isEnvProduction = webpackEnv === 'production';
+
+	// Turn off source maps in production
+	// Source maps are resource heavy
+	const shouldUseSourceMap = !isEnvProduction;
 
 	// get style loaders
 	const getStyleLoaders = (cssOptions, preProcessor) => {
@@ -121,7 +122,7 @@ module.exports = webpackEnv => {
 			: paths.appIndexTs,
 		output: {
 			// The build folder
-			path: isEnvProduction ? paths.appBuild : undefined,
+			path: paths.appBuild,
 			// Add /* filename */ comments to generated require()s in the output.
 			pathinfo: isEnvDevelopment,
 			// There will be one main bundle
@@ -353,40 +354,66 @@ module.exports = webpackEnv => {
 				}
 			}),
 			// Inject .env variables refrenced in the app's code into the final bundle
-			new Dotenv()
+			new Dotenv({
+				path: isEnvDevelopment && path.resolve(paths.appPath, '.env'),
+				// Load all system variables as well, useful during CI builds
+				systemvars: isEnvProduction,
+				// load '.env.example'
+				safe: isEnvDevelopment && path.resolve(paths.appPath, '.env.example')
+			})
 		].filter(Boolean),
 		optimization: {
 			minimize: isEnvProduction,
 			minimizer: [
-				// Extend existing minimizers (i.e. `terser-webpack-plugin`)
-				`...`,
+				// This is only used in production mode
+				new TerserPlugin({
+					terserOptions: {
+						parse: {
+							// Parse ecma 8 code.
+							ecma: 8
+						},
+						compress: {
+							ecma: 5,
+							warnings: false,
+							comparisons: false,
+							inline: 2
+						},
+						mangle: {
+							safari10: true
+						},
+						output: {
+							ecma: 5,
+							comments: false,
+							ascii_only: true
+						}
+					}
+				}),
 				// This is only used in production mode
 				new CssMinimizerPlugin({
-					processorOptions: {
-						parser: safePostCssParser,
-						map: shouldUseSourceMap
-							? {
-									// `inline: false` forces the sourcemap to be output into a
-									// separate file
-									inline: false,
-									// `annotation: true` appends the sourceMappingURL to the end of
-									// the css file, helping the browser find the sourcemap
-									annotation: true
-							  }
-							: false
-					},
 					minimizerOptions: {
-						preset: ['default', { minifyFontValues: { removeQuotes: false } }]
+						preset: ['default', { minifyFontValues: { removeQuotes: false } }],
+						processorOptions: {
+							parser: safePostCssParser,
+							map: shouldUseSourceMap
+								? {
+										// `inline: false` forces the sourcemap to be output into a
+										// separate file
+										inline: false,
+										// `annotation: true` appends the sourceMappingURL to the end of
+										// the css file, helping the browser find the sourcemap
+										annotation: true
+								  }
+								: false
+						}
 					}
 				})
 			],
 			// Automatically split dependencies(vendors) and commons
-			splitChunks: {
-				name: isEnvDevelopment,
+			splitChunks: isEnvProduction && {
 				chunks: 'all'
 			},
 			// Keep the runtime chunk separated to enable long term caching
-			runtimeChunk: {
+			runtimeChunk: isEnvProduction && {
 				name: entrypoint => `runtime-${entrypoint.name}`
 			}
 		}
