@@ -31,7 +31,7 @@ async function invokeCallbacks(response: Response, callbacks: Callback[]) {
 			value = await callback(value);
 		}
 	} catch (error) {
-		if (error instanceof TypeError) handleTypeError();
+		if (error instanceof TypeError) handleTypeError(error.message);
 		else throw error;
 	}
 
