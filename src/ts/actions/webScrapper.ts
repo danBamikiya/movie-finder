@@ -6,7 +6,7 @@ import { handleURIError } from '../utils/errorhandlers';
 const cachedFetchSafeImgsUrl = memoize(fetchSafeResponse);
 
 function handleError(error: Error) {
-	if (error instanceof URIError) handleURIError();
+	if (error instanceof URIError) handleURIError(error.message);
 	else throw new Error(`Did not expect ${error}`);
 }
 
