@@ -1,5 +1,5 @@
 import { HoverRendererParams } from '../../types';
-import noPicImage from '/assets/imgs/no_pic_image.png';
+import noPicImage from '../../../assets/imgs/no_pic_image.png';
 
 export default function hoverCardMsgImgRenderer(
 	div: Element,
