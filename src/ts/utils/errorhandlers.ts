@@ -1,11 +1,11 @@
 import { ClientTypeError, ClientURIError, ResponseError } from '../lib/errors';
 
-export function handleTypeError() {
-	throw new ClientTypeError("Looks like there's a Type Error");
+export function handleTypeError(msg: string) {
+	throw new ClientTypeError(msg);
 }
 
-export function handleURIError() {
-	throw new ClientURIError("Looks like there's a URI Error");
+export function handleURIError(msg: string) {
+	throw new ClientURIError(msg);
 }
 
 export function checkStatus(response: Response, responseError: ResponseError) {
