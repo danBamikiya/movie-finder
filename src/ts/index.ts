@@ -5,6 +5,8 @@ import renderMovie from './ui/Movie';
 import initHoverCard from './ui/HoverCard';
 import setActorsImgsUrl from './actions/setActorsImgsUrl';
 
+import '../styles/index.css';
+
 // Temporary state of the app
 /*
   - Current movie object
