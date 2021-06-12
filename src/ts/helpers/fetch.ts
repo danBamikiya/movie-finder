@@ -23,7 +23,7 @@ function makeRequest(url: RequestInfo, options?: RequestInit): Request {
  */
 
 async function invokeCallbacks(response: Response, callbacks: Callback[]) {
-	let value = Object.assign({}, response);
+	let value = response;
 
 	try {
 		for (const callback of callbacks) {
@@ -76,7 +76,7 @@ function parseResponse(response: Response, callback: Callback | Callback[]) {
 export async function fetchSafeResponse(
 	url: RequestInfo,
 	callback: Callback | Callback[],
-	options?: {} | RequestInit
+	options?: RequestInit
 ): Promise<any> {
 	if (!url) return;
 
