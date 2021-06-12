@@ -13,7 +13,7 @@ function renderInto<P extends Movie>(
 
 export default function processMovieDocumentFragment(Movie: Movie) {
 	return fragment([
-		renderInto(Movie, movieDetailsRenderer),
-		renderInto(Movie, moviePosterRenderer)
+		renderInto(Movie, moviePosterRenderer),
+		renderInto(Movie, movieDetailsRenderer)
 	]);
 }

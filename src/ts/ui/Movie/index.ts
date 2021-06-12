@@ -9,8 +9,8 @@ const container = Elements.container;
 export default function renderMovie(movie: Movie) {
 	if (!(container instanceof HTMLElement)) return;
 
-	document.querySelector('.movie-poster-details-container')?.remove();
 	document.querySelector('.movie-poster-container')?.remove();
+	document.querySelector('.movie-poster-details-container')?.remove();
 
 	const fragment = cachedMovieDocumentFragment(movie);
 
