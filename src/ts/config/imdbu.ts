@@ -1,4 +1,4 @@
-const MOVIE_REQUEST_HEADERS = {
+const MOVIE_REQUEST_HEADERS = <HeadersInit>{
 	'x-rapidapi-key': process.env.RAPID_API_KEY,
 	'x-rapidapi-host': 'imdb-internet-movie-database-unofficial.p.rapidapi.com'
 };
