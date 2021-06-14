@@ -3,9 +3,9 @@
 	"version": "1.0.0",
 	"description": "You don't have to try to recognize an actor in a film you're watching again.Face detector is an  app that gets movie data and poster based on user input then scrapes the web for images of actors and trains a neural network to recognize the scraped images on the movie poster!",
 	"scripts": {
-		"start": "cd scripts && cross-env NODE_ENV=development BABEL_ENV='development' node bin/scripts.js start",
-		"build": "cd scripts && cross-env NODE_ENV=production BABEL_ENV='production' node bin/scripts.js build",
-		"serve:build": "http-server ./public -c-1 --cors --proxy http://localhost:8080?"
+		"start": "cross-env NODE_ENV=development BABEL_ENV=development node scripts/start.js",
+		"build": "cross-env NODE_ENV=production BABEL_ENV=production node scripts/build.js",
+		"serve:build": "http-server ./build -c-1 --cors --proxy http://localhost:8080?"
 	},
 	"repository": {
 		"type": "git",
@@ -23,8 +23,6 @@
 		"@babel/polyfill": "^7.12.1",
 		"@babel/runtime": "^7.12.5",
 		"cheerio": "^1.0.0-rc.9",
-		"core-js": "^3.8.2",
-		"http-server": "^0.12.3",
 		"selector-observer": "^2.1.6"
 	},
 	"devDependencies": {
@@ -36,6 +34,7 @@
 		"babel-loader": "^8.2.2",
 		"case-sensitive-paths-webpack-plugin": "^2.4.0",
 		"chalk": "^2.4.2",
+		"core-js": "^3.8.2",
 		"cross-env": "^7.0.3",
 		"css-loader": "^5.2.6",
 		"css-minimizer-webpack-plugin": "^3.0.1",
@@ -45,9 +44,9 @@
 		"fork-ts-checker-webpack-plugin": "^6.2.10",
 		"fs-extra": "^9.1.0",
 		"html-webpack-plugin": "^5.3.1",
+		"http-server": "^0.12.3",
 		"inline-chunk-html-plugin": "^1.1.1",
 		"mini-css-extract-plugin": "^1.6.0",
-		"path": "^0.12.7",
 		"postcss-flexbugs-fixes": "^5.0.2",
 		"postcss-loader": "^5.3.0",
 		"postcss-normalize": "^10.0.0",
@@ -66,7 +65,6 @@
 		"webpack": "^5.11.1",
 		"webpack-cli": "^4.3.1",
 		"webpack-dev-server": "^3.11.2",
-		"webpack-manifest-plugin": "^3.1.1",
-		"workbox-webpack-plugin": "^6.1.5"
+		"webpack-manifest-plugin": "^3.1.1"
 	}
 }
