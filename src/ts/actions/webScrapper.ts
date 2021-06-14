@@ -1,13 +1,12 @@
+// TODO:	Find a lighter dom parser. Cheerio is too heavy
 import cheerio from 'cheerio';
 import memoize from '../lib/memoizer';
 import { fetchSafeResponse } from '../helpers/fetch';
-import { handleURIError } from '../utils/errorhandlers';
 
 const cachedFetchSafeImgsUrl = memoize(fetchSafeResponse);
 
 function handleError(error: Error) {
-	if (error instanceof URIError) handleURIError(error.message);
-	else throw new Error(`Did not expect ${error}`);
+	console.log("Looks like there's a problem: \n", error);
 }
 
 function parseResponse(response: { contents: string }): string | undefined {

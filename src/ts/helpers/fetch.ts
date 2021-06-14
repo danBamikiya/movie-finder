@@ -1,5 +1,5 @@
 import { ResponseError } from '../lib/errors';
-import { checkStatus, handleTypeError } from '../utils/errorhandlers';
+import { checkStatus } from '../utils/errorhandlers';
 import { Callback } from '../types';
 import { isFunction } from '../utils';
 
@@ -31,8 +31,7 @@ async function invokeCallbacks(response: Response, callbacks: Callback[]) {
 			value = await callback(value);
 		}
 	} catch (error) {
-		if (error instanceof TypeError) handleTypeError(error.message);
-		else throw error;
+		throw error;
 	}
 
 	return value;

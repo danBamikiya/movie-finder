@@ -1,12 +1,4 @@
-import { ClientTypeError, ClientURIError, ResponseError } from '../lib/errors';
-
-export function handleTypeError(msg: string) {
-	throw new ClientTypeError(msg);
-}
-
-export function handleURIError(msg: string) {
-	throw new ClientURIError(msg);
-}
+import { ResponseError } from '../lib/errors';
 
 export function checkStatus(response: Response, responseError: ResponseError) {
 	// handles response as success when the status code
