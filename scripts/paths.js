@@ -4,8 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = relativePath =>
-	path.resolve(appDirectory, '..', relativePath);
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 const publicUrlOrPath = '/';
 
@@ -13,17 +12,7 @@ const buildPath = 'build';
 
 const moduleFileExtensions = ['ts', 'js', 'json'];
 
-const resolveModule = (resolveFn, filePath) => {
-	const extension = moduleFileExtensions.find(extension =>
-		fs.existsSync(resolveFn(`${filePath}.${extension}`))
-	);
-
-	if (extension) return resolveFn(`${filePath}.${extension}`);
-
-	return resolveFn(`${filePath}.js`);
-};
-
-// we're in ./scripts/
+// we're in '.' (the root dir of the app)
 module.exports = {
 	appPath: resolveApp('.'),
 	appBuild: resolveApp(buildPath),
@@ -35,7 +24,6 @@ module.exports = {
 	appTsSrc: resolveApp('src/ts'),
 	appTsConfig: resolveApp('tsconfig.json'),
 	appNodeModules: resolveApp('node_modules'),
-	swSrc: resolveModule(resolveApp, 'src/service-worker'),
 	publicUrlOrPath
 };
 
