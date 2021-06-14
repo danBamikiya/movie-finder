@@ -1,11 +1,21 @@
 'use strict';
 
-const fs = require('fs');
+const __ENV__ = process.env.NODE_ENV;
+
+if (!__ENV__) {
+	console.log(
+		`No env set. Expected \x1B[1m'development'\x1B[22m || \x1B[1m'production'\x1B[22m.`
+	);
+	process.exit(1);
+}
+
+const isEnvDevelopment = __ENV__ === 'development';
+const isEnvProduction = __ENV__ === 'production';
+
 const path = require('path');
 const resolve = require('resolve');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const safePostCssParser = require('postcss-safe-parser');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -13,11 +23,14 @@ const Dotenv = require('dotenv-webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InlineChunkHtmlPlugin = require('inline-chunk-html-plugin');
-const WatchMissingNodeModulesPlugin = require('../dev-utils/WatchMissingNodeModulesPlugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-const paths = require('../paths');
+const ServeMessagesPlugin = require('./scripts/dev-utils/ServeMessagesPlugin');
+const WatchMissingNodeModulesPlugin = require('./scripts/dev-utils/WatchMissingNodeModulesPlugin');
+const redirectServedPath = require('./scripts/dev-utils/redirectServedPathMiddleware');
+const ignoredFiles = require('./scripts/dev-utils/ignoredFiles');
+
+const paths = require('./scripts/paths');
 const postcssNormalize = require('postcss-normalize');
 
 // Images that are less than 10,000 bytes
@@ -25,19 +38,17 @@ const postcssNormalize = require('postcss-normalize');
 // This reduces the number of requests to the server
 const imageInlineSizeLimit = 10000;
 
-// Path to the uncompiled service worker (if it exists).
-const swSrc = paths.swSrc;
-
 // style files regexes
 const cssRegex = /\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 
+const PORT = 8080;
+const isInteractive = process.stdout.isTTY;
+const appName = require(paths.appPackageJson).name;
+
 // This is the production and development configuration.
 // It is focused on fast rebuilds and a minimal bundle.
-module.exports = webpackEnv => {
-	const isEnvDevelopment = webpackEnv === 'development';
-	const isEnvProduction = webpackEnv === 'production';
-
+module.exports = () => {
 	// Turn off source maps in production
 	// Source maps are resource heavy
 	const shouldUseSourceMap = !isEnvProduction;
@@ -140,22 +151,87 @@ module.exports = webpackEnv => {
 			devtoolModuleFilenameTemplate: isEnvProduction
 				? info =>
 						path
-							.relative(paths.appTsSrc, info.absoluteResourcePath)
+							.relative(paths.appSrc, info.absoluteResourcePath)
 							.replace(/\\/g, '/')
 				: isEnvDevelopment &&
 				  (info => path.resolve(info.absoluteResourcePath).replace(/\\g/, '/'))
 		},
+		optimization: {
+			minimize: isEnvProduction,
+			minimizer: [
+				// This is only used in production mode
+				new TerserPlugin({
+					terserOptions: {
+						parse: {
+							// Parse ecma 8 code.
+							ecma: 8
+						},
+						compress: {
+							ecma: 5,
+							warnings: false,
+							comparisons: false,
+							inline: 2
+						},
+						mangle: {
+							safari10: true
+						},
+						output: {
+							ecma: 5,
+							comments: false,
+							ascii_only: true
+						}
+					}
+				}),
+				// This is only used in production mode
+				new CssMinimizerPlugin({
+					minimizerOptions: {
+						preset: ['default', { minifyFontValues: { removeQuotes: false } }],
+						processorOptions: {
+							parser: 'postcss-safe-parser',
+							map: shouldUseSourceMap
+								? {
+										// `inline: false` forces the sourcemap to be output into a
+										// separate file
+										inline: false,
+										// `annotation: true` appends the sourceMappingURL to the end of
+										// the css file, helping the browser find the sourcemap
+										annotation: true
+								  }
+								: false
+						}
+					}
+				})
+			],
+			moduleIds: 'deterministic',
+			// Split dependencies(vendors) and commons
+			splitChunks: isEnvProduction && {
+				cacheGroups: {
+					vendor: {
+						test: /[\\/]node_modules[\\/]/,
+						name: 'vendors',
+						chunks: 'all'
+					}
+				}
+			},
+			// Keep the runtime chunk separated to enable long term caching
+			runtimeChunk: isEnvProduction && {
+				name: entrypoint => `runtime-${entrypoint.name}`
+			}
+		},
+		resolve: {
+			extensions: paths.moduleFileExtensions.map(ext => `.${ext}`),
+			// The fallback for where webpack should look for modules should be 'node_modules'
+			modules: [paths.appNodeModules, paths.appTsSrc]
+		},
 		module: {
 			rules: [
 				// Handle node_modules packages that contain sourcemaps
-				shouldUseSourceMap
-					? {
-							enforce: 'pre',
-							exclude: /@babel(?:\/|\\{1,2})runtime/,
-							test: /\.(js|mjs|ts|css)$/,
-							use: 'source-map-loader'
-					  }
-					: {},
+				shouldUseSourceMap && {
+					enforce: 'pre',
+					exclude: /@babel(?:\/|\\{1,2})runtime/,
+					test: /\.(js|mjs|ts|css)$/,
+					use: 'source-map-loader'
+				},
 				{
 					// "oneOf" will traverse all following loaders until one will
 					// match the requirements. When no loader matches it will fall
@@ -177,7 +253,6 @@ module.exports = webpackEnv => {
 						{
 							test: /\.ts$/,
 							include: paths.appTsSrc,
-							exclude: /node_modules/,
 							use: [
 								{
 									loader: 'babel-loader',
@@ -256,12 +331,7 @@ module.exports = webpackEnv => {
 						}
 					]
 				}
-			]
-		},
-		resolve: {
-			extensions: paths.moduleFileExtensions.map(ext => `.${ext}`),
-			// The fallback for where webpack should look for modules should be 'node_modules'
-			modules: [paths.appNodeModules, paths.appTsSrc]
+			].filter(Boolean)
 		},
 		plugins: [
 			// Generates an `index.html` file with the <script> injected.
@@ -272,22 +342,20 @@ module.exports = webpackEnv => {
 						inject: true,
 						template: paths.appHtml
 					},
-					isEnvProduction
-						? {
-								minify: {
-									removeComments: true,
-									collapseWhitespace: true,
-									removeRedundantAttributes: true,
-									useShortDoctype: true,
-									removeEmptyAttributes: true,
-									removeStyleLinkTypeAttributes: true,
-									keepClosingSlash: true,
-									minifyJS: true,
-									minifyCSS: true,
-									minifyURLs: true
-								}
-						  }
-						: undefined
+					isEnvProduction && {
+						minify: {
+							removeComments: true,
+							collapseWhitespace: true,
+							removeRedundantAttributes: true,
+							useShortDoctype: true,
+							removeEmptyAttributes: true,
+							removeStyleLinkTypeAttributes: true,
+							keepClosingSlash: true,
+							minifyJS: true,
+							minifyCSS: true,
+							minifyURLs: true
+						}
+					}
 				)
 			),
 			// Inlines the webpack runtime script. This script is too small to warrant
@@ -301,6 +369,12 @@ module.exports = webpackEnv => {
 			// Ensures `npm install <library>` forces a project rebuild.
 			isEnvDevelopment &&
 				new WatchMissingNodeModulesPlugin(paths.appNodeModules),
+			// Serve custom messages at different stages of the build
+			new ServeMessagesPlugin({
+				appName,
+				isInteractive,
+				localUrl: `http://localhost:${PORT}/`
+			}),
 			// Extracts CSS into separate files by creating a CSS file per JS file which contains CSS.
 			isEnvProduction &&
 				new MiniCssExtractPlugin({
@@ -327,18 +401,7 @@ module.exports = webpackEnv => {
 					};
 				}
 			}),
-			// Generate a service worker script that will precache and keep up to date,
-			// the HTML & assets that are part of the webpack build.
-			isEnvProduction &&
-				fs.existsSync(swSrc) &&
-				new WorkboxWebpackPlugin.InjectManifest({
-					swSrc,
-					// Detect hashed file names with a regex
-					dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
-					exclude: [/\.map$/, /asset-manifest\.json$/],
-					// Bump up the default maximum size (2mb) that's cached to 5mb
-					maximumFileSizeToCacheInBytes: 5 * 1024 * 1024
-				}),
+			// TypeScript type checking
 			new ForkTsCheckerWebpackPlugin({
 				typescript: {
 					enabled: true,
@@ -356,67 +419,46 @@ module.exports = webpackEnv => {
 				}
 			}),
 			// Inject .env variables refrenced in the app's code into the final bundle
-			new Dotenv({
-				path: isEnvDevelopment && path.resolve(paths.appPath, '.env'),
-				// Load all system variables as well, useful during CI builds
-				systemvars: isEnvProduction,
-				// load '.env.example'
-				safe: isEnvDevelopment && path.resolve(paths.appPath, '.env.example')
-			})
+			new Dotenv(
+				Object.assign(
+					{},
+					isEnvDevelopment && {
+						path: path.resolve(paths.appPath, '.env')
+					},
+					{
+						// Load all system variables as well, useful during CI builds
+						systemvars: isEnvProduction,
+						// load '.env.example'
+						safe:
+							isEnvDevelopment && path.resolve(paths.appPath, '.env.example')
+					}
+				)
+			)
 		].filter(Boolean),
-		optimization: {
-			minimize: isEnvProduction,
-			minimizer: [
-				// This is only used in production mode
-				new TerserPlugin({
-					terserOptions: {
-						parse: {
-							// Parse ecma 8 code.
-							ecma: 8
-						},
-						compress: {
-							ecma: 5,
-							warnings: false,
-							comparisons: false,
-							inline: 2
-						},
-						mangle: {
-							safari10: true
-						},
-						output: {
-							ecma: 5,
-							comments: false,
-							ascii_only: true
-						}
-					}
-				}),
-				// This is only used in production mode
-				new CssMinimizerPlugin({
-					minimizerOptions: {
-						preset: ['default', { minifyFontValues: { removeQuotes: false } }],
-						processorOptions: {
-							parser: safePostCssParser,
-							map: shouldUseSourceMap
-								? {
-										// `inline: false` forces the sourcemap to be output into a
-										// separate file
-										inline: false,
-										// `annotation: true` appends the sourceMappingURL to the end of
-										// the css file, helping the browser find the sourcemap
-										annotation: true
-								  }
-								: false
-						}
-					}
-				})
-			],
-			// Automatically split dependencies(vendors) and commons
-			splitChunks: isEnvProduction && {
-				chunks: 'all'
+		devServer: {
+			contentBase: paths.appPublic,
+			contentBasePublicPath: paths.publicUrlOrPath,
+			// Enable gzip compression of generated files.
+			compress: true,
+			// By default files from `contentBase` will not trigger a page reload.
+			watchContentBase: true,
+			// Open default browser after server has been started.
+			open: true,
+			// Enable hot reloading server
+			hot: true,
+			publicPath: paths.publicUrlOrPath.slice(0, -1),
+			watchOptions: {
+				ignored: ignoredFiles(paths.appSrc)
 			},
-			// Keep the runtime chunk separated to enable long term caching
-			runtimeChunk: isEnvProduction && {
-				name: entrypoint => `runtime-${entrypoint.name}`
+			port: PORT,
+			overlay: true,
+			historyApiFallback: {
+				disableDotRule: true,
+				index: paths.publicUrlOrPath
+			},
+			after(app) {
+				// Redirect to homepage if url not match
+				app.use(redirectServedPath(paths.publicUrlOrPath));
 			}
 		}
 	};
