@@ -50,9 +50,9 @@ jobs:
           target_branch: gh-pages
           build_dir: build
           # Create incremental commit instead of doing push force
-        keep_history: true
-        # Don't push and deploy on pull requests but simulate it
-        dry_run: ${{ github.event_name == 'pull_request' }}
-        commit_message: "deploy to Github Pages :rocket:"
+          keep_history: true
+          # Don't push and deploy on pull requests but simulate it
+          dry_run: ${{ github.event_name == 'pull_request' }}
+          commit_message: "deploy to Github Pages :rocket:"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
