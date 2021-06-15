@@ -5,7 +5,7 @@
 	"scripts": {
 		"start": "cross-env NODE_ENV=development BABEL_ENV=development node scripts/start.js",
 		"build": "cross-env NODE_ENV=production BABEL_ENV=production node scripts/build.js",
-		"serve:build": "http-server ./build -c-1 --cors --proxy http://localhost:8080?"
+		"build:serve-local": "node scripts/serve-local.js"
 	},
 	"repository": {
 		"type": "git",
