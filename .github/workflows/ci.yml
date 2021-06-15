@@ -1,0 +1,58 @@
+name: Deploy to GH Pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    tags:
+      - v\d+\.\d+\.\d+
+    paths-ignore:
+      - "*.md"
+
+jobs:
+  deploy-to-gh-pages:
+    name: Deploy To GH Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use NodeJS 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install gh-pages
+        run: npm install gh-pages --save-dev
+
+      - name: Run Build
+        run: npm run build
+
+      - name: Check GitHub Pages status
+        # Run if last step was successful
+        if: success()
+        uses: crazy-max/ghaction-github-status@v2
+        with:
+          # Check availability of GitHub Pages before deploying
+          pages_threshold: major_outage
+
+      - name: Deploy to Github Pages
+        # Run if last step was successful
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: build
+          # Create incremental commit instead of doing push force
+        keep_history: true
+        # Don't push and deploy on pull requests but simulate it
+        dry_run: ${{ github.event_name == 'pull_request' }}
+        commit_message: "deploy to Github Pages :rocket:"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
