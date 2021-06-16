@@ -1,6 +1,7 @@
 {
 	"name": "rekogniz-ai",
 	"version": "1.0.0",
+	"homepage": "https://danbamikiya.github.io/rekogniz-ai",
 	"description": "You don't have to try to recognize an actor in a film you're watching again.Face detector is an  app that gets movie data and poster based on user input then scrapes the web for images of actors and trains a neural network to recognize the scraped images on the movie poster!",
 	"scripts": {
 		"start": "cross-env NODE_ENV=development BABEL_ENV=development node scripts/start.js",
