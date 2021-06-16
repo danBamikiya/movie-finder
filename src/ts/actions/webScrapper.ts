@@ -1,5 +1,5 @@
 // TODO:	Find a lighter dom parser. Cheerio is too heavy
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import memoize from '../lib/memoizer';
 import { fetchSafeResponse } from '../helpers/fetch';
 
@@ -13,7 +13,7 @@ function parseResponse(response: { contents: string }): string | undefined {
 	const html = response.contents;
 
 	//loading response data into a Cheerio instance
-	const $ = cheerio.load(html);
+	const $ = load(html);
 	//selecting the element with the actor's image url
 	const scrapedata = $('#name-poster').attr('src');
 
