@@ -57,7 +57,7 @@ class ServeMessagesPlugin {
 		console.log(`You can now view ${chalk.bold(appName)} in the browser.`);
 		console.log();
 
-		console.log(`   ${chalk.bold('Local:')}       ${localUrl}/`);
+		console.log(`   ${chalk.bold('Local:')}       ${localUrl}`);
 
 		console.log();
 		console.log('Note that the development build is not optimized.');
