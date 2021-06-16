@@ -124,7 +124,6 @@
 .hover-card-message-name a {
 	font-size: 14px;
 	font-weight: 600;
-	font-family: Poppins, sans-serif;
 	line-height: 1.25;
 	text-decoration: none;
 	color: var(--color-light-text-scale-0);
@@ -155,9 +154,7 @@
 	display: block;
 	border-radius: 50%;
 	border-style: none;
-	width: 60px;
 	aspect-ratio: auto 60 / 60;
-	height: 60px;
 }
 
 .sr-only {

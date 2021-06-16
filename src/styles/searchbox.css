@@ -11,7 +11,6 @@
 	border-image-slice: 1;
 	padding: 20px;
 	color: var(--color-light-text-scale-1);
-	font-family: Poppins, sans-serif;
 	text-align: center;
 	height: 40%;
 	font-size: 1.2vw;
@@ -34,6 +33,5 @@
 }
 
 .search-form > input[type='text'] {
-	font-family: Poppins, sans-serif;
 	width: 240px;
 }
