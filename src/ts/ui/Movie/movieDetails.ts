@@ -1,32 +1,32 @@
 import { Movie, Actor } from '../../types';
 
-export default function movieDetailsRenderer(
+export function movieDetailsRenderer(
 	div: HTMLElement,
 	{ title, year, length, rating, plot, cast: movieCast }: Movie
 ): HTMLElement {
-	const moviePosterDetailsContainer = div.cloneNode() as HTMLElement;
-	moviePosterDetailsContainer.className = 'movie-poster-details-container';
+	const movieDetailsContainer = div.cloneNode() as HTMLElement;
+	movieDetailsContainer.className = 'movie-details-container';
 
 	const p = document.createElement('p');
 
-	const posterDetails = div.cloneNode() as HTMLElement;
-	posterDetails.className = 'poster-details';
+	const movieDetails = div.cloneNode() as HTMLElement;
+	movieDetails.className = 'movie-details';
 
-	const details = p.cloneNode() as HTMLElement;
-	details.className = 'details-header';
-	details.innerHTML = 'Details';
+	const detailsHeader = p.cloneNode() as HTMLElement;
+	detailsHeader.className = 'details-header';
+	detailsHeader.innerHTML = 'Details';
 
-	const cast = p.cloneNode() as HTMLElement;
-	cast.className = 'cast-header';
-	cast.innerHTML = 'Cast';
+	const castHeader = p.cloneNode() as HTMLElement;
+	castHeader.className = 'cast-header';
+	castHeader.innerHTML = 'Cast';
 
 	const detailsParent = div.cloneNode() as HTMLElement;
-	detailsParent.className = 'details-div';
-	detailsParent.appendChild(details);
+	detailsParent.className = 'details';
+	detailsParent.appendChild(detailsHeader);
 
 	const castParent = div.cloneNode() as HTMLElement;
-	castParent.className = 'cast-div';
-	castParent.appendChild(cast);
+	castParent.className = 'cast';
+	castParent.appendChild(castHeader);
 
 	const title_paragraph = p.cloneNode() as HTMLElement;
 	title_paragraph.innerHTML = `Title: ${title}`;
@@ -53,7 +53,7 @@ export default function movieDetailsRenderer(
 	plot_paragraph.id = 'plot-paragraph';
 	detailsParent.appendChild(plot_paragraph);
 
-	posterDetails.appendChild(detailsParent);
+	movieDetails.appendChild(detailsParent);
 
 	const createActorName = (actor: Actor) => {
 		const actorRole = p.cloneNode() as HTMLElement;
@@ -70,9 +70,9 @@ export default function movieDetailsRenderer(
 
 	movieCast.forEach(createActorName);
 
-	posterDetails.appendChild(castParent);
+	movieDetails.appendChild(castParent);
 
-	moviePosterDetailsContainer.appendChild(posterDetails);
+	movieDetailsContainer.appendChild(movieDetails);
 
-	return moviePosterDetailsContainer;
+	return movieDetailsContainer;
 }
