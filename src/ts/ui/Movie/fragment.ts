@@ -1,4 +1,4 @@
-export default function fragment(fragmentContents: HTMLElement[]): DocumentFragment {
+export function fragment(...fragmentContents: HTMLElement[]): DocumentFragment {
 	const fragment = new DocumentFragment();
 
 	fragmentContents.forEach(fragmentContent => fragment.appendChild(fragmentContent));

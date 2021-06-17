@@ -1,6 +1,6 @@
 import { Movie } from '../../types';
 
-export default function moviePosterRenderer(
+export function moviePosterRenderer(
 	div: HTMLElement,
 	{ poster: moviePoster, title: movieTitle }: Movie
 ): HTMLElement {

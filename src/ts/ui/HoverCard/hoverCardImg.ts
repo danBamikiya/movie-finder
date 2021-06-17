@@ -1,7 +1,7 @@
 import { HoverRendererParams } from '../../types';
 import noPicImage from '../../../assets/imgs/no_pic_image.png';
 
-export default function hoverCardMsgImgRenderer(
+export function hoverCardMsgImgRenderer(
 	div: Element,
 	{ actor, imdbPage, imgUrl }: HoverRendererParams
 ): HTMLElement {
@@ -18,7 +18,6 @@ export default function hoverCardMsgImgRenderer(
 	hoverCardImgLink.target = '_blank';
 
 	const img = new Image(60, 60);
-	// consider dynamically importing `noPicImage`
 	img.src = imgUrl || noPicImage;
 	img.alt = imgUrl ? actor : `No photo available for ${actor}`;
 	img.crossOrigin = 'anonymous';

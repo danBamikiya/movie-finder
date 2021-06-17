@@ -1,4 +1,4 @@
-export default function processFragment(fragmentContent: HTMLElement): DocumentFragment {
+export function processFragment(fragmentContent: HTMLElement): DocumentFragment {
 	const fragment = new DocumentFragment();
 
 	fragment.appendChild(fragmentContent);

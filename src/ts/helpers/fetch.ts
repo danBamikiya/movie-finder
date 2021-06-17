@@ -1,5 +1,5 @@
-import { ResponseError } from '../lib/errors';
-import { checkStatus } from '../utils/errorhandlers';
+import { ResponseError } from '../lib';
+import { checkStatus } from '../utils';
 import { Callback } from '../types';
 import { isFunction } from '../utils';
 

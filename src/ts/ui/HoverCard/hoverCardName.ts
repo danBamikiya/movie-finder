@@ -1,6 +1,6 @@
 import { HoverRendererParams } from '../../types';
 
-export default function hoverCardMsgNameRenderer(
+export function hoverCardMsgNameRenderer(
 	div: Element,
 	{ actor, imdbPage }: HoverRendererParams
 ): HTMLElement {

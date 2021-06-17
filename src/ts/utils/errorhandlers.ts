@@ -1,4 +1,4 @@
-import { ResponseError } from '../lib/errors';
+import { ResponseError } from '../lib';
 
 export function checkStatus(response: Response, responseError: ResponseError) {
 	// handles response as success when the status code

@@ -1,7 +1,7 @@
 import { Position } from '../../types';
-import { Elements } from '../../base';
-import memoize from '../../lib/memoizer';
-import processHoverCardDocumentFragment from './processFragment';
+import { Elements } from '../../dom';
+import { memoize } from '../../lib';
+import { processHoverCardDocumentFragment } from './processFragment';
 
 // The hover card. Moved around the page to where the current hover is
 const hoverCardContainer = Elements.hoverCardContainer;
@@ -75,10 +75,8 @@ function selectRectNearestMouse(target: Element): ClientRect {
 }
 
 function calculatePositions(target: Element): Position {
-	const {
-		width: contentWidth,
-		height: contentHeight
-	} = hoverCardContainer!.getBoundingClientRect();
+	const { width: contentWidth, height: contentHeight } =
+		hoverCardContainer!.getBoundingClientRect();
 
 	const {
 		left: targetX,
@@ -122,11 +120,8 @@ function positionCard(target: Element, cardContent: Element) {
 		contentClass('bottom-right')
 	);
 
-	const {
-		containerTop,
-		containerLeft,
-		contentClassSuffix
-	} = calculatePositions(target);
+	const { containerTop, containerLeft, contentClassSuffix } =
+		calculatePositions(target);
 
 	// Add the class for correct caret location
 	cardContent.classList.add(contentClass(contentClassSuffix));

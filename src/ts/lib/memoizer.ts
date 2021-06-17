@@ -10,7 +10,7 @@ function hash(...args: unknown[]): string {
 	);
 }
 
-export default function memoize<
+export function memoize<
 	A extends unknown[],
 	R extends unknown,
 	T extends unknown

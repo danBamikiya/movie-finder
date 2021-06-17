@@ -1,7 +1,7 @@
 import { Movie, RendererFunction } from '../../types';
-import moviePosterRenderer from './moviePosterRenderer';
-import movieDetailsRenderer from './movieDetailsRenderer';
-import fragment from './fragment';
+import { moviePosterRenderer } from './moviePoster';
+import { movieDetailsRenderer } from './movieDetails';
+import { fragment } from './fragment';
 
 function renderInto<P extends Movie>(
 	rendererParams: P,
@@ -11,9 +11,9 @@ function renderInto<P extends Movie>(
 	return renderer(div, rendererParams);
 }
 
-export default function processMovieDocumentFragment(Movie: Movie) {
-	return fragment([
+export function processMovieDocumentFragment(Movie: Movie) {
+	return fragment(
 		renderInto(Movie, moviePosterRenderer),
 		renderInto(Movie, movieDetailsRenderer)
-	]);
+	);
 }

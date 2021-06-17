@@ -1,7 +1,7 @@
 import { HoverRendererParams, RendererFunction } from '../../types';
-import hoverCardMsgImgRenderer from './hoverCardImgRenderer';
-import hoverCardMsgNameRenderer from './hoverCardNameRenderer';
-import processFragment from './fragment';
+import { hoverCardMsgImgRenderer } from './hoverCardImg';
+import { hoverCardMsgNameRenderer } from './hoverCardName';
+import { processFragment } from './fragment';
 
 function renderInto<P extends HoverRendererParams>(
 	rendererParams: P,
@@ -33,7 +33,7 @@ function fragmentRenderer(
 	return fragmentContent;
 }
 
-export default function processHoverCardDocumentFragment(
+export function processHoverCardDocumentFragment(
 	actor: string,
 	imdbPage: string,
 	imgUrl: string

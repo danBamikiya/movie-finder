@@ -1,7 +1,7 @@
+import { Movie } from '../types';
+import { memoize } from '../lib';
 import { fetchSafeResponse } from '../helpers/fetch';
 import { MOVIE_REQUEST_HEADERS } from '../config/imdbu';
-import { Movie } from '../types';
-import memoize from '../lib/memoizer';
 
 const cachedFetchSafeMovie = memoize(fetchSafeResponse);
 
@@ -18,7 +18,8 @@ function parseResponse(movie: any): Movie | undefined {
 		rating: movie['rating'],
 		poster: movie['poster'],
 		plot: movie['plot'],
-		cast: movie['cast']
+		cast: movie['cast'],
+		trailer: movie['trailer']
 	};
 }
 
@@ -26,9 +27,7 @@ function readResponseAsJSON(response: Response): Promise<any> {
 	return response.json();
 }
 
-export default async function getMovie(
-	searchText: string
-): Promise<Movie | undefined> {
+export async function getMovie(searchText: string): Promise<Movie | undefined> {
 	let movie!: Movie | undefined;
 
 	/**

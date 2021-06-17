@@ -1,8 +1,7 @@
-import { Elements } from './base';
-import getMovie from './actions/getMovie';
-import renderMovie from './ui/Movie';
-import initHoverCard from './ui/HoverCard';
-import setActorsImgsUrl from './actions/setActorsImgsUrl';
+import { Elements } from './dom';
+import { getMovie, setActorsImgsUrl } from './actions';
+import { renderMovie } from './ui/Movie';
+import { initHoverCard } from './ui/HoverCard';
 
 import '../styles/index.css';
 

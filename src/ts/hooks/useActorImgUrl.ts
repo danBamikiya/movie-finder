@@ -1,4 +1,4 @@
-export default function useActorImgUrl(url: string | undefined, index: number) {
+export function useActorImgUrl(url: string | undefined, index: number) {
 	const actors = Array.from(document.getElementsByClassName('actor-name'));
 
 	if (!actors.length) return;
