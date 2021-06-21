@@ -1,4 +1,5 @@
 import { Movie } from '../../types';
+import notFound from '../../../assets/imgs/not_found.png';
 
 export function moviePosterRenderer(
 	div: HTMLElement,
@@ -9,7 +10,7 @@ export function moviePosterRenderer(
 
 	const posterImg = new Image();
 	posterImg.crossOrigin = 'anonymous';
-	posterImg.src = moviePoster;
+	posterImg.src = moviePoster || notFound;
 	posterImg.alt = `${movieTitle} movie poster`;
 	posterImg.title = `${movieTitle} movie poster`;
 	posterImg.className = 'movie-poster';
