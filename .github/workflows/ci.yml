@@ -25,9 +25,6 @@ jobs:
         with:
           node-version: "14"
 
-      - name: Install npm@7
-        run: npm i -g npm@7
-
       - name: Cache Dependecies
         uses: actions/cache@v2
         id: cache-node-modules
