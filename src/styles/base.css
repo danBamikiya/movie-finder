@@ -4,7 +4,7 @@
 
 .container {
 	display: grid;
-	grid-template-areas: 'movie-poster-container movie-poster-details-container activity-section';
+	grid-template-areas: 'movie-poster-container movie-details-container activity-section';
 	grid-template-columns: 32% 1fr 29%;
 	height: 100%;
 	width: 95%;
@@ -16,8 +16,8 @@
 	grid-area: movie-poster-container;
 }
 
-.movie-poster-details-container {
-	grid-area: movie-poster-details-container;
+.movie-details-container {
+	grid-area: movie-details-container;
 }
 
 .activity-section {
@@ -27,10 +27,14 @@
 }
 
 .px-3 {
-	padding-right: 16px;
-	padding-left: 16px;
+	padding-right: 15px;
+	padding-left: 15px;
 }
 
 .pb-3 {
 	padding-bottom: 16px;
+}
+
+a {
+	text-decoration: none;
 }

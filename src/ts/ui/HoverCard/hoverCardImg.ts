@@ -5,14 +5,15 @@ export function hoverCardMsgImgRenderer(
 	div: Element,
 	{ actor, imdbPage, imgUrl }: HoverRendererParams
 ): HTMLElement {
+	const a = document.createElement('a');
 	const hoverCardMsgImgContainer = div.cloneNode() as HTMLElement;
 	hoverCardMsgImgContainer.className = 'hover-card-message-img-bar';
 
 	hoverCardMsgImgContainer.appendChild(div.cloneNode());
 	const hoverCardImgLink =
 		hoverCardMsgImgContainer.firstElementChild!.appendChild(
-			document.createElement('a')
-		);
+			a.cloneNode()
+		) as HTMLAnchorElement;
 	hoverCardImgLink.className = 'hover-card-message-img-link';
 	hoverCardImgLink.href = imdbPage;
 	hoverCardImgLink.target = '_blank';
@@ -26,6 +27,21 @@ export function hoverCardMsgImgRenderer(
 	}`;
 
 	hoverCardImgLink.appendChild(img);
+
+	const links = hoverCardMsgImgContainer.appendChild(
+		div.cloneNode()
+	) as HTMLElement;
+	links.className = 'actor-imdb-links';
+
+	const morePhotos = links.appendChild(a.cloneNode()) as HTMLAnchorElement;
+	morePhotos.innerText = 'More photos';
+	morePhotos.href = `${imdbPage}mediaindex`;
+	morePhotos.target = '_blank';
+
+	const moviesClips = links.appendChild(a.cloneNode()) as HTMLAnchorElement;
+	moviesClips.innerText = 'Movies clips';
+	moviesClips.href = `${imdbPage}videogallery`;
+	moviesClips.target = '_blank';
 
 	return hoverCardMsgImgContainer;
 }

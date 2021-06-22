@@ -7,7 +7,7 @@
 
 .hover-card-message {
 	position: relative;
-	width: 180px;
+	width: 190px;
 	margin-right: auto;
 	margin-left: auto;
 	background-color: var(--color-bg-overlay);
@@ -38,7 +38,6 @@
 	border-bottom: 7px solid var(--color-bg-overlay);
 }
 
-/* like 20 lines */
 .hover-card-message--bottom-left::after,
 .hover-card-message--bottom-left::before,
 .hover-card-message--bottom-right::after,
@@ -121,11 +120,11 @@
 	width: 100%;
 }
 
-.hover-card-message-name a {
+.hover-card-message-name > a {
 	font-size: 14px;
 	font-weight: 600;
 	line-height: 1.25;
-	text-decoration: none;
+	margin-left: 8px;
 	color: var(--color-light-text-scale-0);
 }
 
@@ -136,8 +135,9 @@
 .hover-card-message-img-bar {
 	display: flex;
 	margin-top: 16px;
-	align-self: flex-start;
 	text-align: center;
+	align-self: flex-start;
+	justify-content: space-between;
 }
 
 .hover-card-message-img-bar > div {
@@ -147,7 +147,6 @@
 
 .hover-card-message-img-link {
 	color: var(--color-text-link);
-	text-decoration: none;
 }
 
 .hover-card-message-img-link-avatar {
@@ -155,6 +154,22 @@
 	border-radius: 50%;
 	border-style: none;
 	aspect-ratio: auto 60 / 60;
+}
+
+.actor-imdb-links {
+	font-size: 13px;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+}
+
+.actor-imdb-links > a {
+	color: var(--color-base-blue);
+	margin-bottom: 2px;
+}
+
+.actor-imdb-links > a:hover {
+	color: var(--color-text-link);
 }
 
 .sr-only {
