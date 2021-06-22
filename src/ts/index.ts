@@ -1,27 +1,20 @@
 import { Elements } from './dom';
-import { getMovie, setActorsImgsUrl } from './actions';
+import { isEmptyObject } from './utils';
 import { renderMovie } from './ui/Movie';
 import { initHoverCard } from './ui/HoverCard';
+import { getMovie, setActorsImgsUrl } from './actions';
 
 import '../styles/index.css';
 
-function showMovie(searchTxt: string) {
-	getMovie(searchTxt).then(Movie => {
-		if (!Movie || !Object.keys(Movie).length) {
-			console.log('Movie not found');
-			return;
-		}
+async function showMovie(searchTxt: string) {
+	const Movie = await getMovie(searchTxt);
+	if (!Movie || isEmptyObject(Movie)) {
+		console.log('Movie not found');
+		return;
+	}
 
-		/**
-		 * HACK: The webscraping is set off before rendering of the movie ui because
-		 * the actors imgs url are all scraped asynchronously(in parallel) so by the
-		 * time any has finished scraping, the ui will have rendered and the scraped
-		 * img url will be set as data-attributes to the corresponding dom elements
-		 * having the actor's name.
-		 */
-		setActorsImgsUrl(Movie);
-		renderMovie(Movie);
-	});
+	await renderMovie(Movie);
+	setActorsImgsUrl(Movie);
 }
 
 function submitValue(e: MouseEvent) {
