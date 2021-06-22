@@ -38,11 +38,15 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-node-modules.cache-hit != 'true'
-        run: npm ci --prefer-offline
+        run: |
+          echo steps.cache-node-modules.cache-hit
+          npm ci --prefer-offline
 
       - name: Install gh-pages
         if: steps.cache-node-modules.cache-hit != 'true'
-        run: npm install gh-pages --save-dev --prefer-offline
+        run: |
+          echo steps.cache-node-modules.cache-hit
+          npm install gh-pages --save-dev --prefer-offline
 
       - name: Run Build
         run: npm run build
