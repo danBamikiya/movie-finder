@@ -27,6 +27,11 @@ type Actor = {
 	actorImgURL: string | undefined;
 };
 
+type Trailer = {
+	id: string;
+	link: string;
+};
+
 type Movie = {
 	title: string;
 	year: string;
@@ -35,12 +40,19 @@ type Movie = {
 	poster: string;
 	plot: string;
 	cast: Actor[];
+	trailer: Trailer;
 };
 
 type FetchParams = {
 	url: RequestInfo;
 	callback: Callback | Callback[];
 	options?: RequestInit;
+};
+
+type ScrapedVideoData = {
+	definition: string;
+	mimeType: string;
+	url: string;
 };
 
 export {
@@ -51,5 +63,6 @@ export {
 	MemoizableFunction,
 	HoverRendererParams,
 	RendererFunction,
-	FetchParams
+	FetchParams,
+	ScrapedVideoData
 };
