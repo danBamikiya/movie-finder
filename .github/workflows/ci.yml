@@ -37,11 +37,11 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install dependencies
-        if: ${{ steps.cache-node-modules.outputs.cache-hit }} != 'true'
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci --prefer-offline
 
       - name: Install gh-pages
-        if: ${{ steps.cache-node-modules.outputs.cache-hit }} != 'true'
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm install gh-pages --save-dev --prefer-offline
 
       - name: Run Build
