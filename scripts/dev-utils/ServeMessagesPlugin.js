@@ -46,11 +46,11 @@ class ServeMessagesPlugin {
 
 				this.isFirstCompile = false;
 			} else if (isWarning) {
+				console.log();
 				console.log(chalk.yellow('Compiled with warnings.\n'));
-				console.log();
 			} else {
-				console.log(chalk.red('Failed to compile.\n'));
 				console.log();
+				console.log(chalk.red('Failed to compile.\n'));
 			}
 		});
 	}
