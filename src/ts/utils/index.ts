@@ -3,23 +3,23 @@ export function isFunction(func: any) {
 }
 
 export function isArray(arr: any) {
-	return Array.isArray(arr);
+	return Array.isArray(arr) && arr.length !== 0;
 }
 
-export function objectOrFunction(item: any) {
+export function isObjectOrFunction(item: any) {
 	const type = typeof item;
 	return item !== null && (type === 'object' || type === 'function');
 }
 
-export function arrayOrFunction(item: any) {
+export function isArrayOrFunction(item: any) {
 	const type = item.constructor;
 	return type === Array || type === Function;
 }
 
-export function checkEmptyObject(targetObject: any) {
+export function isEmptyObject(targetObject: any) {
 	return (
-		Object.keys(targetObject).length === 0 &&
-		targetObject.constructor === Object
+		targetObject.constructor === Object &&
+		Object.keys(targetObject).length === 0
 	);
 }
 
