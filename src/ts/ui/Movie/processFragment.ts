@@ -20,6 +20,5 @@ export function processMovieFragment(Movie: Movie) {
 }
 
 export async function processMovieTrailerFragment(Movie: Movie) {
-	const fragmentContent = await movieTrailerRenderer(Movie);
-	if (fragmentContent) return fragment(fragmentContent);
+	return fragment(await movieTrailerRenderer(Movie));
 }

@@ -7,7 +7,7 @@ const cachedFetchSafeResponse = memoize(scrapeMovieTrailer);
 
 export async function movieTrailerRenderer({
 	trailer
-}: Movie): Promise<HTMLElement | undefined> {
+}: Movie): Promise<HTMLElement> {
 	const trailerData = await cachedFetchSafeResponse(trailer['id']);
 
 	if (trailerData && !isEmptyObject(trailerData)) {
@@ -24,7 +24,11 @@ export async function movieTrailerRenderer({
 		videoSource.src = trailerData.url;
 
 		return video;
-	}
+	} else {
+		const notFound = new Image();
+		notFound.src = (await import('../../../assets/imgs/not_found.png')).default;
+		notFound.className = 'not-found-image';
 
-	return;
+		return notFound;
+	}
 }

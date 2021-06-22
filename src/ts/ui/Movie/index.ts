@@ -15,7 +15,7 @@ const movieTrailer = Elements.movieTrailer;
 export async function renderMovie(movie: Movie) {
 	if (!(container instanceof HTMLElement)) return;
 
-	let fragment!: DocumentFragment | undefined;
+	let fragment!: DocumentFragment;
 	clearUI();
 
 	fragment = cachedMovieFragment(movie);
@@ -23,10 +23,8 @@ export async function renderMovie(movie: Movie) {
 	container.insertBefore(fragment.cloneNode(true), container.firstElementChild);
 
 	fragment = await cachedMovieTrailerFragment(movie);
-	if (fragment) {
-		/** The Document Fragment is being cloned so that the cached original can be reused */
-		movieTrailer.appendChild(fragment.cloneNode(true));
-		// @ts-ignore
-		document.querySelector('.video-player')?.play();
-	}
+	/** The Document Fragment is being cloned so that the cached original can be reused */
+	movieTrailer.appendChild(fragment.cloneNode(true));
+	// @ts-ignore
+	document.querySelector('.video-player')?.play();
 }

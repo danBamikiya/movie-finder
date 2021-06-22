@@ -1,6 +1,6 @@
 .movie-poster {
 	max-width: 100%;
-	height: auto;
+	height: 615px;
 }
 
 .movie-poster-container {
@@ -82,6 +82,7 @@
 	position: relative;
 	touch-action: none;
 	user-select: none;
+	overflow: hidden;
 }
 
 .video-player {
@@ -89,4 +90,10 @@
 	height: 100%;
 	background: black;
 	object-fit: contain;
+}
+
+.not-found-image {
+	width: 100%;
+	transform: translateY(-120px);
+	object-fit: none;
 }
