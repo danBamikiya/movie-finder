@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "cross-env NODE_ENV=development BABEL_ENV=development node scripts/start.js",
 		"build": "cross-env NODE_ENV=production BABEL_ENV=production node scripts/build.js",
-		"build:serve-local": "node scripts/serve-local.js"
+		"build:serve-local": "cross-env PUBLIC_URL='/' npm run build && node scripts/serve-local.js"
 	},
 	"repository": {
 		"type": "git",
