@@ -37,14 +37,6 @@ async function invokeCallbacks(response: Response, callbacks: Callback[]) {
 	return value;
 }
 
-/**
- *
- * This checks if the callback is an array of callbacks and
- * invokes them on the response or if the single callback is a function
- * and invokes it on the response.
- * The initial response is returned if there's no callback.
- */
-
 function publishCallback(response: Response, callback: Callback | Callback[]) {
 	if (Array.isArray(callback)) {
 		return invokeCallbacks(response, callback);

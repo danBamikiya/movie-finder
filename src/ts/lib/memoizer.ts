@@ -1,6 +1,3 @@
-//INFO: Inspired by https://www.npmjs.com/package/@github/memoize
-// An alternative to this implementation - memoizee
-
 import { MemoizableFunction } from '../types';
 
 function hash(...args: unknown[]): string {

@@ -1,5 +1,3 @@
-//INFO: An alternative to this module - RxJS
-
 // Lightweight TC39 observable Subscription
 class Subscription {
 	closed: boolean; // Indicates whether the subscription is closed.
