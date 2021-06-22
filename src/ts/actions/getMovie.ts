@@ -1,5 +1,6 @@
 import { Movie } from '../types';
 import { memoize } from '../lib';
+import { isEmptyObject } from '../utils';
 import { fetchSafeResponse } from '../helpers/fetch';
 import { MOVIE_REQUEST_HEADERS } from '../config/imdbu';
 
@@ -10,7 +11,7 @@ function logError(err: Error) {
 }
 
 function parseResponse(movie: any): Movie | undefined {
-	if (!movie || !Object.keys(movie).length) return;
+	if (!movie || isEmptyObject(movie)) return;
 	return {
 		title: movie['title'].trim(),
 		year: movie['year'],
@@ -31,9 +32,7 @@ export async function getMovie(searchText: string): Promise<Movie | undefined> {
 	let movie!: Movie | undefined;
 
 	/**
-	 * This makes a fetch() request to a movies api using a fetch helper function.
-	 * Callbacks to parse the response and the request headers are also passed to
-	 * the function.
+	 * This makes a fetch() request to a movies api.
 	 * The movie response is cached.
 	 */
 
