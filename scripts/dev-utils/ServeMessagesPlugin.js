@@ -38,6 +38,7 @@ class ServeMessagesPlugin {
 
 			if (isSuccessful) {
 				console.log(chalk.green('Compiled successfully!'));
+				console.log();
 
 				if (this.isInteractive && this.isFirstCompile) {
 					this.printInstructions(this.appName, this.localUrl);
@@ -46,8 +47,10 @@ class ServeMessagesPlugin {
 				this.isFirstCompile = false;
 			} else if (isWarning) {
 				console.log(chalk.yellow('Compiled with warnings.\n'));
+				console.log();
 			} else {
 				console.log(chalk.red('Failed to compile.\n'));
+				console.log();
 			}
 		});
 	}
