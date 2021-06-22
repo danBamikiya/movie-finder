@@ -9,15 +9,15 @@ function readResponseAsJSON(response: Response): Promise<any> {
 	return response.json();
 }
 
-export async function scrapeWeb(
+export async function scrapeWeb<T>(
 	url: string,
 	...callbacks: Callback[]
-): Promise<string | undefined> {
-	let scrapedData!: string | undefined;
+): Promise<T | undefined> {
+	let scrapedData!: T | undefined;
 
 	/**
 	 * Make a fetch() request (which by default is a GET HTTP request)
-	 * for the page of the passed in url using a fetch helper function.
+	 * for the page of the passed in url.
 	 * This request uses an all origins api to prevent cors error.
 	 * The page url is encoded for better parsing by the
 	 * api server.
