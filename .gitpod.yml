@@ -1,0 +1,29 @@
+ports:
+  - port: 8080
+    onOpen: open-browser
+    visibility: public
+
+tasks:
+  - name: Install Dependencies & Start Dev Server
+    init: npm i
+    command: npm run start:remote-dev
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: true
+    addCheck: true
+    addComment: true
+
+vscode:
+  extensions:
+    - dbaeumer.vscode-eslint
+    - github.github-vscode-theme
+    - vscode-icons-team.vscode-icons
+    - eamodio.gitlens
+    - tabnine.tabnine-vscode
+    - syler.sass-indented
+    - esbenp.prettier-vscode
+    - coenraads.bracket-pair-colorizer
