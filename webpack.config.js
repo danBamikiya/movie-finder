@@ -189,7 +189,7 @@ module.exports = () => {
 					minimizerOptions: {
 						preset: ['default', { minifyFontValues: { removeQuotes: false } }],
 						processorOptions: {
-							parser: 'postcss-safe-parser',
+							// parser: 'postcss-safe-parser',
 							map: shouldUseSourceMap
 								? {
 										// `inline: false` forces the sourcemap to be output into a
@@ -293,10 +293,7 @@ module.exports = () => {
 							test: cssRegex,
 							use: getStyleLoaders({
 								importLoaders: 1,
-								sourceMap: shouldUseSourceMap,
-								modules: {
-									compileType: 'icss'
-								}
+								sourceMap: shouldUseSourceMap
 							}),
 							sideEffects: true
 						},
@@ -306,10 +303,7 @@ module.exports = () => {
 							use: getStyleLoaders(
 								{
 									importLoaders: 3,
-									sourceMap: shouldUseSourceMap,
-									modules: {
-										compileType: 'icss'
-									}
+									sourceMap: shouldUseSourceMap
 								},
 								'sass-loader'
 							),
