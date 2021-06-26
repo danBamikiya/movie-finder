@@ -5,6 +5,7 @@
 	"description": "You don't have to try to recognize an actor in a film you're watching again.Face detector is an  app that gets movie data and poster based on user input then scrapes the web for images of actors and trains a neural network to recognize the scraped images on the movie poster!",
 	"scripts": {
 		"start": "cross-env NODE_ENV=development BABEL_ENV=development node scripts/start.js",
+		"start:remote-dev": "cross-env REMOTE_DEV=true npm run start",
 		"build": "cross-env NODE_ENV=production BABEL_ENV=production node scripts/build.js",
 		"build:serve-local": "cross-env PUBLIC_URL='/' npm run build && node scripts/serve-local.js"
 	},
