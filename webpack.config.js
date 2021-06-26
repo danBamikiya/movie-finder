@@ -11,6 +11,8 @@ if (!__ENV__) {
 
 const isEnvDevelopment = __ENV__ === 'development';
 const isEnvProduction = __ENV__ === 'production';
+const isRemoteDevelopment =
+	isEnvDevelopment && process.env.REMOTE_DEV === 'true';
 
 const path = require('path');
 const resolve = require('resolve');
@@ -451,6 +453,8 @@ module.exports = () => {
 				ignored: ignoredFiles(paths.appSrc)
 			},
 			port: PORT,
+			host: isRemoteDevelopment ? '0.0.0.0' : 'localhost',
+			disableHostCheck: isRemoteDevelopment,
 			overlay: true,
 			historyApiFallback: {
 				disableDotRule: true,
