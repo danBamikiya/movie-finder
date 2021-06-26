@@ -1,0 +1,34 @@
+%header {
+	border-bottom: 1px solid $color-light-text-scale-0;
+	padding: 5px;
+	margin: 0;
+}
+
+%row-flex {
+	display: flex;
+}
+
+%column-flex {
+	display: flex;
+	flex-direction: column;
+}
+
+%row-flex-stretch {
+	@extend %row-flex;
+	align-items: stretch;
+}
+
+%row-flex-center {
+	@extend %row-flex;
+	align-items: center;
+}
+
+%column-flex-stretch {
+	@extend %column-flex;
+	align-items: stretch;
+}
+
+%column-flex-center {
+	@extend %column-flex;
+	align-items: center;
+}

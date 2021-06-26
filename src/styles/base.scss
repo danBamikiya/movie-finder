@@ -10,20 +10,19 @@
 	width: 95%;
 	max-width: 1300px;
 	margin: 0.5rem auto 0 auto;
-}
 
-.movie-poster-container {
-	grid-area: movie-poster-container;
-}
+	.movie-poster-container {
+		grid-area: movie-poster-container;
+	}
 
-.movie-details-container {
-	grid-area: movie-details-container;
-}
+	.movie-details-container {
+		grid-area: movie-details-container;
+	}
 
-.activity-section {
-	grid-area: activity-section;
-	display: flex;
-	flex-direction: column;
+	.activity-section {
+		grid-area: activity-section;
+		@extend %column-flex;
+	}
 }
 
 .px-3 {

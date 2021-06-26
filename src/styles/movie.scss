@@ -1,99 +1,94 @@
-.movie-poster {
-	max-width: 100%;
-	height: 615px;
-}
-
 .movie-poster-container {
 	position: relative;
+
+	.movie-poster {
+		max-width: 100%;
+		height: 615px;
+	}
 }
 
 .movie-details-container {
 	margin: 0 20px;
 	font-size: 14px;
-}
 
-.details {
-	width: 47%;
-	border: 1px solid var(--color-light-text-scale-0);
-}
+	.movie-details {
+		@extend %row-flex-stretch;
+		color: $color-base-blue;
+		justify-content: center;
 
-.cast {
-	border: 1px solid var(--color-light-text-scale-0);
-}
+		p {
+			margin: 0;
+			padding: 5px;
+		}
 
-.details-header {
-	border-bottom: 1px solid var(--color-light-text-scale-0);
-	padding: 5px;
-	margin: 0;
-}
+		.details,
+		.cast {
+			border: 1px solid $color-light-text-scale-0;
+		}
 
-.cast-header {
-	border-bottom: 1px solid var(--color-light-text-scale-0);
-	padding: 5px;
-	margin: 0;
-}
+		.details {
+			width: 47%;
+		}
 
-.movie-details {
-	color: var(--color-base-blue);
-	display: flex;
-	flex-direction: row;
-	align-items: stretch;
-	justify-content: center;
-}
+		.cast {
+			.actor-name {
+				cursor: default;
+				position: relative;
+				font-weight: 500;
+				color: inherit;
 
-.movie-details p {
-	margin: 0;
-	padding: 5px;
-}
+				&:hover {
+					color: $color-text-link;
+				}
+			}
+		}
 
-.actor-name {
-	cursor: default;
-	position: relative;
-	font-weight: 500;
-	color: inherit;
-}
-
-.actor-name:hover {
-	color: var(--color-text-link);
+		$movie-headers: ('.details .details-header', '.cast .cast-header');
+		@each $header in $movie-headers {
+			#{$header} {
+				@extend %header;
+			}
+		}
+	}
 }
 
 .movie-trailer-container {
 	margin-top: 10px;
-}
 
-.movie-trailer-container > div:nth-of-type(1) {
-	color: white;
-	text-align: center;
-	border-image: linear-gradient(to left, #33ccff 0%, #ff99cc 100%);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	border-radius: 3px;
-}
+	> div:nth-of-type(1) {
+		color: $color-light-text-scale-0;
+		text-align: center;
+		border-image: linear-gradient(to left, #33ccff 0%, #ff99cc 100%);
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 3px;
 
-.movie-trailer-container > div:nth-of-type(1) > h3 {
-	font-family: Orbitron;
-	font-size: 1.3vw;
-	letter-spacing: 2.5px;
-}
+		> h3 {
+			font-family: $font-stack-secondary;
+			font-size: 1.3vw;
+			letter-spacing: 2.5px;
+		}
+	}
 
-.movie-trailer {
-	margin-top: 10px;
-	width: 376px;
-	height: 225px;
-	position: relative;
-	touch-action: none;
-	user-select: none;
-	overflow: hidden;
-}
+	.movie-trailer {
+		margin-top: 10px;
+		width: 376px;
+		height: 225px;
+		position: relative;
+		touch-action: none;
+		user-select: none;
+		overflow: hidden;
 
-.video-player {
-	width: 100%;
-	height: 100%;
-	background: black;
-	object-fit: contain;
-}
+		.video-player {
+			width: 100%;
+			height: 100%;
+			background: black;
+			object-fit: contain;
+		}
 
-.not-found-image {
-	width: 100%;
-	transform: translateY(-120px);
-	object-fit: none;
+		.not-found-image {
+			width: 100%;
+			transform: translateY(-120px);
+			object-fit: none;
+		}
+	}
 }

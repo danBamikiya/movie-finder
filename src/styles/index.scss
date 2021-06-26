@@ -1,18 +1,17 @@
-@import url(./_variables.css);
-@import url(./base.css);
-@import url(./searchbox.css);
-@import url(./movie.css);
-@import url(./hovercard.css);
+@import 'variables';
+@import 'utilities';
+@import 'base';
+@import 'searchbox';
+@import 'movie';
+@import 'hovercard';
 
 body {
+	@extend %column-flex-center;
 	margin: 0;
 	padding: 0;
 	width: 100vw;
 	height: 100vh;
-	display: flex;
-	font-family: Poppins, sans-serif;
-	flex-direction: column;
-	align-items: center;
+	font-family: $font-stack-primary;
 	background-image: radial-gradient(
 			circle at center center,
 			rgba(33, 33, 33, 0),
@@ -38,10 +37,10 @@ body {
 header {
 	width: auto;
 	padding: 1rem;
-	color: white;
+	color: $color-light-text-scale-0;
 	text-align: center;
 	letter-spacing: 1px;
-	font-family: Orbitron, sans-serif;
+	font-family: $font-stack-secondary;
 	font-weight: 600;
 	font-size: x-large;
 	background-image: repeating-linear-gradient(

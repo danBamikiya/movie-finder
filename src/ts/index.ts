@@ -4,7 +4,7 @@ import { renderMovie } from './ui/Movie';
 import { initHoverCard } from './ui/HoverCard';
 import { getMovie, setActorsImgsUrl } from './actions';
 
-import '../styles/index.css';
+import '../styles/index.scss';
 
 async function showMovie(searchTxt: string) {
 	const Movie = await getMovie(searchTxt);
