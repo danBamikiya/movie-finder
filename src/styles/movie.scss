@@ -31,6 +31,8 @@
 		}
 
 		.cast {
+			width: 53%;
+
 			.actor-name {
 				cursor: default;
 				position: relative;
@@ -58,8 +60,7 @@
 	> div:nth-of-type(1) {
 		color: $color-light-text-scale-0;
 		text-align: center;
-		border-image: linear-gradient(to left, #33ccff 0%, #ff99cc 100%);
-		border: 1px solid rgba(255, 255, 255, 0.2);
+		border: 1px solid $color-light-pink;
 		border-radius: 3px;
 
 		> h3 {
