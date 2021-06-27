@@ -11,23 +11,23 @@
 	height: 40%;
 	font-size: 1.2vw;
 
-	input[type='text'],
-	input[type='submit'] {
+	.input-txt,
+	.submit-btn {
 		background: $color-dark-bg-scale-1;
 		color: $color-light-text-scale-0;
 	}
 
-	input[type='submit'] {
+	.submit-btn {
 		font-family: $font-stack-primary;
 		border-radius: 5px;
 	}
 
-	input[type='submit']:hover,
-	input[type='submit']:focus {
+	.submit-btn:hover,
+	.submit-btn:focus {
 		cursor: pointer;
 	}
 
-	input[type='text'] {
+	.input-txt {
 		width: 240px;
 	}
 }
