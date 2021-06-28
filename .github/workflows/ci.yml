@@ -11,8 +11,6 @@ on:
   pull_request:
     branches:
       - main
-    tags:
-      - v\d+\.\d+\.\d+
     paths-ignore:
       - "*.md"
 
