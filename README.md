@@ -1,4 +1,4 @@
-<h1 id="header" align="center"> 😃 Rekogniz AI</h1>
+<h1 id="header" align="center"> 😃 Rekogniz AI 🦾</h1>
 
 <h4 align="center">Explore movies and recognize its actors easily!</h4>
 
