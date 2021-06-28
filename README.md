@@ -1,6 +1,6 @@
 <h1 id="header" align="center"> 😃 Rekogniz AI</h1>
 
-<h4 align="center">Explore movies and recognize its actors easily.</h4>
+<h4 align="center">Explore movies and recognize its actors easily!</h4>
 
 <p align="center">A web app for exploring movies, watching their trailers and checking out its actors.</p>
 
