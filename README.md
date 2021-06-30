@@ -99,7 +99,7 @@ npm run start
 npm run build
 ```
 
-- To run the serve the production build locally:
+- To run and serve the production build locally:
 
 ```
 npm run build:serve-local
