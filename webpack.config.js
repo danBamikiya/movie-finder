@@ -418,15 +418,18 @@ module.exports = () => {
 			new Dotenv(
 				Object.assign(
 					{},
-					isEnvDevelopment && {
-						path: path.resolve(paths.appPath, '.env')
-					},
+					isEnvDevelopment &&
+						!isRemoteDevelopment && {
+							path: path.resolve(paths.appPath, '.env')
+						},
 					{
-						// Load all system variables as well, useful during CI builds
-						systemvars: isEnvProduction,
+						// Load all system variables as well, useful during CI builds and in Remote Dev environments
+						systemvars: isEnvProduction || isRemoteDevelopment,
 						// load '.env.example'
 						safe:
-							isEnvDevelopment && path.resolve(paths.appPath, '.env.example')
+							isEnvDevelopment &&
+							!isRemoteDevelopment &&
+							path.resolve(paths.appPath, '.env.example')
 					}
 				)
 			)
