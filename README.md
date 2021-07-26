@@ -4,7 +4,7 @@
 
 <p align="center">A web app for exploring movies, watching their trailers and checking out its actors.</p>
 
-**<p align="center"><a href="danbamikiya.github.io/movie-finder/">movie.finder</a></p>**
+**<p align="center"><a href="https://danbamikiya.github.io/movie-finder/">movie.finder</a></p>**
 
 <p align="center"><img width="auto" alt="movie-finder-preview" src="./assets/movie-finder-preview-1.png" /></p>
 
