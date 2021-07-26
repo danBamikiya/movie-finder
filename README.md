@@ -1,17 +1,17 @@
-<h1 id="header" align="center"> 😃 Rekogniz AI 🦾</h1>
+<h1 id="header" align="center"> 🎥 Movie Finder 🦾</h1>
 
 <h4 align="center">Explore movies and recognize its actors easily!</h4>
 
 <p align="center">A web app for exploring movies, watching their trailers and checking out its actors.</p>
 
-**<p align="center"><a href="danbamikiya.github.io/rekogniz-ai/">rekogniz.ai</a></p>**
+**<p align="center"><a href="danbamikiya.github.io/movie-finder/">movie.finder</a></p>**
 
-<p align="center"><img width="auto" alt="rekogniz-ai-preview" src="./assets/rekogniz-ai-preview-1.png" /></p>
+<p align="center"><img width="auto" alt="movie-finder-preview" src="./assets/movie-finder-preview-1.png" /></p>
 
 <details>
 <summary>more</summary>
 <br />
-<p align="center"><img width="auto" alt="rekogniz-ai-preview" src="./assets/rekogniz-ai-preview-2.png" /></p>
+<p align="center"><img width="auto" alt="movie-finder-preview" src="./assets/movie-finder-preview-2.png" /></p>
 </details>
 
 ---
@@ -26,22 +26,22 @@
 
 ## 🌴 Branches
 
-- [`main`](https://github.com/danBamikiya/rekogniz-ai/tree/main) - production ready code
-- [`staging`](https://github.com/danBamikiya/rekogniz-ai/tree/staging) - testing/development
-- [`gh-pages`](https://github.com/danBamikiya/rekogniz-ai/tree/gh-pages) - deployment of bundled app
+- [`main`](https://github.com/danBamikiya/movie-finder/tree/main) - production ready code
+- [`staging`](https://github.com/danBamikiya/movie-finder/tree/staging) - testing/development
+- [`gh-pages`](https://github.com/danBamikiya/movie-finder/tree/gh-pages) - deployment of bundled app
 
 ## ⌛ Status
 
 ✅ **Early Development:** Start building a barebones version of the project (Movies Search). <br />
-⛔︎ **Actor Face Recognition:** Work on recognizing actor's faces from the movie poster - _paused_. See [#1](https://github.com/danBamikiya/rekogniz-ai/issues/1). <br />
+⛔︎ **Actor Face Recognition:** Work on recognizing actor's faces from the movie poster - _paused_. See [#1](https://github.com/danBamikiya/movie-finder/issues/1). <br />
 ✅ **Hovercard Info:** Displaying actor profile images and info. <br />
 ✅ **TypeScript:** Converted codebase from JS to TS. <br />
 ✅ **Movie Trailer:** Trailer for searched movies. <br />
 ✅ **Migration:** Migrated from CSS to Sass. <br />
 ⌛️ **Local Storage:** Persisting cached data to local storage. <br />
 ⌛️ **Loading Status:** Displaying loading effects when movies are searched. <br />
-⌛️ **Redesign/write:** Implementation of the 2nd re-design. See [ARCHITECTURE.md](https://github.com/danBamikiya/rekogniz-ai/blob/main/ARCHITECTURE.md). <br />
-⌛️ **Recommendation Engine:** Recommending movies to users. See [ARCHITECTURE.md](https://github.com/danBamikiya/rekogniz-ai/blob/main/ARCHITECTURE.md). <br /><br />
+⌛️ **Redesign/write:** Implementation of the 2nd re-design. See [ARCHITECTURE.md](https://github.com/danBamikiya/movie-finder/blob/main/ARCHITECTURE.md). <br />
+⌛️ **Recommendation Engine:** Recommending movies to users. See [ARCHITECTURE.md](https://github.com/danBamikiya/movie-finder/blob/main/ARCHITECTURE.md). <br /><br />
 
 ## 📚 Tech Stack
 
@@ -76,13 +76,13 @@ All commands are run from the root of the project, from a terminal:
 #### Clone the app
 
 ```
-git clone https://github.com/danBamikiya/rekogniz-ai.git
+git clone https://github.com/danBamikiya/movie-finder.git
 ```
 
 #### Navigate to the cloned directory
 
 ```
-cd rekogniz-ai
+cd movie-finder
 ```
 
 #### Quick Start
