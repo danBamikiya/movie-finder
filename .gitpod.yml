@@ -1,7 +1,6 @@
 ports:
   - port: 8080
     onOpen: open-browser
-    visibility: public
 
 tasks:
   - name: Install Dependencies & Start Dev Server
