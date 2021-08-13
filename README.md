@@ -49,7 +49,7 @@ This is currently a frontend focused app so everything is browser rendered.
 
 #### 🎨 Frontend
 
-Typescript . Sass . HTML
+Typescript . Sass . HTML (bundled with Webpack + Babel)
 
 #### 💫 Hosting
 
