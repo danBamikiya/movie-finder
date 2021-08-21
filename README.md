@@ -38,7 +38,7 @@
 ✅ **TypeScript:** Converted codebase from JS to TS. <br />
 ✅ **Movie Trailer:** Trailer for searched movies. <br />
 ✅ **Migration:** Migrated from CSS to Sass. <br />
-✅ **Caching:** In-Memory cache for storing searched movies, document fragments, API requests/responses. <br />
+✅ **Caching:** In-Memory cache for storing searched movies, document fragments, API requests/responses, images. <br />
 ⌛️ **Local Storage:** Persisting cached data to local storage. <br />
 ⌛️ **Loading Status:** Displaying loading effects when movies are searched. <br />
 ⌛️ **Redesign/write:** Implementation of the 2nd re-design. See [ARCHITECTURE.md](https://github.com/danBamikiya/movie-finder/blob/main/ARCHITECTURE.md). <br />
