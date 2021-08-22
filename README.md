@@ -33,7 +33,7 @@
 ## ⌛ Status
 
 ✅ **Early Development:** Start building a barebones version of the project (Movies Search). <br />
-⛔︎ **Actor Face Recognition:** Work on recognizing actor's faces from the movie poster - _paused_. See [#1](https://github.com/danBamikiya/movie-finder/issues/1). <br />
+⛔︎ **Actor Face Recognition:** Work on recognizing actor's faces from the movie poster - _stopped_. See [#1](https://github.com/danBamikiya/movie-finder/issues/1). <br />
 ✅ **Hovercard Info:** Displaying actor profile images and info. <br />
 ✅ **TypeScript:** Converted codebase from JS to TS. <br />
 ✅ **Movie Trailer:** Trailer for searched movies. <br />
@@ -86,6 +86,22 @@ git clone https://github.com/danBamikiya/movie-finder.git
 cd movie-finder
 ```
 
+#### Install dependencies
+
+```
+npm i
+```
+
+#### Add personal RapidAPI token (free)
+We recommend setting this up when running the project locally, as we use the RapidAPI to fetch movies data.
+>   -  [Sign up](https://rapidapi.com/signup) to create a RapidAPI account and [follow these steps](https://docs.rapidapi.com/docs/keys) to get a RapidAPI token
+>   -  In local repo root directory: Make a copy of `.env.example` and name it `.env`
+>   -  Copy & paste your new RapidAPI token into .env
+```
+// .env Example:
+RAPID_API_KEY=K6NUTARFJZJCIXHF1F1E1YGJZ8RQ29BE4U
+```
+
 #### Quick Start
 
 - To run the development server:
@@ -100,7 +116,7 @@ npm run start
 npm run build
 ```
 
-- To run and serve the production build locally:
+- To build and serve the production build locally:
 
 ```
 npm run build:serve-local
