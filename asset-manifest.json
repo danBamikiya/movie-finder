@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/movie-finder/static/css/main.bd6533fc.css",
+    "main.js": "/movie-finder/static/js/main.afed8a04.js",
+    "runtime-main.js": "/movie-finder/static/js/runtime-main.8b2e0b92.js",
+    "vendors.js": "/movie-finder/static/js/vendors.cbc4175e.js",
+    "index.html": "/movie-finder/index.html",
+    "static/media/javascript,__webpack_public_path__ = __webpack_base_uri__ = htmlWebpackPluginPublicPath;": "/movie-finder/static/media/javascript,__webpack_public_path__ = __webpack_base_uri__ = htmlWebpackPluginPublicPath;.1feff74f.bin"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8b2e0b92.js",
+    "static/js/vendors.cbc4175e.js",
+    "static/css/main.bd6533fc.css",
+    "static/js/main.afed8a04.js"
+  ]
+}
