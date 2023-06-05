@@ -98,7 +98,7 @@ We recommend setting this up when running the project locally, as we use the Rap
 >   -  In local repo root directory: Make a copy of `.env.example` and name it `.env`
 >   -  Copy & paste your new RapidAPI token into .env
 ```
-// .env Example:
+// .env Example (an invalid key):
 RAPID_API_KEY=K6NUTARFJZJCIXHF1F1E1YGJZ8RQ29BE4U
 ```
 
